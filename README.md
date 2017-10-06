@@ -1,0 +1,2 @@
+# schrolegrp
+Only static resouurces
