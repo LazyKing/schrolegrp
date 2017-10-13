@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+//import { hashHistory, Router } from 'react-router'
+import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
+import routes from './Routes';
+
+ReactDOM.render(<Router routes={routes} history={hashHistory} />, document.getElementById('root'));
 registerServiceWorker();
