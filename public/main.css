@@ -1,0 +1,12 @@
+html, body {height: 100%; overflow-y: auto;}
+
+.body-styles{
+  background: #757F9A;
+  background: -webkit-linear-gradient(to top, #D7DDE8, #757F9A);
+  background: linear-gradient(to top, #D7DDE8, #757F9A);
+}
+
+.height-fluid {
+	height: 100%;
+	overflow-y: auto;
+}

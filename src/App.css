@@ -9,8 +9,18 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
+  height: 100px;
   padding: 20px;
+  color: white;
+}
+
+.App-footer {
+  position: absolute;
+  bottom: 0px;
+  width: 100%;
+  background-color: #222;
+  height: 75px;
+  padding: 10px;
   color: white;
 }
 
@@ -27,6 +37,35 @@
   margin:auto; 
 }
 
+.justify-content-center {
+  display:flex;
+  justify-content: center;
+}
+
+.login-formControl-align {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.login-formControl-styles {
+  border: 1px darkgrey solid;
+}
+
+.height-fluid {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.float-none{
+  float: none
+}
+.login-form-styles {
+  background: #43C6AC;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #191654, #43C6AC);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #191654, #43C6AC); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
