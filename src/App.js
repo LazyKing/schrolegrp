@@ -1,21 +1,18 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import AppHeader from './AppHeader';
-/*import {
-  BrowserRouter as Router,
-  Route,
-  Link
-} from 'react-router-dom'*/
-import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
+import AppFooter from './AppFooter';
 import './App.css';
-
 
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="height-fluid">
         <AppHeader />
-        {this.props.children}
+        <div>
+          {this.props.children}
+        </div>
+        <AppFooter />
       </div>
     );
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from 'react-bootstrap';
 import './App.css';
-import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router'
+import { Link } from 'react-router'
 
 class AppHeader extends Component {
   render() {
