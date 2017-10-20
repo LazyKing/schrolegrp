@@ -11,7 +11,7 @@ class MainDiv extends Component {
     return (
       <Provider store={createStore(reducers)}>
       <div className="App height-fluid">
-        <header className="App-header">
+        <div className="App-header home-page-imageContainer">
           <h1 style={{'text-align': 'center'}}>
             <span style={{'color': '#1968a5'}}>
               Connecting international schools with the best qualified teachers. Simply.
@@ -26,7 +26,7 @@ class MainDiv extends Component {
               </p>
       </div>
 
-        </header>
+        </div>
         <BookList />
         <BookList />
         <BookList />

@@ -3,14 +3,18 @@ import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from 'react-bootstrap';
 import './App.css';
 import { Link } from 'react-router'
 
+import webLogo from './assets/Schrole_Connect.png';
+
 class AppHeader extends Component {
   render() {
     return (
       <div className="AppHeader">
-      <Navbar collapseOnSelect>
+      <Navbar collapseOnSelect className="navbar-fixed-top">
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">School</a>
+            <a href="#" style={{'width':200,'height':50,'padding':0}}>
+              <img src={webLogo} title="Schrole_Connect" width="200" height="50" />
+            </a>
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
