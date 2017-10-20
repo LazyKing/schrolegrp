@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
-import BookList from "./book-list";
+//import BookList from "./book-list";
 import './App.css';
 
-import { Provider } from "react-redux";
-import { createStore } from "redux";
-import reducers from "./reducers";
+//import { Provider } from "react-redux";
+//import { createStore } from "redux";
+//import reducers from "./reducers";
 
-class MainDiv extends Component {
+class About extends Component {
   render() {
     return (
-      <Provider store={createStore(reducers)}>
       <div className="App height-fluid">
         <header className="App-header">
           <h1 style={{'text-align': 'center'}}>
@@ -27,23 +26,12 @@ class MainDiv extends Component {
       </div>
 
         </header>
-        <BookList />
-        <BookList />
-        <BookList />
-        <BookList />
-        <BookList />
-        <BookList />
-        <BookList />
-        <BookList />
-        <BookList />
-        <BookList />
         <p className="App-intro">
           Introduction
         </p>
       </div>
-      </Provider>
     );
   }
 }
 
-export default MainDiv;
+export default About;

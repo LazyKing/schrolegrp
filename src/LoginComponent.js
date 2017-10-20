@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import './App.css';
 
 import { Form, FormGroup, Col, Checkbox, Button, FormControl, ControlLabel, Grid, Navbar } from 'react-bootstrap';
-import { Link } from 'react-router'
 
+import { Link } from 'react-router'
 import { connect } from "react-redux";
 import { submitLogin } from "./actions/index";
 import { bindActionCreators } from "redux";
+
+import AppFooter from './AppFooter';
 
 class LoginComponent extends Component {
 
@@ -34,7 +36,6 @@ class LoginComponent extends Component {
 
   render() {
     return (
-
     <div className="AppHeader">
       <Navbar collapseOnSelect>
         <Navbar.Header>
@@ -43,10 +44,7 @@ class LoginComponent extends Component {
           </Navbar.Brand>
           <Navbar.Toggle />
         </Navbar.Header>
-      </Navbar>
-      
-
-
+      </Navbar>    
       <Grid fluid={true} className="float-none col-sm-5 login-formControl-styles login-form-styles">
         <h3 className="col-sm-12 login-formControl-align">Welcome to Schol</h3>
         <Form className="col-sm-12">
@@ -73,6 +71,7 @@ class LoginComponent extends Component {
           </FormGroup>
         </Form>
       </Grid>
+      <AppFooter />
       </div>  
     );
   }

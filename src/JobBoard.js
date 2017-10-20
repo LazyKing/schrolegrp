@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 import { createStore } from "redux";
 import reducers from "./reducers";
 
-class MainDiv extends Component {
+class JobBoard extends Component {
   render() {
     return (
       <Provider store={createStore(reducers)}>
@@ -28,22 +28,10 @@ class MainDiv extends Component {
 
         </header>
         <BookList />
-        <BookList />
-        <BookList />
-        <BookList />
-        <BookList />
-        <BookList />
-        <BookList />
-        <BookList />
-        <BookList />
-        <BookList />
-        <p className="App-intro">
-          Introduction
-        </p>
       </div>
       </Provider>
     );
   }
 }
 
-export default MainDiv;
+export default JobBoard;
