@@ -59,7 +59,7 @@ export default function(state = INITIAL_STATE, action) {
 		    "user":{
 		      "email":action.payload.email,
 		      "password":action.payload.password,
-		      "password_confirmation": action.payload.password
+		      "password_confirmation": action.payload.passwordConfirm
 		    }
 		  })
 		}).then((response) => response.json())
