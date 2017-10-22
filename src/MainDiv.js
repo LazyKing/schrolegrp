@@ -38,10 +38,10 @@ class MainDiv extends Component {
             </p>
           </div>
         </div>
-        <div style={{ background: '#ECECEC', padding: '30px' }}>
-          <Row gutter={16}>
-            <Col span={8}>
-              <Card style={{ width: 300, height:380 }} bodyStyle={{ padding: 0 }}>
+        <div className="featured-list-container" >
+          <Row type="flex" justify="space-around">
+            <Col span={6}>
+              <Card style={{ height:400 }} bodyStyle={{ padding: 0 }}>
                 <div className="custom-card-image">
                   <img alt="example" width="100%" src={feature_1} />
                 </div>
@@ -52,8 +52,8 @@ class MainDiv extends Component {
                 </div>
               </Card>
             </Col>
-            <Col span={8}>
-              <Card style={{ width: 300, height:380 }} bodyStyle={{ padding: 0 }}>
+            <Col span={6}>
+              <Card style={{ height:400 }} bodyStyle={{ padding: 0 }}>
                 <div className="custom-card-image">
                   <img alt="example" width="100%" src={feature_2} />
                 </div>
@@ -64,8 +64,8 @@ class MainDiv extends Component {
                 </div>
               </Card>
             </Col>
-            <Col span={8}>
-              <Card style={{ width: 300, height:380 }} bodyStyle={{ padding: 0 }}>
+            <Col span={6}>
+              <Card style={{ height:400 }} bodyStyle={{ padding: 0 }}>
                 <div className="custom-card-image">
                   <img alt="example" width="100%" src={feature_3} />
                 </div>

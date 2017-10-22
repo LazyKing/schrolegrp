@@ -6,6 +6,19 @@ import { Link } from 'react-router'
 import webLogo from './assets/Schrole_Connect.png';
 
 class AppHeader extends Component {
+  
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      activeTab : 1
+    };
+  }
+
+  handleSelect(selectedKey) {
+    this.setState({activeTab:selectedKey});
+  }
+
   render() {
     return (
       <div className="AppHeader">
@@ -22,11 +35,11 @@ class AppHeader extends Component {
           <Nav>
 
           </Nav>
-          <Nav pullRight>
+          <Nav pullRight activeKey={this.state.activeTab} onSelect={this.handleSelect.bind(this)}>
             <NavItem eventKey={1} href="#"><Link role="button" to="/About">About</Link></NavItem>
             <NavItem eventKey={2} href="#"><Link role="button" to="/Register">Register</Link></NavItem>
-            <NavItem eventKey={1} href="#"><Link role="button" to="/JobBoard">Job Board</Link></NavItem>
-            <NavItem eventKey={2} href="#"><Link role="button" to="/Login">Login</Link></NavItem>
+            <NavItem eventKey={3} href="#"><Link role="button" to="/JobBoard">Job Board</Link></NavItem>
+            <NavItem eventKey={4} href="#"><Link role="button" to="/Login">Login</Link></NavItem>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

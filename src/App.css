@@ -24,6 +24,11 @@
   background-attachment: fixed; 
 }
 
+.featured-list-container {
+  background: '#ECECEC';
+  padding: 20px 0px; 
+}
+
 .custom-card-image img {
   display: block;
 }
