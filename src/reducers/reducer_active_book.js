@@ -13,12 +13,7 @@ export default function(state = INITIAL_STATE, action) {
 
     case "SUBMIT_LOGIN":
 	    console.log(action.payload);
-	    function handleErrors(response) {
-    		if ( response.success == false) {
-        		throw Error(response.message);
-    		}
-    		return true;
-		}
+	    window.location.href="http://localhost:3000/#/";
 	  	fetch('http://35.154.148.146/users/sign_in', {
 		  method: 'POST',
 		  headers: {
@@ -34,8 +29,8 @@ export default function(state = INITIAL_STATE, action) {
 		}).then((response) => response.json())
 	  	.then((responseJson) => {
 	  		if(responseJson.success){
-	  			alert("successful login");
 	        	console.log(responseJson);
+	        	//localstorage.
 	  		} else {
 	  			alert("authentication failed");
 	  		}
@@ -80,12 +75,6 @@ export default function(state = INITIAL_STATE, action) {
       
      case "FORGOT_PASSWORD":
 	    console.log(action.payload);
-	    function handleErrors(response) {
-    		if ( response.success == false) {
-        		throw Error(response.message);
-    		}
-    		return true;
-		}
 	  	fetch('http://35.154.148.146/users/sign_in', {
 		  method: 'POST',
 		  headers: {

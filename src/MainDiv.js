@@ -3,12 +3,16 @@ import { Button, Row, Col, Card } from 'antd';
 import { Carousel } from 'react-bootstrap';
 import './App.css';
 
+/*Import Redux functionalities*/
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware } from "redux";
+import thunk from 'redux-thunk';
 import reducers from "./reducers";
 
+/*Import Components*/
 import BookList from "./book-list";
 
+/*Import Images*/
 import webLogo from './assets/about_us.jpg';
 import feature_1 from './assets/feature_1.jpg';
 import feature_2 from './assets/feature_2.jpg';
@@ -23,7 +27,7 @@ class MainDiv extends Component {
 
   render() {
     return (
-      <Provider store={createStore(reducers)}>
+      <Provider store={createStore(reducers), applyMiddleware(thunk)}>
       <div className="App height-fluid">
         <div className="App-header home-page-imageContainer">
           <div className="col-sm-6 float-right home-page-intro-text">
