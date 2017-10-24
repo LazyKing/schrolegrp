@@ -38,7 +38,7 @@ class MainDiv extends Component {
             <h1 style={{'text-align': 'center','color': '#1968a5'}}>
                 Connecting international schools with the best qualified teachers. Simply.
             </h1>
-            <p style={{'text-align': 'center','color': '#333333'}}>
+            <p style={{'textAlign': 'center','color': '#333333'}}>
               <strong>
                 Schrole Connect’s unique software solutions help to attract and match the best qualified teachers with hard to fill roles in international schools.
                 Reducing recruitment time and costs.<br />

@@ -8,13 +8,10 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
     case "BOOK_SELECTED":
-      console.log(action.payload);
       return action.payload;
 
     case "SUBMIT_LOGIN":
-	    console.log(action.payload);
-	    //window.location.href="http://localhost:3000/#/";
-	  	fetch('http://35.154.148.146/users/sign_in', {
+	  	fetch('http://13.126.41.88/users/sign_in', {
 		  method: 'POST',
 		  headers: {
 		    'Accept': 'application/json',
@@ -30,11 +27,11 @@ export default function(state = INITIAL_STATE, action) {
 	  	.then((responseJson) => {
 	  		if(responseJson.success){
 	        	console.log(responseJson);
-						browserHistory.push({
-							pathname: '/About',
-							state: { some: 'state' }
-						});
-						browserHistory.go();
+	        	localStorage.setItem("userprofile", JSON.stringify(responseJson.user) );
+				browserHistory.push({
+					pathname: '/userprofile',
+					state: { stateData: responseJson.user }
+				});
 	  		} else {
 	  			alert("authentication failed");
 	  		}
