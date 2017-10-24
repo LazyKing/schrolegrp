@@ -1,6 +1,6 @@
 // State argument is not application state, only the state
 // this reducer is responsible for
-
+import {  browserHistory  } from 'react-router'
 const INITIAL_STATE = {
 	email: '',
 	password: ''
@@ -13,7 +13,7 @@ export default function(state = INITIAL_STATE, action) {
 
     case "SUBMIT_LOGIN":
 	    console.log(action.payload);
-	    window.location.href="http://localhost:3000/#/";
+	    //window.location.href="http://localhost:3000/#/";
 	  	fetch('http://35.154.148.146/users/sign_in', {
 		  method: 'POST',
 		  headers: {
@@ -30,7 +30,11 @@ export default function(state = INITIAL_STATE, action) {
 	  	.then((responseJson) => {
 	  		if(responseJson.success){
 	        	console.log(responseJson);
-	        	//localstorage.
+						browserHistory.push({
+							pathname: '/About',
+							state: { some: 'state' }
+						});
+						browserHistory.go();
 	  		} else {
 	  			alert("authentication failed");
 	  		}
@@ -72,7 +76,7 @@ export default function(state = INITIAL_STATE, action) {
 	        console.error(error);
 	      });
       return action.payload;
-      
+
      case "FORGOT_PASSWORD":
 	    console.log(action.payload);
 	  	fetch('http://35.154.148.146/users/sign_in', {
@@ -101,15 +105,19 @@ export default function(state = INITIAL_STATE, action) {
 	      	alert("unauthorized");
 	        console.error(error);
 	      });
-      return action.payload;    
+      return action.payload;
 
     case "PASSWORD_CHANGED":
       console.log(action.payload);
       return { ...state, password: action.payload};
-      
+
     case "EMAIL_CHANGED":
       console.log(action.payload);
-      return { ...state, email: action.payload}; 
+      return { ...state, email: action.payload};
+
+		case "CAT_SUCCESS":
+			 console.log(action.payload);
+			 //return { ...state, email: action.payload};
   }
 
   return state;

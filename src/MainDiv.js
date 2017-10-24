@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunk from 'redux-thunk';
 import reducers from "./reducers";
+import { testDispatch } from "./actions/index";
 
 /*Import Components*/
 import BookList from "./book-list";
@@ -18,8 +19,11 @@ import feature_1 from './assets/feature_1.jpg';
 import feature_2 from './assets/feature_2.jpg';
 import feature_3 from './assets/feature_3.jpg';
 
+const store1=createStore(reducers, applyMiddleware(thunk)) ;
+store1.dispatch(testDispatch());
+
 class MainDiv extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = { };
@@ -27,7 +31,7 @@ class MainDiv extends Component {
 
   render() {
     return (
-      <Provider store={createStore(reducers), applyMiddleware(thunk)}>
+      <Provider store={store1}>
       <div className="App height-fluid">
         <div className="App-header home-page-imageContainer">
           <div className="col-sm-6 float-right home-page-intro-text">
@@ -36,7 +40,7 @@ class MainDiv extends Component {
             </h1>
             <p style={{'text-align': 'center','color': '#333333'}}>
               <strong>
-                Schrole Connect’s unique software solutions help to attract and match the best qualified teachers with hard to fill roles in international schools. 
+                Schrole Connect’s unique software solutions help to attract and match the best qualified teachers with hard to fill roles in international schools.
                 Reducing recruitment time and costs.<br />
               </strong>
             </p>
@@ -79,7 +83,7 @@ class MainDiv extends Component {
                   <Button>Find out more</Button>
                 </div>
               </Card>
-            </Col>  
+            </Col>
           </Row>
         </div>
         <div className="carousel-container">

@@ -34,3 +34,29 @@ export function forgotPassword(user) {
     payload: user
   };
 }
+
+export function testDispatch() {
+  return function (dispatch) {
+    dispatch(createCatSuccess('cat'));
+  };
+}
+
+export function createCatSuccess(cat) {
+    return {
+      type: "CAT_SUCCESS" ,
+      payload: cat
+    };
+}
+
+  /*
+  export function createCat(cat) {
+  return function (dispatch) {
+    return catApi.createCat(cat).then(responseCat => {
+      dispatch(createCatSuccess(responseCat));
+      return responseCat;
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+*/
