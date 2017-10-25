@@ -7,8 +7,6 @@ const INITIAL_STATE = {
 }
 export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case "BOOK_SELECTED":
-      return action.payload;
 
     case "SUBMIT_LOGIN":
 	  	fetch('http://13.126.41.88/users/sign_in', {
@@ -104,17 +102,37 @@ export default function(state = INITIAL_STATE, action) {
 	      });
       return action.payload;
 
-    case "PASSWORD_CHANGED":
-      console.log(action.payload);
-      return { ...state, password: action.payload};
 
-    case "EMAIL_CHANGED":
-      console.log(action.payload);
-      return { ...state, email: action.payload};
+    case "LOG_OUT":
+	  	fetch('http://13.126.41.88/users/sign_out', {
+		  method: 'DELETE',
+		  headers: {
+		    'Accept': 'application/json',
+		    'Content-Type': 'application/json',
+		    'X-API-TOKEN' : action.payload
+		  }
+		}).then((response) => response.json())
+	  	.then((responseJson) => {
+	  		if(responseJson.success){
+	        	console.log(responseJson);
+	        	localStorage.setItem("userprofile", JSON.stringify(responseJson.user) );
+				browserHistory.push({
+					pathname: '/Login'
+				});
+	  		} else {
+	  			alert("authentication failed");
+	  		}
+	        return true;
+	      })
+	      .catch((error) => {
+	      	alert("unauthorized");
+	        console.error(error);
+	      }); 
+      return action.payload;
 
-		case "CAT_SUCCESS":
-			 console.log(action.payload);
-			 //return { ...state, email: action.payload};
+	case "CAT_SUCCESS":
+		console.log(action.payload);
+		//return { ...state, email: action.payload};
   }
 
   return state;

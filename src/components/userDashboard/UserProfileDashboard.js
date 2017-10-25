@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 
-
+/*import css*/
 import '../../App.css';
 
 /*router functionalities*/
@@ -15,7 +15,7 @@ import reducers from "../../reducers";
 import { testDispatch } from "../../actions/index";
 
 /*Import Components*/
-
+import Logout from '../Logout';
 const { Header, Content, Footer } = Layout;
 
 const store1=createStore(reducers, applyMiddleware(thunk)) ;
@@ -28,11 +28,11 @@ class UserProfileDashboard extends Component {
     console.log(this.props);
     if(this.props.location.state) {
       const { email, auth_token} = this.props.location.state.stateData ;
-      this.state = { currentTab: '1', user: email , authToekn: auth_token };
+      this.state = { currentTab: '1', user: email , authToken: auth_token };
     } else {
       console.log(JSON.parse(localStorage.getItem("userprofile")));
       const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
-      this.state = { currentTab: '1', user: email , authToekn: auth_token };
+      this.state = { currentTab: '1', user: email , authToken: auth_token };
     }
   }
   
@@ -59,12 +59,13 @@ class UserProfileDashboard extends Component {
                 style={{ lineHeight: '64px' }}
               >
                 <Menu.Item key="1"><Icon type="desktop" /><Link role="button" to="/userprofile" style={{'display':'inline-flex'}}>Dashboard</Link></Menu.Item>
-                <Menu.Item key="2"><Icon type="mail" /><Link role="button" to={{ pathname: '/userprofile/schools', state: { stateData: "Anirudh" } }} style={{'display':'inline-flex'}}>School</Link></Menu.Item>
-                <Menu.Item key="3"><Icon type="user-add" /><Link role="button" to={{ pathname: '/userprofile/vacancies', state: { stateData: "Anirudh" } }} style={{'display':'inline-flex'}}>Vacancies</Link></Menu.Item>
-                <Menu.Item key="4"><Icon type="global" /><Link role="button" to={{ pathname: '/userprofile/application', state: { stateData: "Anirudh" } }} style={{'display':'inline-flex'}}>Applications</Link></Menu.Item>
-                <Menu.Item key="5"><Icon type="smile-o" /><Link role="button" to={{ pathname: '/userprofile/profile', state: { stateData: "Anirudh" } }} style={{'display':'inline-flex'}}>Profile</Link></Menu.Item>
-                <Menu.Item key="6"><Icon type="search" /><Link role="button" to={{ pathname: '/userprofile/search', state: { stateData: "Anirudh" } }} style={{'display':'inline-flex'}}>Search</Link></Menu.Item>
+                <Menu.Item key="2"><Icon type="mail" /><Link role="button" to={{ pathname: '/userprofile/schools'/*, state: { stateData: "Anirudh" }*/ }} style={{'display':'inline-flex'}}>School</Link></Menu.Item>
+                <Menu.Item key="3"><Icon type="user-add" /><Link role="button" to={{ pathname: '/userprofile/vacancies'/*, state: { stateData: "Anirudh" }*/ }} style={{'display':'inline-flex'}}>Vacancies</Link></Menu.Item>
+                <Menu.Item key="4"><Icon type="global" /><Link role="button" to={{ pathname: '/userprofile/application'/*, state: { stateData: "Anirudh" }*/ }} style={{'display':'inline-flex'}}>Applications</Link></Menu.Item>
+                <Menu.Item key="5"><Icon type="smile-o" /><Link role="button" to={{ pathname: '/userprofile/profile'/*, state: { stateData: "Anirudh" }*/ }} style={{'display':'inline-flex'}}>Profile</Link></Menu.Item>
+                <Menu.Item key="6"><Icon type="search" /><Link role="button" to={{ pathname: '/userprofile/search'/*, state: { stateData: "Anirudh" }*/ }} style={{'display':'inline-flex'}}>Search</Link></Menu.Item>
                 <Menu.Item key="7"><Icon type="user" />{this.state.user}</Menu.Item>
+                <Menu.Item key="8" className="pull-right"><Logout auth_token={this.state.authToken}/></Menu.Item>
               </Menu>
             </Header>
             <Content style={{ padding: '0 50px' }}>

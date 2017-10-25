@@ -14,7 +14,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="">
-        <h1 style={{'textAlign': 'left','color': '#1968a5'}}>
+        <h1 style={{'textAlign': 'left','color': '#1968a5', padding: '10px'}}>
           Welcome to your Schrole Dashboard
         </h1>
         <div className="" style={{ background: '#ECECEC', padding: '30px' }} >
