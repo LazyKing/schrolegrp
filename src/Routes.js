@@ -9,7 +9,9 @@ import LoginPageAnt from './LoginAnt';
 import JobBoard from './JobBoard';
 import About from './About';
 import UserProfile from './components/userDashboard/UserProfileDashboard';
-import Application from './components/userDashboard/Application'
+import Application from './components/userDashboard/Application';
+import Dashboard from './components/userDashboard/Dashboard';
+import Schools from './components/userDashboard/Schools';
 /**
  * All routes go here.
  * Don't forget to import the components above after adding new route.
@@ -25,8 +27,8 @@ export default (
     <Route path="/Login" component={LoginPageAnt} />
     
     <Route name="userprofile" breadcrumbName="User Profile" path="/userprofile" component={UserProfile}>
-      <IndexRoute name="Dashboard" breadcrumbName="Dashboard" component={About} />
-      <Route name="Schools" breadcrumbName="Schools" path="/userprofile/schools" component={About} />
+      <IndexRoute name="Dashboard" breadcrumbName="Dashboard" component={Dashboard} />
+      <Route name="Schools" breadcrumbName="Schools" path="/userprofile/schools" component={Schools} />
       <Route name="Vacancies" breadcrumbName="Vacancies" path="/userprofile/vacancies" component={About} />
       <Route name="Application" breadcrumbName="Application" path="/userprofile/application" component={Application} />
       <Route name="Profile" breadcrumbName="Profile" path="/userprofile/profile" component={About} />

@@ -31,7 +31,7 @@ class UserProfileDashboard extends Component {
       this.state = { currentTab: '1', user: email , authToekn: auth_token };
     } else {
       console.log(JSON.parse(localStorage.getItem("userprofile")));
-      const { email, auth_token} = localStorage.getItem("userprofile");
+      const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
       this.state = { currentTab: '1', user: email , authToekn: auth_token };
     }
   }

@@ -1,0 +1,19 @@
+.school-card-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.school-card-name-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.school-card-actions-container{
+
+}
+
+.school-card-name {
+  display: flex
+}
