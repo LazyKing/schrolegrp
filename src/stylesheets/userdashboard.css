@@ -13,6 +13,22 @@
 .school-card-actions-container{
 
 }
+.basic-profile-mainContainer, .experience-mainContainer,
+.extraInformation-mainContainer, .qualification-mainContainer,
+.references-mainContainer {
+  margin-top: 10px;
+}
+
+.profile-basic-info-container{
+  margin-top: 10px;
+}
+
+.profile-percentage-card{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  height: 230px;
+}
 
 .school-card-name {
   display: flex

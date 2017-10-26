@@ -12,6 +12,7 @@ import UserProfile from './components/userDashboard/UserProfileDashboard';
 import Application from './components/userDashboard/Application';
 import Dashboard from './components/userDashboard/Dashboard';
 import Schools from './components/userDashboard/Schools';
+import Profile from './components/userDashboard/Profile';
 /**
  * All routes go here.
  * Don't forget to import the components above after adding new route.
@@ -31,7 +32,7 @@ export default (
       <Route name="Schools" breadcrumbName="Schools" path="/userprofile/schools" component={Schools} />
       <Route name="Vacancies" breadcrumbName="Vacancies" path="/userprofile/vacancies" component={About} />
       <Route name="Application" breadcrumbName="Application" path="/userprofile/application" component={Application} />
-      <Route name="Profile" breadcrumbName="Profile" path="/userprofile/profile" component={About} />
+      <Route name="Profile" breadcrumbName="Profile" path="/userprofile/profile" component={Profile} />
       <Route name="Search" breadcrumbName="Search" path="/userprofile/search" component={About} />
     </Route>
   </Route>

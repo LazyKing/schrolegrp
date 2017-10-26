@@ -68,7 +68,7 @@ class UserProfileDashboard extends Component {
                 <Menu.Item key="8" className="pull-right"><Logout auth_token={this.state.authToken}/></Menu.Item>
               </Menu>
             </Header>
-            <Content style={{ padding: '0 50px' }}>
+            <Content style={{ padding: '0 20px' }}>
               <Breadcrumb routes={this.props.routes} params={this.props.params} style={{ padding: '10px 10px' }} />
               <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
                 <div>
