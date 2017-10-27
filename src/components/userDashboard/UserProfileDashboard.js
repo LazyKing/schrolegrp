@@ -22,6 +22,12 @@ const store1=createStore(reducers, applyMiddleware(thunk)) ;
 store1.dispatch(testDispatch());
 
 class UserProfileDashboard extends Component {
+  
+  onMenuClick = (e) => {
+    this.setState({
+      currentTab: e.key,
+    });
+  }
 
   constructor(props) {
     super(props);
@@ -29,17 +35,17 @@ class UserProfileDashboard extends Component {
     if(this.props.location.state) {
       const { email, auth_token} = this.props.location.state.stateData ;
       this.state = { currentTab: '1', user: email , authToken: auth_token };
-    } else {
+    } else if ( localStorage.getItem("userprofile") ) {
       console.log(JSON.parse(localStorage.getItem("userprofile")));
       const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
       this.state = { currentTab: '1', user: email , authToken: auth_token };
+    } else {
+
     }
   }
-  
-  onMenuClick = (e) => {
-    this.setState({
-      currentTab: e.key,
-    });
+
+  ComponentDidMount() {
+    //call AJAX over here
   }
 
   render() {

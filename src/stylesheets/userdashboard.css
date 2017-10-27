@@ -20,7 +20,7 @@
 }
 
 .profile-basic-info-container{
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 .profile-percentage-card{
@@ -30,6 +30,16 @@
   height: 230px;
 }
 
+.profile-details-container{
+  margin-top: 20px;
+}
+
 .school-card-name {
   display: flex
+}
+
+.basic-profile-header{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

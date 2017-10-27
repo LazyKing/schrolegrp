@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { Button, Row, Col, Card, Progress } from 'antd';
 
+import PersonalDetails from './basicProfile/PersonalDetails';
+import ContactDetails from './basicProfile/ContactDetails';
+import Dependents from './basicProfile/Dependents';
+
 class BasicProfile extends Component {
 
   constructor(props) {
@@ -11,25 +15,40 @@ class BasicProfile extends Component {
   render() {
     return (
       <div className="basic-profile-mainContainer">
-          <div className="">
-            <h1 style={{'textAlign': 'center','color': '#1968a5' }}>
-                Connecting international schools with the best qualified teachers. Simply.
-            </h1>
-          </div>
           <div className="profile-basic-info-container">
             <Row gutter={16}>
-              <Col span={8}>
+              <Col xs={0} sm={9} lg={8}>
                 <Card title="Yellow Flower" style={{ height: 230 }}>
 
                 </Card>
               </Col>
-              <Col span={8}>
-                <h2> Yellow Flower </h2>
+              <Col xs={0} sm={9} lg={8} >
+                <div style={{ height: 230 }}>
+                  <div className="basic-profile-header">
+                    <h2> Yellow Flower </h2>
+                    <Button> Edit </Button>
+                  </div>
+                  <hr style={{ border: '1px rgba(37, 132, 193, 0.9) solid' }}/>
+                </div>  
               </Col>
-              <Col span={8}>
+              <Col xs={0} sm={6} lg={8} className="hidden-sm-down">
                 <Card className="profile-percentage-card" title="Profile Completion Status" >
-                  <Progress type="circle" percent={75} />
+                  <Progress type="circle" percent={80} />
                 </Card>
+              </Col>
+            </Row>
+          </div>
+          <hr style={{ marginTop:'10px', border: '1px rgba(37, 132, 193, 0.9) solid' }}/>
+          <div className="profile-details-container">
+            <Row gutter={16}>
+              <Col xs={0} sm={9} lg={8}>
+                <PersonalDetails />
+              </Col>
+              <Col xs={0} sm={9} lg={8}>
+                <Dependents />
+              </Col>
+              <Col xs={0} sm={6} lg={8} className="hidden-sm-down" >
+                <ContactDetails />
               </Col>
             </Row>
           </div>
