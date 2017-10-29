@@ -15,8 +15,9 @@ class Logout extends Component {
   }
  
   onLogout(e) {
-  	//localStorage.removeItem("userprofile");
-  	this.props.logout(this.props.auth_token);
+  	//console.log(this.props.auth_token,this.props.user_email,);
+  	const logoutPayloadHeader = { 'auth_token': this.props.auth_token, 'user_email': this.props.user_email }
+  	this.props.logout(logoutPayloadHeader);
   }
 
   render() {

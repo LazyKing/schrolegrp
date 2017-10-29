@@ -5,7 +5,7 @@ import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 import '../../App.css';
 
 /*router functionalities*/
-import { Link } from 'react-router'
+import { Link, browserHistory } from 'react-router';
 
 /*Import Redux functionalities*/
 import { Provider } from "react-redux";
@@ -31,21 +31,24 @@ class UserProfileDashboard extends Component {
 
   constructor(props) {
     super(props);
-    console.log(this.props);
+    this.state = { currentTab: '1', user: '' , authToken: '' };
+  }
+
+  componentDidMount() {
+    //call AJAX over here
+    //console.log(this.props);
     if(this.props.location.state) {
       const { email, auth_token} = this.props.location.state.stateData ;
-      this.state = { currentTab: '1', user: email , authToken: auth_token };
+      this.setState({ user: email , authToken: auth_token });
     } else if ( localStorage.getItem("userprofile") ) {
       console.log(JSON.parse(localStorage.getItem("userprofile")));
       const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
-      this.state = { currentTab: '1', user: email , authToken: auth_token };
+      this.setState({ user: email , authToken: auth_token });
     } else {
-
+      browserHistory.push({
+        pathname: '/Login'
+      });
     }
-  }
-
-  ComponentDidMount() {
-    //call AJAX over here
   }
 
   render() {
@@ -71,12 +74,12 @@ class UserProfileDashboard extends Component {
                 <Menu.Item key="5"><Icon type="smile-o" /><Link role="button" to={{ pathname: '/userprofile/profile'/*, state: { stateData: "Anirudh" }*/ }} style={{'display':'inline-flex'}}>Profile</Link></Menu.Item>
                 <Menu.Item key="6"><Icon type="search" /><Link role="button" to={{ pathname: '/userprofile/search'/*, state: { stateData: "Anirudh" }*/ }} style={{'display':'inline-flex'}}>Search</Link></Menu.Item>
                 <Menu.Item key="7"><Icon type="user" />{this.state.user}</Menu.Item>
-                <Menu.Item key="8" className="pull-right"><Logout auth_token={this.state.authToken}/></Menu.Item>
+                <Menu.Item key="8" className="pull-right"><Logout auth_token={this.state.authToken} user_email={this.state.user}/></Menu.Item>
               </Menu>
             </Header>
             <Content style={{ padding: '0 20px' }}>
-              <Breadcrumb routes={this.props.routes} params={this.props.params} style={{ padding: '10px 10px' }} />
-              <div style={{ background: '#fff', padding: 24, minHeight: 280 }}>
+              <Breadcrumb separator=">" routes={this.props.routes} params={this.props.params} className="breadCrumb-container" />
+              <div style={{ background: '#fff', padding: 15, minHeight: 280 }}>
                 <div>
                   {this.props.children}
                 </div>

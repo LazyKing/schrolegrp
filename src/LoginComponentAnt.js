@@ -5,7 +5,7 @@ import {  Navbar } from 'react-bootstrap';
 import 'antd/dist/antd.css';
 import './App.css';
 
-import { Link } from 'react-router'
+import { Link, browserHistory } from 'react-router'
 import { connect } from "react-redux";
 import { submitLogin, registerUser, forgotPassword } from "./actions/index";
 import { bindActionCreators } from "redux";
@@ -25,6 +25,15 @@ class testReflux extends Component {
       passwordConfirm: '',
       registration: false
     };
+  }
+
+  routeToHome(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    browserHistory.push({
+        pathname: '/'
+    });
+
   }
 
   onEmailChange(event) {
@@ -63,7 +72,7 @@ class testReflux extends Component {
         <Navbar collapseOnSelect>
             <Navbar.Header>
               <Navbar.Brand>
-                <a href="#" style={{'width':200,'height':50,'padding':0}}>
+                <a onClick={this.routeToHome} href="javascript.void(0)" style={{'width':200,'height':50,'padding':0}}>
                     <img src={webLogo} title="Schrole_Connect" width="200" height="50" />
                 </a>
               </Navbar.Brand>

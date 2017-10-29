@@ -5,6 +5,9 @@ import PersonalDetails from './basicProfile/PersonalDetails';
 import ContactDetails from './basicProfile/ContactDetails';
 import Dependents from './basicProfile/Dependents';
 
+/*temproary*/
+import profilePic from '../../../assets/feature_1.jpg';
+
 class BasicProfile extends Component {
 
   constructor(props) {
@@ -18,8 +21,8 @@ class BasicProfile extends Component {
           <div className="profile-basic-info-container">
             <Row gutter={16}>
               <Col xs={0} sm={9} lg={8}>
-                <Card title="Yellow Flower" style={{ height: 230 }}>
-
+                <Card title="Yellow Flower" style={{ height: 350 }}>
+                  <img style={{ width: '100%' }} src={profilePic} />
                 </Card>
               </Col>
               <Col xs={0} sm={9} lg={8} >

@@ -26,6 +26,10 @@ class Schools extends Component {
         <div className="" style={{ background: '#ECECEC', padding: '30px' }} >
           <Row gutter={16}>
             <Col span={24}>
+              <Row className="school-list-header" type="flex" justify="space-between">
+                <Col><span><strong>Schools</strong></span></Col>
+                <Col><span><strong>Results:2</strong></span></Col>
+              </Row>
               {listItems}
             </Col>
           </Row>    

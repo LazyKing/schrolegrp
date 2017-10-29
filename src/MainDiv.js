@@ -35,7 +35,7 @@ class MainDiv extends Component {
       <div className="App height-fluid">
         <div className="App-header home-page-imageContainer">
           <div className="col-sm-6 float-right home-page-intro-text">
-            <h1 style={{'text-align': 'center','color': '#1968a5'}}>
+            <h1 style={{'textAlign': 'center','color': '#1968a5'}}>
                 Connecting international schools with the best qualified teachers. Simply.
             </h1>
             <p style={{'textAlign': 'center','color': '#333333'}}>

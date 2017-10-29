@@ -109,18 +109,24 @@ export default function(state = INITIAL_STATE, action) {
 		  headers: {
 		    'Accept': 'application/json',
 		    'Content-Type': 'application/json',
-		    'X-API-TOKEN' : action.payload
+		    'X-API-TOKEN' : action.payload.auth_token,
+		    'X-API-EMAIL' : action.payload.user_email
 		  }
 		}).then((response) => response.json())
 	  	.then((responseJson) => {
+	  		//console.log(responseJson);
 	  		if(responseJson.success){
-	        	console.log(responseJson);
-	        	localStorage.setItem("userprofile", JSON.stringify(responseJson.user) );
+	        	localStorage.removeItem("userprofile");
 				browserHistory.push({
 					pathname: '/Login'
 				});
 	  		} else {
-	  			alert("authentication failed");
+	  			alert("Invalid session");
+	  			localStorage.removeItem("userprofile");
+				browserHistory.push({
+					pathname: '/Login'
+				});
+
 	  		}
 	        return true;
 	      })

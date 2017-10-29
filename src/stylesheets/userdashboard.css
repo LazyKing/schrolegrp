@@ -1,15 +1,28 @@
+.breadCrumb-container{
+  padding: 10px 10px; 
+  font-size: medium;
+}
+
 .school-card-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
 
-.school-card-name-container {
+/*.school-card-name-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}*/
+.school-list-header {
+  padding: 10px;
+  background-color: cornflowerblue;
 }
-
+.school-card-listItem{
+  margin-top: 10px;
+  padding: 10px 0px;
+  border: 1px rgba(117, 112, 112, 0.2) solid;
+}
 .school-card-actions-container{
 
 }
