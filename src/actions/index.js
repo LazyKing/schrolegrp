@@ -8,6 +8,12 @@ export function selectBook(book) {
   };
 }
 
+export function submitLoginDispatch(user) {
+  return function (dispatch) {
+    dispatch(submitLogin(user));
+  };
+}
+
 export function submitLogin(user) {
   return {
     type: "SUBMIT_LOGIN",

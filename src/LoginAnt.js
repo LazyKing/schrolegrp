@@ -5,13 +5,13 @@ import LoginComponent from './LoginComponentAnt';
 
 import { Provider } from "react-redux";
 import { createStore } from "redux";
-import reducers from "./reducers";
+import authenticationAndRegistration from "./reducers";
 
 
 class Login extends Component {
   render() {
     return (
-      <Provider store={createStore(reducers)}>  
+      <Provider store={createStore(authenticationAndRegistration)}>  
         <LoginComponent />
       </Provider>  
     );

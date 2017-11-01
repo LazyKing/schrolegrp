@@ -8,7 +8,7 @@ const INITIAL_STATE = {
 export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
 
-/*    case "SUBMIT_LOGIN":
+    case "SUBMIT_LOGIN":
 	  	fetch('http://13.126.41.88/users/sign_in', {
 		  method: 'POST',
 		  headers: {
@@ -135,10 +135,6 @@ export default function(state = INITIAL_STATE, action) {
 	        console.error(error);
 	      }); 
       return action.payload;
-*/
-	case "CAT_SUCCESS":
-		console.log(action.payload);
-		//return { ...state, email: action.payload};
   }
 
   return state;
