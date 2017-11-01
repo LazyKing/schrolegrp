@@ -23,7 +23,6 @@ class LoginComponent extends Component {
       email: '',
       password: '',
       passwordConfirm: '',
-      registration: false,
       loading: false
     };
   }
@@ -53,25 +52,15 @@ class LoginComponent extends Component {
     this.props.forgotPassword(this.state)
   }
 
-  onRegisterNow(event) {
-    this.setState({registration:!this.state.registration});
-  }
-
   onLogin(event) {
     //console.log(this.state);
     this.setState({loading:true});
-    if (this.state.registration)
-        this.props.registerUser(this.state)
-    else
-        this.props.submitLogin(this.state)
+    this.props.submitLogin(this.state)
   }
 
   renderLoginButtonText() {
     if(!this.state.loading) {
-      if(this.state.registration)
-        return 'Register';
-      else
-        return 'Log in';
+      return 'Log in';
     } else {
       return '';
     }
@@ -105,15 +94,11 @@ class LoginComponent extends Component {
             <FormItem>
                 <Input onChange={this.onPasswordChange.bind(this)} prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password" />
             </FormItem>
-            <FormItem style={{ 'display': (this.state.registration) ? 'block' : 'none' }}>
-                <Input onChange={this.onPasswordConfirmChange.bind(this)} prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Confirm Password" />
-            </FormItem>
             <FormItem>
-                <a id="forgotPassword" style={{ textAlign: 'right', 'display': (this.state.registration) ? 'none' : 'block' }} className="login-form-forgot col-sm-12" onClick={this.onForgotPassword.bind(this)} href="javascript:void(0)">Forgot password</a>
+                <a id="forgotPassword" style={{ textAlign: 'right' }} className="login-form-forgot col-sm-12" onClick={this.onForgotPassword.bind(this)} href="javascript:void(0)">Forgot password</a>
                 <Button type="primary" onClick={this.onLogin.bind(this)} htmlType="submit" className="login-form-button col-sm-12" loading={this.state.loading}>
                     {this.renderLoginButtonText()}
                 </Button>
-                <a className="col-sm-12" onClick={this.onRegisterNow.bind(this)} href="javascript:void(0)">{this.state.registration ? 'Go back to Login Page' : 'Register now!'}</a>
             </FormItem>
           </Form>
       </div>
