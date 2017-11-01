@@ -20,12 +20,12 @@ class BasicProfile extends Component {
       <div className="basic-profile-mainContainer">
           <div className="profile-basic-info-container">
             <Row gutter={16}>
-              <Col xs={0} sm={9} lg={8}>
+              <Col xs={0} sm={10} md={8} lg={8}>
                 <Card title="Yellow Flower" style={{ height: 350 }}>
                   <img style={{ width: '100%' }} src={profilePic} />
                 </Card>
               </Col>
-              <Col xs={0} sm={9} lg={8} >
+              <Col xs={0} sm={14} md={8} lg={8} >
                 <div style={{ height: 230 }}>
                   <div className="basic-profile-header">
                     <h2> Yellow Flower </h2>
@@ -34,7 +34,7 @@ class BasicProfile extends Component {
                   <hr style={{ border: '1px rgba(37, 132, 193, 0.9) solid' }}/>
                 </div>  
               </Col>
-              <Col xs={0} sm={6} lg={8} className="hidden-sm-down">
+              <Col md={8} lg={8} className="hidden-sm hidden-xs">
                 <Card className="profile-percentage-card" title="Profile Completion Status" >
                   <Progress type="circle" percent={80} />
                 </Card>
