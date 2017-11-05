@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Card, Progress } from 'antd';
+import { Button, Row, Col, Card, Progress, LocaleProvider } from 'antd';
 
 import PersonalDetails from './basicProfile/PersonalDetails';
 import ContactDetails from './basicProfile/ContactDetails';
 import Dependents from './basicProfile/Dependents';
+import enUS from 'antd/lib/locale-provider/en_US';
 
 /*temproary*/
 import profilePic from '../../../assets/feature_1.jpg';
@@ -12,7 +13,7 @@ class BasicProfile extends Component {
 
   constructor(props) {
     super(props);
-    console.log(this.props);
+    //console.log(this.props);
   }
 
   render() {
@@ -42,19 +43,21 @@ class BasicProfile extends Component {
             </Row>
           </div>
           <hr style={{ marginTop:'10px', border: '1px rgba(37, 132, 193, 0.9) solid' }}/>
-          <div className="profile-details-container">
-            <Row gutter={16}>
-              <Col xs={0} sm={9} lg={8}>
-                <PersonalDetails />
-              </Col>
-              <Col xs={0} sm={9} lg={8}>
-                <Dependents />
-              </Col>
-              <Col xs={0} sm={6} lg={8} className="hidden-sm-down" >
-                <ContactDetails />
-              </Col>
-            </Row>
-          </div>
+          <LocaleProvider  locale={enUS}>
+            <div className="profile-details-container">
+              <Row gutter={16}>
+                <Col xs={0} sm={9} lg={8}>
+                  <PersonalDetails />
+                </Col>
+                <Col xs={0} sm={9} lg={8}>
+                  <Dependents />
+                </Col>
+                <Col xs={0} sm={6} lg={8} className="hidden-sm-down" >
+                  <ContactDetails />
+                </Col>
+              </Row>
+            </div>
+          </LocaleProvider>
       </div>
     );
   }

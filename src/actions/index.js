@@ -1,3 +1,4 @@
+import applicantsApi from '../api/ApplicantsApi';
 
 export function selectBook(book) {
   // selectBook is an ActionCreator, it needs to return an action,
@@ -55,6 +56,39 @@ export function createCatSuccess(cat) {
     };
 }
 
+export function getPersonalDetailsDispatch(user) {
+  return function(dispatch) {
+    return applicantsApi.getApplicantsProfile(user).then(profile => {
+      dispatch(getPersonalDetails(profile));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+export function updatePersonalDetailsDispatch(user, personalDetails) {
+  return function(dispatch) {
+    return applicantsApi.getApplicantsProfile(user, personalDetails).then(profile => {
+      dispatch(getPersonalDetails(profile));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+export function getPersonalDetails(profile) {
+  return {
+    type: "GET_USER_PROFILE",
+    payload: profile
+  };
+}
+
+export function updatePersonalDetails(profile) {
+  return {
+    type: "UPDATE_PERSONAL_DETAILS",
+    payload: profile
+  };
+}
   /*
   export function createCat(cat) {
   return function (dispatch) {
