@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Button, Row, Col, Card, Modal, Form, 
-  Input, Icon, Select, DatePicker, Radio, LocaleProvider } from 'antd';
+  Input, Icon, Select, DatePicker, Radio } from 'antd';
+import moment from 'moment';
 
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getPersonalDetails, getPersonalDetailsDispatch, updatePersonalDetailsDispatch } from "../../../../actions";
+import { getPersonalDetailsDispatch, updatePersonalDetailsDispatch } from "../../../../actions";
 
 import enUS from 'antd/lib/locale-provider/en_US';
 
@@ -60,8 +61,16 @@ class PersonalDetails extends Component {
       ModalText: 'Content of the modal',
       visible: false,
       confirmLoading: false,
-      confirmDirty: false,
-      applicantsProfile: {}
+      applicantsProfile: {
+        'country_of_birth':"Pakistan",
+        'country_of_citizenship':"NewZealand",
+        'dob':"1997-12-12",
+        'eu_passport':true,
+        'gender':"male",
+        'marital_status':"single",
+        'other_citizenship':'yes',
+        'other_citizenship_country':"Uruguay"
+      }
     }
   }
 
@@ -74,8 +83,10 @@ class PersonalDetails extends Component {
   componentWillReceiveProps(nextProps) {
     console.log("componentWillReceiveProps",nextProps);
     const { applicantsProfile } = nextProps
-    this.setState({ applicantsProfile });
+    const personalDetails = applicantsProfile.personal_details;
+    this.setState({ personalDetails });
   }
+
   showModal = () => {
     this.setState({
       visible: true,
@@ -107,11 +118,20 @@ class PersonalDetails extends Component {
       visible: false,
     });
   }
+
+  updateFormValues = ( applicantsProfile ) => {
+    //console.log(applicantsProfile);
+    /*this.props.form.setFieldsValue({
+      'citizenship': applicantsProfile.other_citizenship
+    })*/
+  }
   
   render() {
     //console.log(this.props.applicantsProfile);
     //console.log(this.state);
     const { getFieldDecorator } = this.props.form;
+    //this.updateFormValues(this.state.applicantsProfile);
+
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -122,8 +142,9 @@ class PersonalDetails extends Component {
         sm: { span: 14 },
       },
     };
-    const config = {
+    const dateConfig = {
       rules: [{ type: 'object', required: true, message: 'Please select date!' }],
+      initialValue: moment( this.state.applicantsProfile.dob, 'YYYY-MM-DD')
     };
 
     return (
@@ -136,64 +157,62 @@ class PersonalDetails extends Component {
             okText={'Save'}
             cancelText={'cancel'}
           >
-      <Form>
+            <Form>
+              <FormItem
+                {...formItemLayout}
+                label="Other Citizenship"
+              >
+              
+              {getFieldDecorator('citizenship', { initialValue: (this.state.applicantsProfile.other_citizenship) ? 'yes' : 'no' })( 
+                <RadioGroup>
+                  <Radio value={'yes'}>Yes</Radio>
+                  <Radio value={'no'}>No</Radio>
+                </RadioGroup>
+              )}
+              </FormItem>
 
-        
-        <FormItem
-          {...formItemLayout}
-          label="Other Citizenship"
-        >
-        
-        {getFieldDecorator('citizenship', { initialValue: 'yes' })( 
-          <RadioGroup>
-            <Radio value={'yes'}>Yes</Radio>
-            <Radio value={'no'}>No</Radio>
-          </RadioGroup>
-        )}
-        </FormItem>
+              <FormItem
+                {...formItemLayout}
+                label="Date of Birth"
+              >
+                {getFieldDecorator('date-picker', dateConfig)(
+                  <DatePicker />
+                )}
+              </FormItem>
 
-        <FormItem
-          {...formItemLayout}
-          label="Date of Birth"
-        >
-          {getFieldDecorator('date-picker', config)(
-            <DatePicker />
-          )}
-        </FormItem>
-
-        <FormItem
-          {...formItemLayout}
-          label="EU Passport"
-        >
-        {getFieldDecorator('euCitizenship', { initialValue: 'yes'  })( 
-          <Select style={{ width: 120 }}>
-            {euPassportOptions}
-          </Select>
-        )}
-        </FormItem>
-        
-        <FormItem
-          {...formItemLayout}
-          label="Gender"
-        >
-        {getFieldDecorator('gender', { initialValue: 'female' })(
-          <Select style={{ width: 120 }}>
-            {genderOptions}
-          </Select>
-        )}  
-        </FormItem>
-        
-        <FormItem
-          {...formItemLayout}
-          label="Marital Status"
-        >
-        {getFieldDecorator('maritialStatus', { initialValue: 'single' })(
-          <Select style={{ width: 120 }}>
-            {maritialOptions}
-          </Select>
-        )}
-        </FormItem>
-      </Form>
+              <FormItem
+                {...formItemLayout}
+                label="EU Passport"
+              >
+              {getFieldDecorator('euCitizenship', { initialValue: (this.state.applicantsProfile.eu_passport) ? 'yes' : 'no'  })( 
+                <Select style={{ width: 120 }}>
+                  {euPassportOptions}
+                </Select>
+              )}
+              </FormItem>
+              
+              <FormItem
+                {...formItemLayout}
+                label="Gender"
+              >
+              {getFieldDecorator('gender', { initialValue: this.state.applicantsProfile.gender })(
+                <Select style={{ width: 120 }}>
+                  {genderOptions}
+                </Select>
+              )}  
+              </FormItem>
+              
+              <FormItem
+                {...formItemLayout}
+                label="Marital Status"
+              >
+              {getFieldDecorator('maritialStatus', { initialValue: this.state.applicantsProfile.marital_status })(
+                <Select style={{ width: 120 }}>
+                  {maritialOptions}
+                </Select>
+              )}
+              </FormItem>
+            </Form>
           </Modal>
           <div>
             <Row type="flex" justify="space-between">
@@ -206,19 +225,19 @@ class PersonalDetails extends Component {
              </Row>
             <Row type="flex" justify="space-between">
               <Col><span><strong>EU Passport</strong></span></Col>
-              <Col><span>No</span></Col>
+              <Col><span>{ this.state.applicantsProfile.eu_passport ? 'Yes' : 'No'}</span></Col>
             </Row>
             <Row type="flex" justify="space-between">
               <Col><span><strong>Date of Birth</strong></span></Col>
-              <Col><span>22/12/1974</span></Col>
+              <Col><span>{this.state.applicantsProfile.dob}</span></Col>
             </Row>
             <Row type="flex" justify="space-between">
               <Col><span><strong>Gender</strong></span></Col>
-              <Col><span>Female</span></Col>
+              <Col><span>{this.state.applicantsProfile.gender}</span></Col>
             </Row>
             <Row type="flex" justify="space-between">
               <Col><span><strong>Marital status</strong></span></Col>
-              <Col><span>Single</span></Col>
+              <Col><span>{this.state.applicantsProfile.marital_status}</span></Col>
             </Row>
           </div>
         </Card>
@@ -231,7 +250,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getPersonalDetails: getPersonalDetails, getPersonalDetailsDispatch: getPersonalDetailsDispatch, 
+  return bindActionCreators({ getPersonalDetailsDispatch: getPersonalDetailsDispatch, 
       updatePersonalDetailsDispatch: updatePersonalDetailsDispatch }, dispatch);
 }
 
