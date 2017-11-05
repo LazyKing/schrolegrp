@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, NavItem, NavDropdown, MenuItem, Nav } from 'react-bootstrap';
+import { Navbar, NavItem, NavDropdown } from 'react-bootstrap';
 import './App.css';
 import { Link } from 'react-router'
 

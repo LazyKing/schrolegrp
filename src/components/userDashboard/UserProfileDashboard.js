@@ -11,15 +11,13 @@ import { Link, browserHistory } from 'react-router';
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunk from 'redux-thunk';
-import reducers from "../../reducers";
-import { testDispatch } from "../../actions/index";
+import applicants from "../../reducers";
 
 /*Import Components*/
 import Logout from '../Logout';
 const { Header, Content, Footer, Sider } = Layout;
 
-const store1=createStore(reducers, applyMiddleware(thunk)) ;
-store1.dispatch(testDispatch());
+const applicantsStore=createStore(applicants, applyMiddleware(thunk)) ;
 
 class UserProfileDashboard extends Component {
   
@@ -41,7 +39,7 @@ class UserProfileDashboard extends Component {
       const { email, auth_token} = this.props.location.state.stateData ;
       this.setState({ user: email , authToken: auth_token });
     } else if ( localStorage.getItem("userprofile") ) {
-      console.log(JSON.parse(localStorage.getItem("userprofile")));
+      //console.log(JSON.parse(localStorage.getItem("userprofile")));
       const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
       this.setState({ user: email , authToken: auth_token });
     } else {
@@ -53,7 +51,7 @@ class UserProfileDashboard extends Component {
 
   render() {
     return (
-      <Provider store={store1}>
+      <Provider store={applicantsStore}>
       <div className="height-fluid">
         <div className="featured-list-container" >
           <Layout className="layout">

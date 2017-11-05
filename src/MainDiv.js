@@ -11,7 +11,7 @@ import reducers from "./reducers";
 import { testDispatch } from "./actions/index";
 
 /*Import Components*/
-import BookList from "./book-list";
+//import BookList from "./book-list";
 
 /*Import Images*/
 import webLogo from './assets/about_us.jpg';

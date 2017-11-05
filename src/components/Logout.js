@@ -4,7 +4,6 @@ import { Icon, Button, Menu } from 'antd';
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import reducers from "../reducers";
 import { logout } from "../actions";
 
 

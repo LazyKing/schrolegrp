@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import { Router, Route, IndexRoute, Link, hashHistory } from 'react-router';
 import LoginComponent from './LoginComponentAnt';
 
 import { Provider } from "react-redux";
