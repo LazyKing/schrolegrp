@@ -81,6 +81,7 @@ class BasicProfile extends Component {
                 </Col>
                 <Col xs={0} sm={9} lg={8}>
                   <Dependents />
+                  <EmergencyContact emergency_contact={this.state.emergency_contact}/>
                 </Col>
                 <Col xs={0} sm={6} lg={8} className="hidden-sm-down" >
                   <ContactDetails contact_details={this.state.contact_details} />
@@ -90,7 +91,6 @@ class BasicProfile extends Component {
                 <Col xs={0} sm={9} lg={8}>
                 </Col>
                 <Col xs={0} sm={9} lg={8}>
-                  <EmergencyContact emergency_contact={this.state.emergency_contact}/>
                 </Col>
                 <Col xs={0} sm={6} lg={8} className="hidden-sm-down" >
                   <CriminalConvictions criminal_convictions={this.state.criminal_convictions} />
