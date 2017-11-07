@@ -72,7 +72,7 @@ class EmergencyContact extends Component {
       },
     };
     return (
-        <Card title="Emergency Contact (optional)" extra={<Button onClick={this.showModal}>Edit</Button>}>
+        <Card style={{'marginTop':'10px'}} title="Emergency Contact (optional)" extra={<Button onClick={this.showModal}>Edit</Button>}>
           <Modal title="Emergency Contact"
             visible={this.state.visible}
             onOk={this.handleOk}

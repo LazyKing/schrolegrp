@@ -39,9 +39,9 @@ class BasicProfile extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    //console.log("componentWillReceiveProps",nextProps);
+    //console.log("componentWillReceiveProps - basicprof",nextProps);
     const { first_name, last_name, emergency_contact, 
-      criminal_convictions, contact_details } = nextProps.applicantsProfile;
+      criminal_convictions, contact_details } = nextProps.applicantsProfilePayload.applicantsProfile;
     this.setState({ first_name, last_name , emergency_contact, 
       criminal_convictions, contact_details});
   }
@@ -77,14 +77,15 @@ class BasicProfile extends Component {
             <div className="profile-details-container">
               <Row gutter={16}>
                 <Col xs={0} sm={9} lg={8}>
-                  <PersonalDetails />
-                </Col>
-                <Col xs={0} sm={9} lg={8}>
                   <Dependents />
                   <EmergencyContact emergency_contact={this.state.emergency_contact}/>
                 </Col>
+                <Col xs={0} sm={9} lg={8}>
+                  <PersonalDetails />
+                </Col>
                 <Col xs={0} sm={6} lg={8} className="hidden-sm-down" >
                   <ContactDetails contact_details={this.state.contact_details} />
+                  <CriminalConvictions criminal_convictions={this.state.criminal_convictions} />
                 </Col>
               </Row>
               <Row gutter={16}>
@@ -93,7 +94,7 @@ class BasicProfile extends Component {
                 <Col xs={0} sm={9} lg={8}>
                 </Col>
                 <Col xs={0} sm={6} lg={8} className="hidden-sm-down" >
-                  <CriminalConvictions criminal_convictions={this.state.criminal_convictions} />
+                  
                 </Col>
               </Row>
             </div>
@@ -105,7 +106,7 @@ class BasicProfile extends Component {
 
 function mapStateToProps(state) {
   //console.log("mapStateToProps",state);
-  return { applicantsProfile: state.applicants};
+  return { applicantsProfilePayload: state.applicants};
 }
 
 function mapDispatchToProps(dispatch) {

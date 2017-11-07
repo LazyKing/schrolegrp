@@ -77,7 +77,7 @@ class CriminalConvictions extends Component {
     };
 
     return (
-        <Card title="Criminal Convictions" extra={<Button onClick={this.showModal}>Edit</Button>}>
+        <Card style={{'marginTop':'10px'}} title="Criminal Convictions" extra={<Button onClick={this.showModal}>Edit</Button>}>
           <Modal title="Emergency Contact"
             visible={this.state.visible}
             onOk={this.handleOk}

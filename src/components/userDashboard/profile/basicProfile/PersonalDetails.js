@@ -81,7 +81,7 @@ class PersonalDetails extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    console.log("componentWillReceiveProps",nextProps);
+    //console.log("componentWillReceiveProps - personal details",nextProps);
     const { applicantsProfile } = nextProps
     const personalDetails = applicantsProfile.personal_details;
     this.setState({ personalDetails });

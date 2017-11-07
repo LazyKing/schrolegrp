@@ -1,31 +1,52 @@
 import React, { Component } from 'react';
 
+/*Import Redux functionalities*/
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { getAllExperiencesDetailsDispatch } from "../../../actions";
+
+/*import components/modules*/
+import AllExperiences from './experiences/AllExperiences';
 
 class Experience extends Component {
 
   constructor(props) {
     super(props);
     //this.state = { };
-    console.log(this.props);
+    //console.log(this.props);
+    this.state = {
+      experiences:[]
+    }
+  }
+
+  componentDidMount() {
+    const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
+    const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email }
+    const response = this.props.getAllExperiencesDetailsDispatch(logoutPayloadHeader);
+  }
+  
+  componentWillReceiveProps(nextProps) {
+    //console.log("componentWillReceiveProps AllExperiences",nextProps);
+    const { experiences } = nextProps.experiencesDetails;
+    this.setState({ experiences });
   }
 
   render() {
     return (
       <div className="experience-mainContainer">
-          <div className="">
-            <h1 style={{'textAlign': 'center','color': '#1968a5'}}>
-                Connecting international schools with the best qualified teachers. Simply.
-            </h1>
-            <p style={{'textAlign': 'center','color': '#333333'}}>
-              <strong>
-                Schrole Connect’s unique software solutions help to attract and match the best qualified teachers with hard to fill roles in international schools.
-                Reducing recruitment time and costs.<br />
-              </strong>
-            </p>
-          </div>
+        <AllExperiences  experiencesArray={this.state.experiences}/>
       </div>
     );
   }
 }
+function mapStateToProps(state) {
+  //console.log("mapStateToProps-qalifications",state);
+  return { experiencesDetails: state.applicants.experiences};
+}
 
-export default Experience;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ getAllExperiencesDetailsDispatch: getAllExperiencesDetailsDispatch }, dispatch);
+}
+
+
+export default connect( mapStateToProps, mapDispatchToProps)(Experience);

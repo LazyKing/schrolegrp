@@ -76,9 +76,43 @@ export function updatePersonalDetailsDispatch(user, personalDetails) {
   };
 }
 
+export function getAllQualificationsDetailsDispatch(user) {
+  return function(dispatch) {
+    return applicantsApi.getAllQualifiacationsDetails(user).then(profile => {
+      dispatch(getAllQualifiacations(profile));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+export function getAllExperiencesDetailsDispatch(user) {
+  return function(dispatch) {
+    return applicantsApi.getAllExperiencesDetails(user).then(profile => {
+      dispatch(getAllExperiences(profile));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
 export function getPersonalDetails(profile) {
   return {
     type: "GET_USER_PROFILE",
+    payload: profile
+  };
+}
+
+export function getAllQualifiacations(profile) {
+  return {
+    type: "GET_ALL_QUALIFICATIONS",
+    payload: profile
+  };
+}
+
+export function getAllExperiences(profile) {
+  return {
+    type: "GET_ALL_EXPERIENCES",
     payload: profile
   };
 }

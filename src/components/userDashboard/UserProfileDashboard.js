@@ -48,7 +48,22 @@ class UserProfileDashboard extends Component {
       });
     }
   }
-
+/*<Sider collapsible collapsed={true} width={200} style={{ background: '#fff' }}>
+  <Menu
+    mode="inline"
+    defaultSelectedKeys={['11']}
+    style={{ height: '100%', borderRight: 0 }}
+  >
+    <Menu.Item key="11">
+      <Icon type="pie-chart" />
+      <span>Option 1</span>
+    </Menu.Item>
+    <Menu.Item key="12">
+      <Icon type="desktop" />
+      <span>Option 2</span>
+    </Menu.Item>
+  </Menu>
+</Sider>*/
   render() {
     return (
       <Provider store={applicantsStore}>
@@ -77,22 +92,6 @@ class UserProfileDashboard extends Component {
               </Menu>
             </Header>
             <Layout> 
-            <Sider collapsible collapsed={true} width={200} style={{ background: '#fff' }}>
-              <Menu
-                mode="inline"
-                defaultSelectedKeys={['11']}
-                style={{ height: '100%', borderRight: 0 }}
-              >
-                <Menu.Item key="11">
-                  <Icon type="pie-chart" />
-                  <span>Option 1</span>
-                </Menu.Item>
-                <Menu.Item key="12">
-                  <Icon type="desktop" />
-                  <span>Option 2</span>
-                </Menu.Item>
-              </Menu>
-            </Sider>
               <Content style={{ padding: '0 20px' }}>
                 <Breadcrumb separator=">" routes={this.props.routes} params={this.props.params} className="breadCrumb-container" />
                 <div style={{ background: '#fff', padding: 15, minHeight: 280 }}>

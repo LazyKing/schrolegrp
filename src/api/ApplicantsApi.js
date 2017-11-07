@@ -25,6 +25,38 @@ class ApplicantsApi {
     });
   }
 
+  static getAllQualifiacationsDetails(user) {
+  	//console.log(user)
+  	const {auth_token,user_email} = user
+    const headers = this.requestHeaders(auth_token,user_email);
+    const request = new Request('http://13.126.41.88/applicants/qualifications', {
+      method: 'GET',
+      headers: headers
+    });
+
+    return fetch(request).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    });
+  }
+
+  static getAllExperiencesDetails(user) {
+  	//console.log(user)
+  	const {auth_token,user_email} = user
+    const headers = this.requestHeaders(auth_token,user_email);
+    const request = new Request('http://13.126.41.88/applicants/experiences', {
+      method: 'GET',
+      headers: headers
+    });
+
+    return fetch(request).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    });
+  }
+
   static updateApplicantsPersonalDetails( user, personalDetails) {
   	//console.log(user)
   	const {auth_token,user_email} = user;
