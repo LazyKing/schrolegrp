@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Button, Row, Col, Card,
           Modal, Form, Input, Select } from 'antd';
 
+/*Import Redux functionalities*/
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { updateCriminalRecorsDispatch } from "../../../../actions";
+
 const FormItem = Form.Item;
 const Option = Select.Option;
 
@@ -11,14 +16,10 @@ class CriminalConvictions extends Component {
     super(props);
     //console.log(this.props);
     this.state = {
-      ModalText: 'Content of the modal',
       visible: false,
       confirmLoading: false,
       showDescription: false,
-      criminal_convictions:{
-        criminal_convicted: true, 
-        criminal_convicted_value: "Sex offender"
-      }
+      criminal_convictions:{}
     }
   }
 
@@ -35,10 +36,12 @@ class CriminalConvictions extends Component {
 
   handleOk = () => {
     console.log(this.props.form.getFieldsValue());
+    const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
+    const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email }
     this.props.form.validateFields((err, values) => {
       //console.log(err);
       if(!err) {
-        //update new data here
+        this.props.updateCriminalRecorsDispatch(logoutPayloadHeader, this.props.form.getFieldsValue());
         this.setState({
           ModalText: 'The modal will be closed after two seconds',
           confirmLoading: true,
@@ -92,7 +95,7 @@ class CriminalConvictions extends Component {
                 {...formItemLayout}
                 label="Do you have any criminal convictions?"
               >
-                {getFieldDecorator('criminal_convicted', { initialValue: 'no' })(
+                {getFieldDecorator('criminal_convicted', { initialValue: this.state.criminal_convictions.criminal_convicted ? 'yes' : 'no' })(
                 <Select
                   onChange={this.handleSelectChange}
                 >
@@ -106,7 +109,7 @@ class CriminalConvictions extends Component {
                 {...formItemLayout}
                 label="Please provide more details on this"
               >
-                {getFieldDecorator('criminal_convicted_value', { })(
+                {getFieldDecorator('criminal_convicted_value', { initialValue: this.state.criminal_convictions.criminal_convicted_value })(
                   <Input.TextArea rows={4} />
                 )}
               </FormItem>
@@ -127,4 +130,13 @@ class CriminalConvictions extends Component {
   }
 }
 
-export default Form.create()(CriminalConvictions);
+function mapStateToProps(state) {
+  //console.log("mapStateToProps",state);
+  return { applicantsProfilePayload: state.applicants};
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ updateCriminalRecorsDispatch: updateCriminalRecorsDispatch }, dispatch);
+}
+
+export default connect( mapStateToProps, mapDispatchToProps)(Form.create()(CriminalConvictions));

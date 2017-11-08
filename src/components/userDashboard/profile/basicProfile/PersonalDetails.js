@@ -60,7 +60,8 @@ class PersonalDetails extends Component {
     this.state = {
       visible: false,
       confirmLoading: false,
-      applicantsProfile: {
+      showOtherCitizenship: false,
+      personalDetails: {
         'country_of_birth':"Pakistan",
         'country_of_citizenship':"NewZealand",
         'dob':"1997-12-12",
@@ -72,18 +73,10 @@ class PersonalDetails extends Component {
       }
     }
   }
-
-  componentDidMount() {
-    const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
-    const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email }
-    const response = this.props.getPersonalDetailsDispatch(logoutPayloadHeader);
-  }
   
   componentWillReceiveProps(nextProps) {
     //console.log("componentWillReceiveProps - personal details",nextProps);
-    const { applicantsProfile } = nextProps
-    const personalDetails = applicantsProfile.personal_details;
-    this.setState({ personalDetails });
+    this.setState({personalDetails:nextProps.personal_details})
   }
 
   showModal = () => {
@@ -93,11 +86,13 @@ class PersonalDetails extends Component {
   }
 
   handleOk = () => {
-    console.log(this.props.form.getFieldsValue());
+    //console.log(this.props.form.getFieldsValue());
+    const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
+    const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email };
     this.props.form.validateFields((err, values) => {
       //console.log(err);
       if(!err) {
-        //update new data here
+        this.props.updatePersonalDetailsDispatch( logoutPayloadHeader, this.props.form.getFieldsValue());
         this.setState({
           confirmLoading: true,
         });
@@ -116,24 +111,14 @@ class PersonalDetails extends Component {
       visible: false,
     });
   }
-
-  updateFormValues = ( applicantsProfile ) => {
-    //console.log(applicantsProfile);
-    /*this.props.form.setFieldsValue({
-      'citizenship': applicantsProfile.other_citizenship
-    })*/
-  }
   
   render() {
-    //console.log(this.props.applicantsProfile);
-    //console.log(this.state);
     const { getFieldDecorator } = this.props.form;
-    //this.updateFormValues(this.state.applicantsProfile);
 
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
-        sm: { span: 6 },
+        sm: { span: 8 },
       },
       wrapperCol: {
         xs: { span: 24 },
@@ -142,7 +127,7 @@ class PersonalDetails extends Component {
     };
     const dateConfig = {
       rules: [{ type: 'object', required: true, message: 'Please select date!' }],
-      initialValue: moment( this.state.applicantsProfile.dob, 'YYYY-MM-DD')
+      initialValue: moment( this.state.personalDetails.dob, 'YYYY-MM-DD')
     };
 
     return (
@@ -154,26 +139,52 @@ class PersonalDetails extends Component {
             onCancel={this.handleCancel}
             okText={'Save'}
             cancelText={'cancel'}
+            width={'70%'}
           >
             <Form>
+              <FormItem
+                {...formItemLayout}
+                label="Country of Birth"
+              >
+                {getFieldDecorator('country_of_birth', { initialValue: this.state.personalDetails.country_of_birth })(
+                  <Input />
+                )}
+              </FormItem>
+              <FormItem
+                {...formItemLayout}
+                label="Country of Citizenship"
+              >
+                {getFieldDecorator('country_of_citizenship', { initialValue: this.state.personalDetails.country_of_citizenship })(
+                  <Input />
+                )}
+              </FormItem>
               <FormItem
                 {...formItemLayout}
                 label="Other Citizenship"
               >
               
-              {getFieldDecorator('citizenship', { initialValue: (this.state.applicantsProfile.other_citizenship) ? 'yes' : 'no' })( 
+              {getFieldDecorator('other_citizenship', { initialValue: (this.state.personalDetails.other_citizenship) ? 'yes' : 'no' })( 
                 <RadioGroup>
                   <Radio value={'yes'}>Yes</Radio>
                   <Radio value={'no'}>No</Radio>
                 </RadioGroup>
               )}
               </FormItem>
+              <FormItem
+              style={{'display': this.state.showOtherCitizenship ? 'block' : 'none'}}
+                {...formItemLayout}
+                label="Other citizenship's"
+              >
+                {getFieldDecorator('other_citizenship_country', { initialValue: this.state.personalDetails.other_citizenship_country })(
+                  <Input />
+                )}
+              </FormItem>
 
               <FormItem
                 {...formItemLayout}
                 label="Date of Birth"
               >
-                {getFieldDecorator('date-picker', dateConfig)(
+                {getFieldDecorator('dob', dateConfig)(
                   <DatePicker />
                 )}
               </FormItem>
@@ -182,7 +193,7 @@ class PersonalDetails extends Component {
                 {...formItemLayout}
                 label="EU Passport"
               >
-              {getFieldDecorator('euCitizenship', { initialValue: (this.state.applicantsProfile.eu_passport) ? 'yes' : 'no'  })( 
+              {getFieldDecorator('eu_passport', { initialValue: (this.state.personalDetails.eu_passport) ? 'yes' : 'no'  })( 
                 <Select style={{ width: 120 }}>
                   {euPassportOptions}
                 </Select>
@@ -193,7 +204,7 @@ class PersonalDetails extends Component {
                 {...formItemLayout}
                 label="Gender"
               >
-              {getFieldDecorator('gender', { initialValue: this.state.applicantsProfile.gender })(
+              {getFieldDecorator('gender', { initialValue: this.state.personalDetails.gender })(
                 <Select style={{ width: 120 }}>
                   {genderOptions}
                 </Select>
@@ -204,7 +215,7 @@ class PersonalDetails extends Component {
                 {...formItemLayout}
                 label="Marital Status"
               >
-              {getFieldDecorator('maritialStatus', { initialValue: this.state.applicantsProfile.marital_status })(
+              {getFieldDecorator('marital_status', { initialValue: this.state.personalDetails.marital_status })(
                 <Select style={{ width: 120 }}>
                   {maritialOptions}
                 </Select>
@@ -215,27 +226,27 @@ class PersonalDetails extends Component {
           <div>
             <Row type="flex" justify="space-between">
               <Col><span><strong>Country of Citizenship</strong></span></Col>
-              <Col><span>United States of America</span></Col>
+              <Col><span>{this.state.personalDetails.country_of_birth}</span></Col>
             </Row>
              <Row type="flex" justify="space-between">
               <Col><span><strong>Country of Birth</strong></span></Col>
-              <Col><span>United States of America</span></Col>
+              <Col><span>{this.state.personalDetails.country_of_citizenship}</span></Col>
              </Row>
             <Row type="flex" justify="space-between">
               <Col><span><strong>EU Passport</strong></span></Col>
-              <Col><span>{ this.state.applicantsProfile.eu_passport ? 'Yes' : 'No'}</span></Col>
+              <Col><span>{ this.state.personalDetails.eu_passport ? 'Yes' : 'No'}</span></Col>
             </Row>
             <Row type="flex" justify="space-between">
               <Col><span><strong>Date of Birth</strong></span></Col>
-              <Col><span>{this.state.applicantsProfile.dob}</span></Col>
+              <Col><span>{this.state.personalDetails.dob}</span></Col>
             </Row>
             <Row type="flex" justify="space-between">
               <Col><span><strong>Gender</strong></span></Col>
-              <Col><span>{this.state.applicantsProfile.gender}</span></Col>
+              <Col><span>{this.state.personalDetails.gender}</span></Col>
             </Row>
             <Row type="flex" justify="space-between">
               <Col><span><strong>Marital status</strong></span></Col>
-              <Col><span>{this.state.applicantsProfile.marital_status}</span></Col>
+              <Col><span>{this.state.personalDetails.marital_status}</span></Col>
             </Row>
           </div>
         </Card>
