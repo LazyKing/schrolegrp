@@ -59,8 +59,14 @@ export function createCatSuccess(cat) {
 export function getPersonalDetailsDispatch(user) {
   return function(dispatch) {
     return applicantsApi.getApplicantsProfile(user).then(profile => {
-      dispatch(getPersonalDetails(profile));
+      //console.log("dispatch person suc::",profile);
+      if( profile.status === '401'){
+        dispatch(logoutUser(profile));
+      } else {
+        dispatch(getPersonalDetails(profile));
+      }
     }).catch(error => {
+      //console.log("dispatch person::",error);
       throw(error);
     });
   };
@@ -68,8 +74,27 @@ export function getPersonalDetailsDispatch(user) {
 
 export function updatePersonalDetailsDispatch(user, personalDetails) {
   return function(dispatch) {
-    return applicantsApi.getApplicantsProfile(user, personalDetails).then(profile => {
-      dispatch(getPersonalDetails(profile));
+    return applicantsApi.updateApplicantsPersonalDetails(user, personalDetails).then(profile => {
+      dispatch(updatePersonalDetails(profile));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+export function updateEmergencyDetailsDispatch(user, personalDetails) {
+  return function(dispatch) {
+    return applicantsApi.updateApplicantsEmergencyContact(user, personalDetails).then(profile => {
+      dispatch(updateEmergencyDetails(profile));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+export function updateCriminalRecorsDispatch(user, personalDetails) {
+  return function(dispatch) {
+    return applicantsApi.updateApplicantsCriminalRecors(user, personalDetails).then(profile => {
+      dispatch(criminalRecorsDetails(profile));
     }).catch(error => {
       throw(error);
     });
@@ -116,6 +141,16 @@ export function createNewQualificationDispatch(user, newQualification) {
   };
 }
 
+export function createNewExperienceDispatch(user, newExperience) {
+  return function(dispatch) {
+    return applicantsApi.createNewExperience(user, newExperience).then(response => {
+      dispatch(createExperience(response));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
 export function deleteDependantDispatch(user, dependentId) {
   return function(dispatch) {
     return applicantsApi.deleteDependant(user, dependentId).then(response => {
@@ -130,6 +165,26 @@ export function updateQualificationDispatch(user, qualificationUpdatePayload, qu
   return function(dispatch) {
     return applicantsApi.updateQualification(user, qualificationUpdatePayload, qualificationId).then(response => {
       dispatch(updateQualification(response));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+export function updateApplicantsContactDetailsDispatch(user, contactDetails) {
+  return function(dispatch) {
+    return applicantsApi.updateApplicantsContactDetails(user, contactDetails).then(response => {
+      dispatch(updateApplicantsContactDetails(response));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+export function updateExperienceDispatch(user, experienceUpdatePayload, experienceId) {
+  return function(dispatch) {
+    return applicantsApi.updateExperience(user, experienceUpdatePayload, experienceId).then(response => {
+      dispatch(updateExperience(response));
     }).catch(error => {
       throw(error);
     });
@@ -157,13 +212,6 @@ export function getAllExperiences(profile) {
   };
 }
 
-export function updatePersonalDetails(profile) {
-  return {
-    type: "UPDATE_PERSONAL_DETAILS",
-    payload: profile
-  };
-}
-
 export function createDependant(dependants) {
   return {
     type: "CREATE_NEW_DEPENDANT",
@@ -178,6 +226,41 @@ export function createQualification(qualifications) {
   };
 }
 
+export function createExperience(experiences) {
+  return {
+    type: "CREATE_NEW_EXPERIENCE",
+    payload: experiences
+  };
+}
+
+export function updatePersonalDetails(profile) {
+  return {
+    type: "UPDATE_PERSONAL_DETAILS",
+    payload: profile
+  };
+}
+
+export function updateApplicantsContactDetails(profile) {
+  return {
+    type: "UPDATE_CONTACT_DETAILS",
+    payload: profile
+  };
+}
+
+export function updateEmergencyDetails(profile) {
+  return {
+    type: "UPDATE_EMERGENCY_DETAILS",
+    payload: profile
+  };
+}
+
+export function criminalRecorsDetails(profile) {
+  return {
+    type: "UPDATE_CRIMINAL_CONVICTIONS",
+    payload: profile
+  };
+}
+
 export function updateQualification(qualification) {
   return {
     type: "UPDATE_QUALIFICATION",
@@ -185,11 +268,24 @@ export function updateQualification(qualification) {
   };
 }
 
+export function updateExperience(experiences) {
+  return {
+    type: "UPDATE_EXPERIENCE",
+    payload: experiences
+  };
+}
 
 export function deleteDependant(dependants) {
   return {
     type: "DELETE_DEPENDANT",
     payload: dependants
+  };
+}
+
+export function logoutUser() {
+  return {
+    type: "LOGOUT_USER",
+    payload: {}
   };
 }
   /*

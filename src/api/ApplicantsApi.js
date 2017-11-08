@@ -1,3 +1,6 @@
+import axios from 'axios';
+import {  browserHistory  } from 'react-router'
+
 class ApplicantsApi {
 
   static requestHeaders(auth_token,user_email) {
@@ -13,15 +16,16 @@ class ApplicantsApi {
   	//console.log(user)
   	const {auth_token,user_email} = user
     const headers = this.requestHeaders(auth_token,user_email);
-    const request = new Request('http://13.126.41.88/applicants/profile', {
+    return axios({
       method: 'GET',
+      url: 'http://13.126.41.88/applicants/profile',
       headers: headers
-    });
-
-    return fetch(request).then(response => {
-      return response.json();
-    }).catch(error => {
-      return error;
+    }).then(function (response) {
+      //console.log("response",response);
+      return (response.data)
+    }).catch(function (error) {
+      //console.log("error",error.response);
+      return error.response ;
     });
   }
 
@@ -61,9 +65,61 @@ class ApplicantsApi {
   	//console.log(user)
   	const {auth_token,user_email} = user;
     const headers = this.requestHeaders(auth_token,user_email);
-    const request = new Request('http://13.126.41.88/applicants/profile', {
-      method: 'POST',
-      headers: headers
+    const request = new Request('http://13.126.41.88/applicants/profile/personal_details', {
+      method: 'PUT',
+      headers: headers,
+      body: JSON.stringify({'data': personalDetails})
+    });
+
+    return fetch(request).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    });
+  }
+
+  static updateApplicantsEmergencyContact( user, emergencyDetails) {
+    //console.log(user)
+    const {auth_token,user_email} = user;
+    const headers = this.requestHeaders(auth_token,user_email);
+    const request = new Request('http://13.126.41.88/applicants/profile/emergency_contact', {
+      method: 'PUT',
+      headers: headers,
+      body: JSON.stringify({'data': emergencyDetails})
+    });
+
+    return fetch(request).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    });
+  }
+
+  static updateApplicantsContactDetails( user, contactDetails) {
+    //console.log(user)
+    const {auth_token,user_email} = user;
+    const headers = this.requestHeaders(auth_token,user_email);
+    const request = new Request('http://13.126.41.88/applicants/profile/contact_details', {
+      method: 'PUT',
+      headers: headers,
+      body: JSON.stringify({'data': contactDetails})
+    });
+
+    return fetch(request).then(response => {
+      return response.json();
+    }).catch(error => {
+      return error;
+    });
+  }
+
+  static updateApplicantsCriminalRecors( user, criminalRecors) {
+    //console.log(user)
+    const {auth_token,user_email} = user;
+    const headers = this.requestHeaders(auth_token,user_email);
+    const request = new Request('http://13.126.41.88/applicants/profile/criminal_convictions', {
+      method: 'PUT',
+      headers: headers,
+      body: JSON.stringify({'data': criminalRecors})
     });
 
     return fetch(request).then(response => {
@@ -106,6 +162,24 @@ class ApplicantsApi {
       return error;
     });
   }
+
+  static createNewExperience( user, newExperience) {
+    //console.log(user)
+    const {auth_token,user_email} = user;
+    const headers = this.requestHeaders(auth_token,user_email);
+    return axios({
+      method: 'POST',
+      url: 'http://13.126.41.88/applicants/experiences',
+      headers: headers,
+      data: JSON.stringify({'data': newExperience})
+    }).then(function (response) {
+      //console.log("response",response);
+      return (response.data)
+    }).catch(function (error) {
+      //console.log("error",error.response);
+      return error.response ;
+    });
+  }
   
   static updateQualification( user, qualificationUpdate, qualificationId) {
     //console.log(user)
@@ -121,6 +195,24 @@ class ApplicantsApi {
       return response.json();
     }).catch(error => {
       return error;
+    });
+  }
+
+  static updateExperience( user, experienceUpdate, experiencenId) {
+    console.log(experienceUpdate)
+    const {auth_token,user_email} = user;
+    const headers = this.requestHeaders(auth_token,user_email);
+    return axios({
+      method: 'PUT',
+      url: `http://13.126.41.88/applicants/experiences/${experiencenId}`,
+      headers: headers,
+      data: JSON.stringify({'data': experienceUpdate})
+    }).then(function (response) {
+      //console.log("response",response);
+      return (response.data)
+    }).catch(function (error) {
+      //console.log("error",error.response);
+      return error.response ;
     });
   }
 
