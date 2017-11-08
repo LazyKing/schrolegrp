@@ -23,9 +23,9 @@ class DependentItem extends Component {
   render() {
     const { dependent } = this.props;
     return (
-        <Row type="flex" justify="space-between">
+        <Row type="flex" justify="space-between" style={{'padding':5}}>
           <Col><span>{dependent.name} ({dependent.gender})</span></Col>
-          <Col><Button id={dependent.id} onClick={this.removeDependent}>Delete</Button></Col>
+          <Col><Button id={dependent.id} onClick={this.removeDependent}><Icon type="delete" /></Button></Col>
         </Row>
     );
   }

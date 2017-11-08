@@ -37,16 +37,11 @@ class Dependents extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("componentWillReceiveProps - dependents",nextProps);
+    //console.log("componentWillReceiveProps - dependents",nextProps);
     this.setState({dependentsArray: nextProps.dependentsArray});
-  }
-  
-  componentDidMount() {
-    console.log(this.props);
   }
 
   handleOk = () => {
-    
     //console.log(this._stepOne.getFieldsValue());
     var payloadObj = this._stepOne.getFieldsValue();
     payloadObj.dob = this._stepOne.getFieldsValue().dob._i;
@@ -83,9 +78,6 @@ class Dependents extends Component {
   }  
   
   render() {
-    console.log("props obj",this.props)
-    console.log("state obj",this.state)
-    //this.setState({dependentsArray: nextProps.dependentsArray});
     const listItems = this.state.dependentsArray.map((dependent) =>
           <DependentItem key={dependent.id} id={dependent.id} dependent={dependent}/> );
     return (
@@ -110,7 +102,7 @@ class Dependents extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log("mapStateToProps - dependents",state);
+  //console.log("mapStateToProps - dependents",state);
   return { dependentsArray:  state.applicants.applicantsProfile.dependents };
 }
 
