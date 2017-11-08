@@ -96,6 +96,46 @@ export function getAllExperiencesDetailsDispatch(user) {
   };
 }
 
+export function createNewDependantDispatch(user, newDependant) {
+  return function(dispatch) {
+    return applicantsApi.createNewDependant(user, newDependant).then(response => {
+      dispatch(createDependant(response));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+export function createNewQualificationDispatch(user, newQualification) {
+  return function(dispatch) {
+    return applicantsApi.createNewQualification(user, newQualification).then(response => {
+      dispatch(createQualification(response));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+export function deleteDependantDispatch(user, dependentId) {
+  return function(dispatch) {
+    return applicantsApi.deleteDependant(user, dependentId).then(response => {
+      dispatch(deleteDependant(response));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+export function updateQualificationDispatch(user, qualificationUpdatePayload, qualificationId) {
+  return function(dispatch) {
+    return applicantsApi.updateQualification(user, qualificationUpdatePayload, qualificationId).then(response => {
+      dispatch(updateQualification(response));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
 export function getPersonalDetails(profile) {
   return {
     type: "GET_USER_PROFILE",
@@ -121,6 +161,35 @@ export function updatePersonalDetails(profile) {
   return {
     type: "UPDATE_PERSONAL_DETAILS",
     payload: profile
+  };
+}
+
+export function createDependant(dependants) {
+  return {
+    type: "CREATE_NEW_DEPENDANT",
+    payload: dependants
+  };
+}
+
+export function createQualification(qualifications) {
+  return {
+    type: "CREATE_NEW_QUALIFICATION",
+    payload: qualifications
+  };
+}
+
+export function updateQualification(qualification) {
+  return {
+    type: "UPDATE_QUALIFICATION",
+    payload: qualification
+  };
+}
+
+
+export function deleteDependant(dependants) {
+  return {
+    type: "DELETE_DEPENDANT",
+    payload: dependants
   };
 }
   /*
