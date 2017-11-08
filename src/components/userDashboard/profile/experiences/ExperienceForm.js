@@ -111,11 +111,11 @@ class ExperienceForm extends Component {
     country='', from='1993-02-21', to='1993-02-21', duration=3 } = this.props.currentExperience;
 
     const fromdateConfig = {
-      rules: [{ type: 'object', required: true, message: 'Please select date!' }],
+      rules: [{ type: 'object' }],
       initialValue: moment( from, 'YYYY-MM-DD')
     };
     const todateConfig = {
-      rules: [{ type: 'object', required: true, message: 'Please select date!' }],
+      rules: [{ type: 'object' }],
       initialValue: moment(  to, 'YYYY-MM-DD')
     };
 

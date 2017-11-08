@@ -5,6 +5,12 @@ import _ from 'lodash';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 
+/*Import Redux functionalities*/
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { createNewExperienceDispatch, updateExperienceDispatch } from "../../../../actions";
+
+
 /*import components*/
 import ExperienceCard from './ExperienceCard';
 import ExperienceForm from './ExperienceForm';
@@ -20,8 +26,8 @@ class AllExperiences extends Component {
     //this.state = { };
     //console.log(this.props);
     this.state = {
-      ModalText: 'Content of the modal',
       visible: false,
+      editMode: false,
       confirmLoading: false,
       experiencesArray:[],
       selectedExperience:{}
@@ -35,24 +41,43 @@ class AllExperiences extends Component {
   
   showModal = (props) => {
     const { target } = props;
-    const selectedExperience = _.find( this.state.experiencesArray, function(experiences) { 
-      return experiences.id == target.id;
-    });
-
-    this.setState({
-      visible: true,
-      selectedExperience: (selectedExperience) ? selectedExperience : {}
-    });
+    if( target.className.indexOf('edit_experience') !== -1 ) {
+      const selectedExperience = _.find( this.state.experiencesArray, function(experiences) { 
+        return experiences.id == target.id;
+      });
+      this.setState({
+        visible: true,
+        editMode: true,
+        selectedExperience: (selectedExperience) ? selectedExperience : {}
+      });
+    } else {
+      this.setState({
+        visible: true, 
+        editMode: false
+      });
+    }
   }
 
   handleOk = () => {
-    console.log(this.props.form.getFieldsValue());
+    //console.log(this._expirenceFormProps.getFieldsValue());
+    const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
+    const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email }
+
+    var payloadObj = this._expirenceFormProps.getFieldsValue();
+    payloadObj.from = this._expirenceFormProps.getFieldsValue().from._i;
+    payloadObj.to = this._expirenceFormProps.getFieldsValue().to._i;
+
     this.props.form.validateFields((err, values) => {
       //console.log(err);
       if(!err) {
-        //update new data here
+        if(this.state.editMode){
+          this.props.updateExperienceDispatch(logoutPayloadHeader, payloadObj, this.state.selectedExperience.id );
+        }
+        else{
+          this.props.createNewExperienceDispatch(logoutPayloadHeader, payloadObj);
+        }
+
         this.setState({
-          ModalText: 'The modal will be closed after two seconds',
           confirmLoading: true,
         });
         setTimeout(() => {
@@ -85,14 +110,15 @@ class AllExperiences extends Component {
             cancelText={'cancel'}
             width={'70%'}
           >
-            <ExperienceForm currentExperience={this.state.selectedExperience}/>
+            <ExperienceForm currentExperience={this.state.selectedExperience}
+            ref={(ref) => this._expirenceFormProps = ref} />
           </Modal>
         
           <Row type="flex" justify="center" style={{'marginTop':'10px'}}>
             <Col sm={22}>
               <Row type="flex" justify="space-between">
                 <Col><h3>Experiences</h3></Col>
-                <Col><Button onClick={this.showModal}>Add another Experience</Button></Col>
+                <Col><Button className="add_experience" onClick={this.showModal}>Add another Experience</Button></Col>
               </Row>
               <Col>
                 <hr style={{ border: '1px rgba(37, 132, 193, 0.9) solid', 'marginTop': 10 }}/>
@@ -107,4 +133,14 @@ class AllExperiences extends Component {
   }
 }
 
-export default Form.create()(AllExperiences);
+function mapStateToProps(state) {
+  //console.log("mapStateToProps, qualification",state);
+  return { experiencesArray:  state.applicants.experiences };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ createNewExperienceDispatch: createNewExperienceDispatch, 
+  updateExperienceDispatch:updateExperienceDispatch }, dispatch);
+}
+
+export default connect( mapStateToProps, mapDispatchToProps)(Form.create()(AllExperiences));

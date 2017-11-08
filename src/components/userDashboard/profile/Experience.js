@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { LocaleProvider } from 'antd';
+import enUS from 'antd/lib/locale-provider/en_US';
 
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
@@ -34,7 +36,9 @@ class Experience extends Component {
   render() {
     return (
       <div className="experience-mainContainer">
-        <AllExperiences  experiencesArray={this.state.experiences}/>
+        <LocaleProvider locale={enUS}>
+          <AllExperiences  experiencesArray={this.state.experiences}/>
+        </LocaleProvider>
       </div>
     );
   }

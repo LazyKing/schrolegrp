@@ -23,8 +23,8 @@ class ExperienceCard extends Component {
 experience
   render() {
     return (      
-      <Col span={8} style={{'marginTop': 10 }}>
-        <Card title={this.props.experience.position} extra={<div><Button id={this.props.experience.id} onClick={this.props.onclick}>Edit</Button></div>}>
+      <Col span={8} style={{'marginTop': 10,'padding': 5 }}>
+        <Card title={this.props.experience.position} extra={<div><Button className="edit_experience" id={this.props.experience.id} onClick={this.props.onclick}>Edit</Button></div>}>
           <div>
             <Row type="flex" justify="space-between">
               <Col><span><strong>Country</strong></span></Col>
