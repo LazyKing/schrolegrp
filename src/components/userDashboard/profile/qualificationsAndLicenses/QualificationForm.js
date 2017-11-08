@@ -162,7 +162,7 @@ class QualificationForm extends Component {
                 {...formItemLayout}
                 label="Date of Qualification"
               >
-                {getFieldDecorator('date-picker', dateConfig)(
+                {getFieldDecorator('date_of_completion', dateConfig)(
                   <DatePicker />
                 )}
               </FormItem>

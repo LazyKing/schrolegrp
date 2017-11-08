@@ -3,6 +3,11 @@ import { Button, Row, Col, Card, Modal, Form,
   Input, Icon, DatePicker, Select } from 'antd';
 import _ from 'lodash';
 
+/*Import Redux functionalities*/
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { createNewQualificationDispatch, updateQualificationDispatch } from "../../../../actions";
+
 /*import components*/
 import QualificationCard from './QualificationCard';
 import QualificationForm from './QualificationForm';
@@ -17,7 +22,7 @@ class AllQualifications extends Component {
     //this.state = { };
     //console.log(this.props);
     this.state = {
-      ModalText: 'Content of the modal',
+      editMode: false,
       visible: false,
       confirmLoading: false,
       qualificationsArray:[],
@@ -32,23 +37,46 @@ class AllQualifications extends Component {
   
   showModal = (props) => {
     const { target } = props;
-    const selectedQualification = _.find( this.state.qualificationsArray, function(qualification) { 
-      return qualification.id == target.id;
-    });
-    this.setState({
-      visible: true,
-      selectedQualification: (selectedQualification) ? selectedQualification : {}
-    });
+    
+    if( target.className.indexOf('edit_qualification') !== -1 ) {
+      const selectedQualification = _.find( this.state.qualificationsArray, function(qualification) { 
+        return qualification.id == target.id;
+      });
+      this.setState({
+        visible: true,
+        editMode: true,
+        selectedQualification: (selectedQualification) ? selectedQualification : {}
+      });
+    } else {
+      this.setState({ 
+        editMode: false
+      });
+    }  
   }
 
   handleOk = () => {
-    console.log(this.props.form.getFieldsValue());
-    this.props.form.validateFields((err, values) => {
+    const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
+    const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email }
+
+    var payloadObj = this._qualificationFormProps.getFieldsValue();
+    payloadObj.dob = this._qualificationFormProps.getFieldsValue().date_of_completion._i;
+    //console.log(payloadObj);
+    if(this.state.editMode){
+      this.props.updateQualificationDispatch(logoutPayloadHeader, payloadObj, this.state.selectedQualification.id );
+    }
+    else
+      this.props.createNewQualificationDispatch(logoutPayloadHeader, payloadObj);
+
+    this.setState({
+      visible: false,
+      editMode: false,
+      confirmLoading: false,
+    });
+/*    this._qualificationFormProps.form.validateFields((err, values) => {
       //console.log(err);
       if(!err) {
         //update new data here
         this.setState({
-          ModalText: 'The modal will be closed after two seconds',
           confirmLoading: true,
         });
         setTimeout(() => {
@@ -58,7 +86,7 @@ class AllQualifications extends Component {
           });
         }, 2000);
       }
-    });
+    });*/
   }
 
   handleCancel = () => {
@@ -81,14 +109,15 @@ class AllQualifications extends Component {
             cancelText={'cancel'}
             width={'70%'}
           >
-            <QualificationForm currentQualification = {this.state.selectedQualification} />
+            <QualificationForm currentQualification = {this.state.selectedQualification} 
+            ref={(ref) => this._qualificationFormProps = ref} />
           </Modal>
         
           <Row type="flex" justify="center" style={{'marginTop':'10px'}}>
             <Col sm={22}>
               <Row type="flex" justify="space-between">
                 <Col><h3>Qualifications</h3></Col>
-                <Col><Button onClick={this.showModal}>Add another qulification </Button></Col>
+                <Col><Button className="add_qualification" onClick={this.showModal}>Add another qulification </Button></Col>
               </Row>
               <Col>
                 <hr style={{ border: '1px rgba(37, 132, 193, 0.9) solid', 'marginTop': 10 }}/>
@@ -103,4 +132,14 @@ class AllQualifications extends Component {
   }
 }
 
-export default Form.create()(AllQualifications);
+function mapStateToProps(state) {
+  //console.log("mapStateToProps, qualification",state);
+  return { qualificationsArray:  state.applicants.qualificationsDetails.qualifications };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ createNewQualificationDispatch: createNewQualificationDispatch, 
+  updateQualificationDispatch:updateQualificationDispatch }, dispatch);
+}
+
+export default connect( mapStateToProps, mapDispatchToProps)(Form.create()(AllQualifications));
