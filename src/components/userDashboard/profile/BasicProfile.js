@@ -26,9 +26,12 @@ class BasicProfile extends Component {
     this.state = {
       first_name: '',
       last_name: '',
+      cv_url: '',
+      link_to_video: '',
       emergency_contact: {},
       criminal_convictions: {},
-      contact_details: {}
+      contact_details: {},
+      dependents:[]
     }
   }
   
@@ -39,11 +42,12 @@ class BasicProfile extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    //console.log("componentWillReceiveProps - basicprof",nextProps);
+    console.log("componentWillReceiveProps - basicprof",nextProps);
     const { first_name, last_name, emergency_contact, 
-      criminal_convictions, contact_details } = nextProps.applicantsProfilePayload.applicantsProfile;
+      criminal_convictions, contact_details, dependents,link_to_video, cv_url } = nextProps.applicantsProfilePayload.applicantsProfile;
+
     this.setState({ first_name, last_name , emergency_contact, 
-      criminal_convictions, contact_details});
+      criminal_convictions, contact_details, dependents, link_to_video, cv_url});
   }
 
   render() {
@@ -51,18 +55,28 @@ class BasicProfile extends Component {
       <div className="basic-profile-mainContainer">
           <div className="profile-basic-info-container">
             <Row gutter={16}>
-              <Col xs={0} sm={10} md={8} lg={8}>
-                <Card title={this.state.first_name + ' ' + this.state.last_name} style={{ height: 350 }}>
+              <Col xs={0} sm={10} md={8} lg={6}>
+                <Card className="profile-pic-card" title={this.state.first_name + ' ' + this.state.last_name} style={{ height: 350 }}>
                   <img style={{ width: '100%' }} src={profilePic} />
                 </Card>
               </Col>
-              <Col xs={0} sm={14} md={8} lg={8} >
+              <Col xs={0} sm={14} md={8} lg={10} >
                 <div style={{ height: 230 }}>
                   <div className="basic-profile-header">
                     <h2> {this.state.first_name + ' ' + this.state.last_name} </h2>
                     <Button> Edit </Button>
                   </div>
                   <hr style={{ border: '1px rgba(37, 132, 193, 0.9) solid' }}/>
+                  <div>
+                    <Row> 
+                      <Col>
+                        <Button> View Cv </Button>
+                      </Col>
+                      <Col>
+                        <a href={this.state.link_to_video} target="_blank">Link to tutorial Video</a>
+                      </Col>
+                    </Row>
+                  </div>
                 </div>  
               </Col>
               <Col md={8} lg={8} className="hidden-sm hidden-xs">
@@ -77,7 +91,7 @@ class BasicProfile extends Component {
             <div className="profile-details-container">
               <Row gutter={16}>
                 <Col xs={0} sm={9} lg={8}>
-                  <Dependents />
+                  <Dependents dependentsArray={this.state.dependents}/>
                   <EmergencyContact emergency_contact={this.state.emergency_contact}/>
                 </Col>
                 <Col xs={0} sm={9} lg={8}>
