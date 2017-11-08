@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "antd": "^2.13.6",
+    "axios": "^0.17.0",
     "bootstrap": "^3.3.7",
     "lodash": "^4.17.4",
     "react": "^16.0.0",
