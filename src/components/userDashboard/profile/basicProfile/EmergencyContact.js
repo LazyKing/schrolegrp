@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { Button, Row, Col, Card, 
   Modal, Form, Input, Icon } from 'antd';
 
+/*Import Redux functionalities*/
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { updateEmergencyDetailsDispatch } from "../../../../actions";
+
 const FormItem = Form.Item;
 
 class EmergencyContact extends Component {
@@ -34,13 +39,15 @@ class EmergencyContact extends Component {
   }
 
   handleOk = () => {
-    console.log(this.props.form.getFieldsValue());
+    //console.log(this.props.form.getFieldsValue());
+    const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
+    const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email }
     this.props.form.validateFields((err, values) => {
       //console.log(err);
       if(!err) {
         //update new data here
+        this.props.updateEmergencyDetailsDispatch( logoutPayloadHeader, this.props.form.getFieldsValue())
         this.setState({
-          ModalText: 'The modal will be closed after two seconds',
           confirmLoading: true,
         });
         setTimeout(() => {
@@ -87,7 +94,7 @@ class EmergencyContact extends Component {
                 {...formItemLayout}
                 label="E-mail"
               >
-                {getFieldDecorator('email', {
+                {getFieldDecorator('emergency_contact_email', {
                   rules: [{
                     type: 'email', message: 'The input is not valid E-mail!',
                   }],
@@ -100,7 +107,7 @@ class EmergencyContact extends Component {
                 {...formItemLayout}
                 label="Full name"
               >
-                {getFieldDecorator('full_name', { initialValue: this.state.emergency_contact.emergency_contact_name })(
+                {getFieldDecorator('emergency_contact_name', { initialValue: this.state.emergency_contact.emergency_contact_name })(
                   <Input />
                 )}
               </FormItem>
@@ -116,7 +123,7 @@ class EmergencyContact extends Component {
                 {...formItemLayout}
                 label="Phone"
               >
-                {getFieldDecorator('phone', { initialValue: this.state.emergency_contact.emergency_contact_phone })(
+                {getFieldDecorator('emergency_contact_phone', { initialValue: this.state.emergency_contact.emergency_contact_phone })(
                   <Input placeholder="eg: +6112345678" />
                 )}
               </FormItem>
@@ -137,4 +144,14 @@ class EmergencyContact extends Component {
   }
 }
 
-export default Form.create()(EmergencyContact);
+
+function mapStateToProps(state) {
+  //console.log("mapStateToProps",state);
+  return { applicantsProfilePayload: state.applicants};
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ updateEmergencyDetailsDispatch: updateEmergencyDetailsDispatch }, dispatch);
+}
+
+export default connect( mapStateToProps, mapDispatchToProps)(Form.create()(EmergencyContact));

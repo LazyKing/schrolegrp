@@ -28,6 +28,7 @@ class BasicProfile extends Component {
       last_name: '',
       cv_url: '',
       link_to_video: '',
+      personal_details: {},
       emergency_contact: {},
       criminal_convictions: {},
       contact_details: {},
@@ -42,11 +43,11 @@ class BasicProfile extends Component {
   }
   
   componentWillReceiveProps(nextProps) {
-    console.log("componentWillReceiveProps - basicprof",nextProps);
-    const { first_name, last_name, emergency_contact, 
+    //console.log("componentWillReceiveProps - basicprof",nextProps);
+    const { first_name, last_name, personal_details, emergency_contact, 
       criminal_convictions, contact_details, dependents,link_to_video, cv_url } = nextProps.applicantsProfilePayload.applicantsProfile;
 
-    this.setState({ first_name, last_name , emergency_contact, 
+    this.setState({ first_name, last_name , personal_details, emergency_contact, 
       criminal_convictions, contact_details, dependents, link_to_video, cv_url});
   }
 
@@ -92,10 +93,10 @@ class BasicProfile extends Component {
               <Row gutter={16}>
                 <Col xs={0} sm={9} lg={8}>
                   <Dependents dependentsArray={this.state.dependents}/>
-                  <EmergencyContact emergency_contact={this.state.emergency_contact}/>
                 </Col>
                 <Col xs={0} sm={9} lg={8}>
-                  <PersonalDetails />
+                  <PersonalDetails personal_details={this.state.personal_details}/>
+                  <EmergencyContact emergency_contact={this.state.emergency_contact}/>
                 </Col>
                 <Col xs={0} sm={6} lg={8} className="hidden-sm-down" >
                   <ContactDetails contact_details={this.state.contact_details} />
