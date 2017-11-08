@@ -58,7 +58,6 @@ class PersonalDetails extends Component {
     super(props);
     //console.log(this.props);
     this.state = {
-      ModalText: 'Content of the modal',
       visible: false,
       confirmLoading: false,
       applicantsProfile: {
@@ -100,7 +99,6 @@ class PersonalDetails extends Component {
       if(!err) {
         //update new data here
         this.setState({
-          ModalText: 'The modal will be closed after two seconds',
           confirmLoading: true,
         });
         setTimeout(() => {
