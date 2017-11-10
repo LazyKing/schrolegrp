@@ -19,6 +19,14 @@ const { Header, Content, Footer, Sider } = Layout;
 
 const applicantsStore=createStore(applicants, applyMiddleware(thunk)) ;
 
+const masterTabs = {
+  'schools' : '2',
+  'vacancies' : '3',
+  'application' : '4',
+  'profile' : '5',
+  'search' : '6'
+}
+
 class UserProfileDashboard extends Component {
   
   onMenuClick = (e) => {
@@ -33,8 +41,15 @@ class UserProfileDashboard extends Component {
   }
 
   componentDidMount() {
-    //call AJAX over here
-    //console.log(this.props);
+    //console.log("UserProfileDashboard",this.props.location);
+    var pathnam = this.props.location.pathname;
+    const currentMasterTabName = pathnam.replace(/^\/userprofile\//, '');
+    const currentMasterTabKey  = masterTabs[currentMasterTabName];
+    if( currentMasterTabKey ){
+      console.log(currentMasterTabName, currentMasterTabKey)
+      this.setState ({ currentTab: currentMasterTabKey});
+    }
+
     if(this.props.location.state) {
       const { email, auth_token} = this.props.location.state.stateData ;
       this.setState({ user: email , authToken: auth_token });
