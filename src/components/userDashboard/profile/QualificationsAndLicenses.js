@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getAllQualificationsDetailsDispatch } from "../../../actions";
+import { getAllQualificationsDetailsDispatch } from "./qualificationsAndLicenses/QualificationAndLicences_Actions";
 
 /*import components/modules*/
 import AllQualifications from './qualificationsAndLicenses/AllQualifications';

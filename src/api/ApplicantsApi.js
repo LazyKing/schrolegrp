@@ -25,23 +25,7 @@ class ApplicantsApi {
       return (response.data)
     }).catch(function (error) {
       //console.log("error",error.response);
-      return error.response ;
-    });
-  }
-
-  static getAllQualifiacationsDetails(user) {
-  	//console.log(user)
-  	const {auth_token,user_email} = user
-    const headers = this.requestHeaders(auth_token,user_email);
-    const request = new Request('http://13.126.41.88/applicants/qualifications', {
-      method: 'GET',
-      headers: headers
-    });
-
-    return fetch(request).then(response => {
-      return response.json();
-    }).catch(error => {
-      return error;
+      return error.response ; 
     });
   }
 
@@ -146,23 +130,6 @@ class ApplicantsApi {
     });
   }
 
-  static createNewQualification( user, newQualification) {
-    //console.log(user)
-    const {auth_token,user_email} = user;
-    const headers = this.requestHeaders(auth_token,user_email);
-    const request = new Request('http://13.126.41.88/applicants/qualifications', {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify({'data': newQualification})
-    });
-
-    return fetch(request).then(response => {
-      return response.json();
-    }).catch(error => {
-      return error;
-    });
-  }
-
   static createNewExperience( user, newExperience) {
     //console.log(user)
     const {auth_token,user_email} = user;
@@ -180,23 +147,6 @@ class ApplicantsApi {
       return error.response ;
     });
   }
-  
-  static updateQualification( user, qualificationUpdate, qualificationId) {
-    //console.log(user)
-    const {auth_token,user_email} = user;
-    const headers = this.requestHeaders(auth_token,user_email);
-    const request = new Request(`http://13.126.41.88/applicants/qualifications/${qualificationId}`, {
-      method: 'PUT',
-      headers: headers,
-      body: JSON.stringify({'data': qualificationUpdate})
-    });
-
-    return fetch(request).then(response => {
-      return response.json();
-    }).catch(error => {
-      return error;
-    });
-  }
 
   static updateExperience( user, experienceUpdate, experiencenId) {
     console.log(experienceUpdate)
@@ -209,6 +159,22 @@ class ApplicantsApi {
       data: JSON.stringify({'data': experienceUpdate})
     }).then(function (response) {
       //console.log("response",response);
+      return (response.data)
+    }).catch(function (error) {
+      //console.log("error",error.response);
+      return error.response ;
+    });
+  }
+
+  static updateProfileImage( user, profileUpdate ) {
+    const {auth_token,user_email} = user;
+    const headers = this.requestHeaders(auth_token,user_email);
+    return axios({
+      method: 'POST',
+      url: 'http://13.126.41.88/applicants/profile/picture',
+      headers: headers,
+      data: JSON.stringify({'picture': profileUpdate})
+    }).then(function (response) {
       return (response.data)
     }).catch(function (error) {
       //console.log("error",error.response);

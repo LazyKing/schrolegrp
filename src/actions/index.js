@@ -101,15 +101,16 @@ export function updateCriminalRecorsDispatch(user, personalDetails) {
   };
 }
 
-export function getAllQualificationsDetailsDispatch(user) {
+export function updateProfileImageDispatch(user, profileImage) {
   return function(dispatch) {
-    return applicantsApi.getAllQualifiacationsDetails(user).then(profile => {
-      dispatch(getAllQualifiacations(profile));
+    return applicantsApi.updateProfileImage(user, profileImage).then(profile => {
+      dispatch(updateProfileImage(profile));
     }).catch(error => {
       throw(error);
     });
   };
 }
+
 
 export function getAllExperiencesDetailsDispatch(user) {
   return function(dispatch) {
@@ -131,16 +132,6 @@ export function createNewDependantDispatch(user, newDependant) {
   };
 }
 
-export function createNewQualificationDispatch(user, newQualification) {
-  return function(dispatch) {
-    return applicantsApi.createNewQualification(user, newQualification).then(response => {
-      dispatch(createQualification(response));
-    }).catch(error => {
-      throw(error);
-    });
-  };
-}
-
 export function createNewExperienceDispatch(user, newExperience) {
   return function(dispatch) {
     return applicantsApi.createNewExperience(user, newExperience).then(response => {
@@ -155,16 +146,6 @@ export function deleteDependantDispatch(user, dependentId) {
   return function(dispatch) {
     return applicantsApi.deleteDependant(user, dependentId).then(response => {
       dispatch(deleteDependant(response));
-    }).catch(error => {
-      throw(error);
-    });
-  };
-}
-
-export function updateQualificationDispatch(user, qualificationUpdatePayload, qualificationId) {
-  return function(dispatch) {
-    return applicantsApi.updateQualification(user, qualificationUpdatePayload, qualificationId).then(response => {
-      dispatch(updateQualification(response));
     }).catch(error => {
       throw(error);
     });
@@ -198,13 +179,6 @@ export function getPersonalDetails(profile) {
   };
 }
 
-export function getAllQualifiacations(profile) {
-  return {
-    type: "GET_ALL_QUALIFICATIONS",
-    payload: profile
-  };
-}
-
 export function getAllExperiences(profile) {
   return {
     type: "GET_ALL_EXPERIENCES",
@@ -216,13 +190,6 @@ export function createDependant(dependants) {
   return {
     type: "CREATE_NEW_DEPENDANT",
     payload: dependants
-  };
-}
-
-export function createQualification(qualifications) {
-  return {
-    type: "CREATE_NEW_QUALIFICATION",
-    payload: qualifications
   };
 }
 
@@ -254,17 +221,17 @@ export function updateEmergencyDetails(profile) {
   };
 }
 
-export function criminalRecorsDetails(profile) {
+export function updateProfileImage(profile) {
   return {
-    type: "UPDATE_CRIMINAL_CONVICTIONS",
+    type: "UPDATE_PROFILE_IMAGE",
     payload: profile
   };
 }
 
-export function updateQualification(qualification) {
+export function criminalRecorsDetails(profile) {
   return {
-    type: "UPDATE_QUALIFICATION",
-    payload: qualification
+    type: "UPDATE_CRIMINAL_CONVICTIONS",
+    payload: profile
   };
 }
 

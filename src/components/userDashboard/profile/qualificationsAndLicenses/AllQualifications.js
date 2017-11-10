@@ -6,7 +6,7 @@ import _ from 'lodash';
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { createNewQualificationDispatch, updateQualificationDispatch } from "../../../../actions";
+import { createNewQualificationDispatch, updateQualificationDispatch } from "./QualificationAndLicences_Actions";
 
 /*import components*/
 import QualificationCard from './QualificationCard';

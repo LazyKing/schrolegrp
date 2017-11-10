@@ -13,8 +13,15 @@ export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
 
     case "GET_USER_PROFILE":
-    //console.log(action);
-      return { ...state, applicantsProfile: action.payload }
+      if( action.payload.status === 401 ) {
+        localStorage.removeItem("userprofile");
+        browserHistory.push({
+          pathname: '/Login'
+        });
+        return { ...state, applicantsProfile: {} };
+      }
+      else
+        return { ...state, applicantsProfile: action.payload }
 
     case "GET_ALL_QUALIFICATIONS":
     //console.log(action);
@@ -34,6 +41,11 @@ export default function(state = INITIAL_STATE, action) {
     var newApplicantsState = Object.assign({}, state.qualificationsDetails , {'qualifications': action.payload.qualifications });
     return { ...state, qualificationsDetails: newApplicantsState };
 
+    case "CREATE_NEW_LICENCE":
+      //console.log(action.payload);
+      var newApplicantsState = Object.assign({}, state.qualificationsDetails , {'licences': action.payload.licences });
+      return { ...state, qualificationsDetails: newApplicantsState };
+
     case "CREATE_NEW_EXPERIENCE":
       //console.log(action.payload);
       var experiences = action.payload.experiences;
@@ -44,6 +56,12 @@ export default function(state = INITIAL_STATE, action) {
       var qualifications = action.payload.qualifications;
       var newApplicantsState = Object.assign({}, state.qualificationsDetails , {'qualifications': qualifications });
       return { ...state, qualificationsDetails: newApplicantsState };
+
+    case "UPDATE_LICENSE":
+      console.log(action);
+      var licences = action.payload.licences;
+      var newApplicantsState = Object.assign({}, state.qualificationsDetails , {'licences': licences });
+      return { ...state, qualificationsDetails: newApplicantsState };  
 
     case "UPDATE_PERSONAL_DETAILS":
       //console.log(action);
@@ -69,6 +87,11 @@ export default function(state = INITIAL_STATE, action) {
     case "UPDATE_EXPERIENCE":
       var experiences = action.payload.experiences;
       return Object.assign({}, state , {'experiences': experiences });    
+
+    case "UPDATE_PROFILE_IMAGE":
+      var profilePic = action.payload.profile_pic_url;
+      var newApplicantsState = Object.assign({}, state.applicantsProfile , {'profile_pic_url': profilePic });
+      return { ...state, applicantsProfile: newApplicantsState };
 
     case "DELETE_DEPENDANT":
       //creating a new copy of objects
