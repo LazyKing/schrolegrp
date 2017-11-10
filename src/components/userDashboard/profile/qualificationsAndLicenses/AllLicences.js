@@ -3,6 +3,11 @@ import { Button, Row, Col, Card, Modal, Form,
   Input, Icon, DatePicker, Select } from 'antd';
 import _ from 'lodash';
 
+/*Import Redux functionalities*/
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { updateLicenceDispatch, createLicenceDispatch } from "./QualificationAndLicences_Actions";
+
 /*import components*/
 import LicenceCard from './LicenceCard';
 import LicenceForm from './LicenceForm';
@@ -27,22 +32,37 @@ class AllLicences extends Component {
 
   showModal = (props) => {
     const { target } = props;
-    const selectedLicence = _.find( this.state.licencesArray, function(licence) { 
-      return licence.id == target.id;
-    });
+    if( target.className.indexOf('edit_license') !== -1 ) {
+      const selectedLicence = _.find( this.state.licencesArray, function(licence) { 
+        return licence.id == target.id;
+      });
 
-    this.setState({
-      visible: true,
-      selectedLicence: (selectedLicence) ? selectedLicence : {}
-    });
+      this.setState({
+        visible: true,
+        editMode: true,
+        selectedLicence: (selectedLicence) ? selectedLicence : {}
+      }); 
+    } else {
+      this.setState({ visible: true, editMode: false });
+    }
   }
 
   handleOk = () => {
-    console.log(this.props.form.getFieldsValue());
-    this.props.form.validateFields((err, values) => {
+    //console.log(this._licenceFormProps.props.form.getFieldsValue());
+    const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
+    const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email };
+    var payloadObj = this._licenceFormProps.props.form.getFieldsValue();
+    console.log(payloadObj);
+
+    this._licenceFormProps.props.form.validateFields((err, values) => {
       //console.log(err);
       if(!err) {
-        //update new data here
+        if(this.state.editMode){
+          this.props.updateLicenceDispatch(logoutPayloadHeader, payloadObj, this.state.selectedLicence.id );
+        }
+        else
+          this.props.createLicenceDispatch(logoutPayloadHeader, payloadObj);
+
         this.setState({
           confirmLoading: true,
         });
@@ -76,7 +96,8 @@ class AllLicences extends Component {
             cancelText={'cancel'}
             width={'70%'}
           >
-          <LicenceForm currentLicence={this.state.selectedLicence}/>
+          <LicenceForm currentLicence={this.state.selectedLicence}
+          wrappedComponentRef={(ref) => this._licenceFormProps = ref}/>
           </Modal>
         
           <Row type="flex" justify="center" style={{'marginTop':'10px'}}>
@@ -98,4 +119,14 @@ class AllLicences extends Component {
   }
 }
 
-export default Form.create()(AllLicences);
+function mapStateToProps(state) {
+  console.log("mapStateToProps, licences",state);
+  return { licencesArray:  state.applicants.qualificationsDetails.licences };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ updateLicenceDispatch: updateLicenceDispatch, 
+  createLicenceDispatch:createLicenceDispatch }, dispatch);
+}
+
+export default connect( mapStateToProps, mapDispatchToProps)(Form.create()(AllLicences));

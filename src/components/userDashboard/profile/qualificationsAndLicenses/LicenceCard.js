@@ -15,7 +15,7 @@ class LicenseCard extends Component {
   render() {
     return (      
       <Col span={8} style={{'marginTop': 10, 'marginLeft': 10 }}>
-        <Card title={this.props.licence.country} extra={<div><Button id={this.props.licence.id} onClick={this.props.onclick}>Edit</Button></div>}>
+        <Card title={this.props.licence.country} extra={<div><Button className="edit_license" id={this.props.licence.id} onClick={this.props.onclick}>Edit</Button></div>}>
           <div>
             <Row type="flex" justify="space-between">
               <Col><span><strong>Country of Registration</strong></span></Col>

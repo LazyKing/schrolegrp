@@ -1,17 +1,8 @@
 import React, { Component } from 'react';
 import { Button, Row, Col, Card, Modal, Form, 
   Input, Icon, DatePicker, Select } from 'antd';
-import _ from 'lodash';
-import moment from 'moment';
-import 'moment/locale/zh-cn';
-
-/*import components*/
-import LicenceCard from './LicenceCard';
 
 const FormItem = Form.Item;
-
-moment.locale('en');
-
 
 class LicenceForm extends Component {
 
