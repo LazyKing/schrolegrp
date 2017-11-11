@@ -60,11 +60,7 @@ export function getPersonalDetailsDispatch(user) {
   return function(dispatch) {
     return applicantsApi.getApplicantsProfile(user).then(profile => {
       //console.log("dispatch person suc::",profile);
-      if( profile.status === '401'){
-        dispatch(logoutUser(profile));
-      } else {
-        dispatch(getPersonalDetails(profile));
-      }
+      dispatch(getPersonalDetails(profile));
     }).catch(error => {
       //console.log("dispatch person::",error);
       throw(error);
@@ -111,31 +107,10 @@ export function updateProfileImageDispatch(user, profileImage) {
   };
 }
 
-
-export function getAllExperiencesDetailsDispatch(user) {
-  return function(dispatch) {
-    return applicantsApi.getAllExperiencesDetails(user).then(profile => {
-      dispatch(getAllExperiences(profile));
-    }).catch(error => {
-      throw(error);
-    });
-  };
-}
-
 export function createNewDependantDispatch(user, newDependant) {
   return function(dispatch) {
     return applicantsApi.createNewDependant(user, newDependant).then(response => {
       dispatch(createDependant(response));
-    }).catch(error => {
-      throw(error);
-    });
-  };
-}
-
-export function createNewExperienceDispatch(user, newExperience) {
-  return function(dispatch) {
-    return applicantsApi.createNewExperience(user, newExperience).then(response => {
-      dispatch(createExperience(response));
     }).catch(error => {
       throw(error);
     });
@@ -162,26 +137,9 @@ export function updateApplicantsContactDetailsDispatch(user, contactDetails) {
   };
 }
 
-export function updateExperienceDispatch(user, experienceUpdatePayload, experienceId) {
-  return function(dispatch) {
-    return applicantsApi.updateExperience(user, experienceUpdatePayload, experienceId).then(response => {
-      dispatch(updateExperience(response));
-    }).catch(error => {
-      throw(error);
-    });
-  };
-}
-
 export function getPersonalDetails(profile) {
   return {
     type: "GET_USER_PROFILE",
-    payload: profile
-  };
-}
-
-export function getAllExperiences(profile) {
-  return {
-    type: "GET_ALL_EXPERIENCES",
     payload: profile
   };
 }
@@ -190,13 +148,6 @@ export function createDependant(dependants) {
   return {
     type: "CREATE_NEW_DEPENDANT",
     payload: dependants
-  };
-}
-
-export function createExperience(experiences) {
-  return {
-    type: "CREATE_NEW_EXPERIENCE",
-    payload: experiences
   };
 }
 
@@ -232,13 +183,6 @@ export function criminalRecorsDetails(profile) {
   return {
     type: "UPDATE_CRIMINAL_CONVICTIONS",
     payload: profile
-  };
-}
-
-export function updateExperience(experiences) {
-  return {
-    type: "UPDATE_EXPERIENCE",
-    payload: experiences
   };
 }
 

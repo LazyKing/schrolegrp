@@ -5,7 +5,7 @@ import enUS from 'antd/lib/locale-provider/en_US';
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getAllExperiencesDetailsDispatch } from "../../../actions";
+import { getAllExperiencesDetailsDispatch } from "./experiences/Experiences_Actions";
 
 /*import components/modules*/
 import AllExperiences from './experiences/AllExperiences';

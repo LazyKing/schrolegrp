@@ -8,7 +8,7 @@ import 'moment/locale/zh-cn';
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { createNewExperienceDispatch, updateExperienceDispatch } from "../../../../actions";
+import { createNewExperienceDispatch, updateExperienceDispatch } from "./Experiences_Actions";
 
 
 /*import components*/

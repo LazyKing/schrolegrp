@@ -29,22 +29,6 @@ class ApplicantsApi {
     });
   }
 
-  static getAllExperiencesDetails(user) {
-  	//console.log(user)
-  	const {auth_token,user_email} = user
-    const headers = this.requestHeaders(auth_token,user_email);
-    const request = new Request('http://13.126.41.88/applicants/experiences', {
-      method: 'GET',
-      headers: headers
-    });
-
-    return fetch(request).then(response => {
-      return response.json();
-    }).catch(error => {
-      return error;
-    });
-  }
-
   static updateApplicantsPersonalDetails( user, personalDetails) {
   	//console.log(user)
   	const {auth_token,user_email} = user;
@@ -127,42 +111,6 @@ class ApplicantsApi {
       return response.json();
     }).catch(error => {
       return error;
-    });
-  }
-
-  static createNewExperience( user, newExperience) {
-    //console.log(user)
-    const {auth_token,user_email} = user;
-    const headers = this.requestHeaders(auth_token,user_email);
-    return axios({
-      method: 'POST',
-      url: 'http://13.126.41.88/applicants/experiences',
-      headers: headers,
-      data: JSON.stringify({'data': newExperience})
-    }).then(function (response) {
-      //console.log("response",response);
-      return (response.data)
-    }).catch(function (error) {
-      //console.log("error",error.response);
-      return error.response ;
-    });
-  }
-
-  static updateExperience( user, experienceUpdate, experiencenId) {
-    console.log(experienceUpdate)
-    const {auth_token,user_email} = user;
-    const headers = this.requestHeaders(auth_token,user_email);
-    return axios({
-      method: 'PUT',
-      url: `http://13.126.41.88/applicants/experiences/${experiencenId}`,
-      headers: headers,
-      data: JSON.stringify({'data': experienceUpdate})
-    }).then(function (response) {
-      //console.log("response",response);
-      return (response.data)
-    }).catch(function (error) {
-      //console.log("error",error.response);
-      return error.response ;
     });
   }
 
