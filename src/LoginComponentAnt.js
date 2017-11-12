@@ -5,7 +5,7 @@ import {  Navbar } from 'react-bootstrap';
 import 'antd/dist/antd.css';
 import './App.css';
 
-import { Link, browserHistory } from 'react-router'
+/*Redux imports*/
 import { connect } from "react-redux";
 import { submitLogin, registerUser, forgotPassword } from "./actions/index";
 import { bindActionCreators } from "redux";
@@ -25,15 +25,6 @@ class LoginComponent extends Component {
       passwordConfirm: '',
       loading: false
     };
-  }
-
-  routeToHome(event) {
-    event.preventDefault();
-    event.stopPropagation();
-    browserHistory.push({
-        pathname: '/'
-    });
-
   }
 
   onEmailChange(event) {
@@ -71,18 +62,6 @@ class LoginComponent extends Component {
 
     return (
     <div className="AppHeader">    
-
-        <Navbar collapseOnSelect>
-            <Navbar.Header>
-              <Navbar.Brand>
-                <a onClick={this.routeToHome} href="javascript.void(0)" style={{'width':200,'height':50,'padding':0}}>
-                    <img src={webLogo} title="Schrole_Connect" width="200" height="50" />
-                </a>
-              </Navbar.Brand>
-              <Navbar.Toggle />
-            </Navbar.Header>
-        </Navbar>
-
       <div className="float-none col-sm-4 login-formControl-styles login-form-styles container-fluid">
           <Form onSubmit={this.handleSubmit} className="login-form">
             <FormItem>
@@ -128,9 +107,7 @@ class LoginComponent extends Component {
 }
 
 function mapStateToProps(state) {
-  //Whatever is returned will show up as props
-  // inside of BookList
-  console.log(state);
+  //console.log(state);
   return {
     email: state.email,
     password: state.password
@@ -140,12 +117,7 @@ function mapStateToProps(state) {
 // Anything returned from this function will end up as props
 // on the BookList container
 function mapDispatchToProps(dispatch) {
-  // Whenever selectBook is called, the result shoudl be passed
-  // to all of our reducers
   return bindActionCreators({ submitLogin: submitLogin, registerUser:registerUser , forgotPassword:forgotPassword }, dispatch);
 }
 
-// Promote BookList from a component to a container - it needs to know
-// about this new dispatch method, selectBook. Make it available
-// as a prop.
 export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);

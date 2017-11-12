@@ -5,7 +5,7 @@ import { Route, IndexRoute } from 'react-router'
  */
 import App from './App';
 import MainDiv from './MainDiv';
-import LoginPageAnt from './LoginAnt';
+
 import JobBoard from './JobBoard';
 import About from './About';
 import UserProfile from './components/userDashboard/UserProfileDashboard';
@@ -13,6 +13,12 @@ import Application from './components/userDashboard/Application';
 import Dashboard from './components/userDashboard/Dashboard';
 import Schools from './components/userDashboard/Schools';
 import Profile from './components/userDashboard/Profile';
+
+/*Login&Registration components*/
+import LoginAndRegistrationContainer from './components/registerComponents/LoginAndRegistrationContainer'
+import LoginPageAnt from './LoginAnt';
+import ApplicantRegister from './components/registerComponents/ApplicantRegister'
+
 /**
  * All routes go here.
  * Don't forget to import the components above after adding new route.
@@ -25,7 +31,12 @@ export default (
       <Route path="/Register" component={MainDiv} />
       <Route path="/JobBoard" component={JobBoard} />
     </Route>
-    <Route path="/Login" component={LoginPageAnt} />
+
+    <Route path="/Login" component={LoginAndRegistrationContainer}>
+      <IndexRoute component={LoginPageAnt} />
+      <Route path="/RegisterApplicant" component={ApplicantRegister} />
+    </Route>
+
     
     <Route name="userprofile" breadcrumbName="User Profile" path="/userprofile" component={UserProfile}>
       <IndexRoute name="Dashboard" breadcrumbName="Dashboard" component={Dashboard} />

@@ -1,45 +1,14 @@
 import applicantsApi from '../api/ApplicantsApi';
 
+export * from './Login_Actions'
+export * from './Register_Actions'
+
 export function selectBook(book) {
   // selectBook is an ActionCreator, it needs to return an action,
   // an object with a type property.
   return {
     type: "BOOK_SELECTED",
     payload: book
-  };
-}
-
-export function submitLoginDispatch(user) {
-  return function (dispatch) {
-    dispatch(submitLogin(user));
-  };
-}
-
-export function submitLogin(user) {
-  return {
-    type: "SUBMIT_LOGIN",
-    payload: user
-  };
-}
-
-export function logout(token) {
-  return {
-    type: "LOG_OUT",
-    payload: token
-  };
-}
-
-export function registerUser(user) {
-  return {
-    type: "REGISTER_USER",
-    payload: user
-  };
-}
-
-export function forgotPassword(user) {
-  return {
-    type: "FORGOT_PASSWORD",
-    payload: user
   };
 }
 
