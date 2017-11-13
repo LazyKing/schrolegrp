@@ -2,12 +2,14 @@ import AunthenticationAndRegistrationApi from '../api/AunthenticationAndRegistra
 
 export function registerApplicantDispatch(user) {
   return function(dispatch) {
-    return AunthenticationAndRegistrationApi.registerApplicant(user).then(profile => {
-      //console.log("dispatch person suc::",profile);
-      dispatch(registerApplicant(profile));
+    return AunthenticationAndRegistrationApi.registerApplicant(user).then(response => {
+      //console.log("dispatch person suc::",response);
+      if(response.status === 201 || response.status === 200)
+        dispatch(registerApplicant(response));
+      else
+        dispatch(handleError(response));
     }).catch(error => {
-      //console.log("dispatch person::",error);
-      throw(error);
+      console.log("dispatch person::",error);
     });
   };
 }
@@ -40,3 +42,16 @@ export function registerUser(user) {
   };
 }
 
+export function resetStore(data) {
+  return {
+    type: "RESET_STORE",
+    payload: data
+  };
+}
+
+export function handleError(error) {
+  return {
+    type: "HANDLE_ERROR",
+    payload: error
+  };
+}

@@ -5,6 +5,8 @@ import {  Navbar } from 'react-bootstrap';
 import 'antd/dist/antd.css';
 import './App.css';
 
+import {  browserHistory  } from 'react-router'
+
 /*Redux imports*/
 import { connect } from "react-redux";
 import { submitLogin, registerUser, forgotPassword } from "./actions/index";
@@ -30,7 +32,7 @@ class LoginComponent extends Component {
   onEmailChange(event) {
     this.setState({ email:event.target.value});
   }
-  
+
   onPasswordChange(event) {
     this.setState({ password:event.target.value});
   }
@@ -49,19 +51,26 @@ class LoginComponent extends Component {
     this.props.submitLogin(this.state)
   }
 
+  candidateSignUp(){
+    browserHistory.push({
+      pathname: '/RegisterApplicant'
+    });
+    return true;
+  }
+
   renderLoginButtonText() {
     if(!this.state.loading) {
       return 'Log in';
     } else {
       return '';
     }
-    
+
   }
 
   render() {
 
     return (
-    <div className="AppHeader">    
+    <div className="AppHeader">
       <div className="float-none col-sm-4 login-formControl-styles login-form-styles container-fluid">
           <Form onSubmit={this.handleSubmit} className="login-form">
             <FormItem>
@@ -88,20 +97,20 @@ class LoginComponent extends Component {
             <Card style={{'textAlign':'center'}} title="CALLING all SCHOOLS" bordered={false}>
               <p>Are you a school looking to sign up for our services?
                Click below to go to our sign up page.</p>
-               <Button>Sign Up</Button> 
+               <Button>Sign Up</Button>
             </Card>
           </Col>
           <Col span={10}>
             <Card style={{'textAlign':'center'}} title="CALLING all CANDIDATES" bordered={false}>
               <p>Haven't got an account with Schrole yet? Want to get the Schrole Advantage?
                Sign up for Premium below.</p>
-              <Button>Sign Up</Button> 
+              <Button onClick={this.candidateSignUp.bind(this)}>Sign Up</Button>
             </Card>
           </Col>
         </Row>
       </div>
       <AppFooter />
-    </div>  
+    </div>
     );
   }
 }

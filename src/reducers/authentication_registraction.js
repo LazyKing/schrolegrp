@@ -3,7 +3,10 @@
 import {  browserHistory  } from 'react-router'
 const INITIAL_STATE = {
 	email: '',
-	password: ''
+	password: '',
+	registrationSuccessStatus: '',
+	errorMessage: '',
+	errorSummary: ''
 }
 export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
@@ -133,9 +136,22 @@ export default function(state = INITIAL_STATE, action) {
 	      .catch((error) => {
 	      	alert("unauthorized");
 	        console.error(error);
-	      }); 
+	      });
       return action.payload;
-  }
 
-  return state;
+    case "REGISTER_APPLICANT":
+    console.log(action.payload);
+    	return { ...state , registrationSuccessStatus: action.payload.status };
+
+    case "HANDLE_ERROR":
+    //console.log(action.payload);
+    	return { ...state , registrationSuccessStatus: action.payload.status,
+			errorMessage: action.payload.data.message, errorSummary: action.payload.statusText}
+
+		case "RESET_STORE":
+				return { ...state, registrationSuccessStatus: INITIAL_STATE.registrationSuccessStatus };
+
+    default:
+      return state;
+  }
 }
