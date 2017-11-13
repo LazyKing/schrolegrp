@@ -6,7 +6,8 @@ import _ from 'lodash';
 const INITIAL_STATE = { 
 	applicantsProfile: {},
 	qualificationsDetails: {},
-  experiences: {}
+  experiences: {},
+  extraInfo: {}
 }
 
 export default function(state = INITIAL_STATE, action) {
@@ -24,12 +25,38 @@ export default function(state = INITIAL_STATE, action) {
         return { ...state, applicantsProfile: action.payload }
 
     case "GET_ALL_QUALIFICATIONS":
-    //console.log(action);
-    return { ...state, qualificationsDetails: action.payload }
+      if( action.payload.status === 401 ) {
+        localStorage.removeItem("userprofile");
+        browserHistory.push({
+          pathname: '/Login'
+        });
+        return { ...state, qualificationsDetails: {} }
+      }
+      else
+        return { ...state, qualificationsDetails: action.payload }
 
     case "GET_ALL_EXPERIENCES":
-    //console.log(action);
-    return { ...state, experiences: action.payload.experiences }
+      if( action.payload.status === 401 ) {
+        localStorage.removeItem("userprofile");
+        browserHistory.push({
+          pathname: '/Login'
+        });
+        return { ...state, experiences: {} }
+      }
+      else
+        return { ...state, experiences: action.payload.experiences }
+
+    case "GET_EXTRA_INFO_BASIC":
+    console.log(action.payload)
+      if( action.payload.status === 401 ) {
+        localStorage.removeItem("userprofile");
+        browserHistory.push({
+          pathname: '/Login'
+        });
+        return { ...state, extraInfo: {} }
+      }
+      else
+        return { ...state, extraInfo: action.payload }
 
     case "CREATE_NEW_DEPENDANT":
     //console.log(action.payload);

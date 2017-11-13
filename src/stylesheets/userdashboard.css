@@ -60,3 +60,22 @@
 .profile-pic-card.ant-card .ant-card-body {
   height: 80%;
 }
+
+.data-display-row-styles {
+  padding: 5px 0px;
+  border-style: solid;
+  border-bottom: 1px solid #dcdcdc;
+  border-top: 1px solid #fff;
+  border-left: 0px;
+  border-right: 0px;
+}
+
+.first-data-row {
+  margin-top: 10px;
+  padding: 5px 0px;
+  border-style: solid;
+  border-bottom: 1px solid #dcdcdc;
+  border-top: 1px solid #fff;
+  border-left: 0px;
+  border-right: 0px;
+}
