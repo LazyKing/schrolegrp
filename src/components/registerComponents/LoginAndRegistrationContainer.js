@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 
 /*Bootstrap and ant compoennts*/
 import {  Navbar } from 'react-bootstrap';
+import { Alert } from 'antd';
 
-import { Link, browserHistory } from 'react-router'
-
+/*routing and redux*/
+import { browserHistory } from 'react-router'
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware } from "redux";
 import thunk from 'redux-thunk';
@@ -13,6 +14,19 @@ import authenticationAndRegistration from "../../reducers";
 import webLogo from '../../assets/Schrole_Connect.png';
 
 class LoginAndRegistrationContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showConfirmEmailAlert: false
+    };
+  }
+
+  componentDidMount() {
+    console.log(this.props.location)
+    if ( this.props.location.query.confirmLogin === 'true' ) {
+      this.setState({ showConfirmEmailAlert: true });
+    }
+  }
 
   routeToHome(event) {
     event.preventDefault();
@@ -23,6 +37,16 @@ class LoginAndRegistrationContainer extends Component {
 
   }
 
+  displayConfirmEmailAlertAlert () {
+      return ( <Alert
+        style={{'margin': 5 }}
+        message="Email confirmed successfully"
+        description="Your email has been confirmed.Please login to continue."
+        type="success"
+        showIcon
+        closable
+      /> ) ;
+  }
   render() {
     return (
       <Provider store={createStore(authenticationAndRegistration, applyMiddleware(thunk))}>
@@ -38,10 +62,11 @@ class LoginAndRegistrationContainer extends Component {
 	            </Navbar.Header>
 	        </Navbar>
 
+          { (this.state.showConfirmEmailAlert) ? this.displayConfirmEmailAlertAlert() : '' }
 	        {this.props.children}
 
 	      </div>
-      </Provider>  
+      </Provider>
     );
   }
 }

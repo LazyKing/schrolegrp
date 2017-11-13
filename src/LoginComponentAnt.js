@@ -29,6 +29,9 @@ class LoginComponent extends Component {
     };
   }
 
+  componentDidMount() {
+    console.log(this.props)
+  }
   onEmailChange(event) {
     this.setState({ email:event.target.value});
   }
