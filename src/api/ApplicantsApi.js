@@ -13,27 +13,29 @@ class ApplicantsApi {
   }
 
   static getApplicantsProfile(user) {
-  	//console.log(user)
+  	const baseUrl = global.devHost ;
+    const getApplicantsProfileUrl = baseUrl + '/applicants/profile';
   	const {auth_token,user_email} = user
     const headers = this.requestHeaders(auth_token,user_email);
     return axios({
       method: 'GET',
-      url: 'http://13.126.41.88/applicants/profile',
+      url: getApplicantsProfileUrl,
       headers: headers
     }).then(function (response) {
       //console.log("response",response);
       return (response.data)
     }).catch(function (error) {
       //console.log("error",error.response);
-      return error.response ; 
+      return error.response ;
     });
   }
 
   static updateApplicantsPersonalDetails( user, personalDetails) {
-  	//console.log(user)
+    const baseUrl = global.devHost ;
+    const updateApplicantsPersonalDetailsUrl = baseUrl + '/applicants/profile/personal_details';
   	const {auth_token,user_email} = user;
     const headers = this.requestHeaders(auth_token,user_email);
-    const request = new Request('http://13.126.41.88/applicants/profile/personal_details', {
+    const request = new Request(updateApplicantsPersonalDetailsUrl , {
       method: 'PUT',
       headers: headers,
       body: JSON.stringify({'data': personalDetails})
@@ -47,10 +49,11 @@ class ApplicantsApi {
   }
 
   static updateApplicantsEmergencyContact( user, emergencyDetails) {
-    //console.log(user)
+    const baseUrl = global.devHost ;
+    const updateApplicantsEmergencyContactUrl = baseUrl + '/applicants/profile/emergency_contact';
     const {auth_token,user_email} = user;
     const headers = this.requestHeaders(auth_token,user_email);
-    const request = new Request('http://13.126.41.88/applicants/profile/emergency_contact', {
+    const request = new Request(updateApplicantsEmergencyContactUrl , {
       method: 'PUT',
       headers: headers,
       body: JSON.stringify({'data': emergencyDetails})
@@ -64,10 +67,11 @@ class ApplicantsApi {
   }
 
   static updateApplicantsContactDetails( user, contactDetails) {
-    //console.log(user)
+    const baseUrl = global.devHost ;
+    const updateApplicantsContactDetailsUrl = baseUrl + '/applicants/profile/contact_details';
     const {auth_token,user_email} = user;
     const headers = this.requestHeaders(auth_token,user_email);
-    const request = new Request('http://13.126.41.88/applicants/profile/contact_details', {
+    const request = new Request(updateApplicantsContactDetailsUrl , {
       method: 'PUT',
       headers: headers,
       body: JSON.stringify({'data': contactDetails})
@@ -81,10 +85,11 @@ class ApplicantsApi {
   }
 
   static updateApplicantsCriminalRecors( user, criminalRecors) {
-    //console.log(user)
+    const baseUrl = global.devHost ;
+    const updateApplicantsCriminalRecorsUrl = baseUrl + '/applicants/profile/criminal_convictions';
     const {auth_token,user_email} = user;
     const headers = this.requestHeaders(auth_token,user_email);
-    const request = new Request('http://13.126.41.88/applicants/profile/criminal_convictions', {
+    const request = new Request(updateApplicantsCriminalRecorsUrl , {
       method: 'PUT',
       headers: headers,
       body: JSON.stringify({'data': criminalRecors})
@@ -98,10 +103,11 @@ class ApplicantsApi {
   }
 
   static createNewDependant( user, newDependant) {
-    //console.log(user)
+    const baseUrl = global.devHost ;
+    const createNewDependantUrl = baseUrl + '/applicants/dependents';
     const {auth_token,user_email} = user;
     const headers = this.requestHeaders(auth_token,user_email);
-    const request = new Request('http://13.126.41.88/applicants/dependents', {
+    const request = new Request(createNewDependantUrl , {
       method: 'POST',
       headers: headers,
       body: JSON.stringify({'data': newDependant})
@@ -115,11 +121,13 @@ class ApplicantsApi {
   }
 
   static updateProfileImage( user, profileUpdate ) {
+    const baseUrl = global.devHost ;
+    const updateProfileImageUrl = baseUrl + '/applicants/profile/picture';
     const {auth_token,user_email} = user;
     const headers = this.requestHeaders(auth_token,user_email);
     return axios({
       method: 'POST',
-      url: 'http://13.126.41.88/applicants/profile/picture',
+      url: updateProfileImageUrl,
       headers: headers,
       data: JSON.stringify({'picture': profileUpdate})
     }).then(function (response) {
@@ -131,10 +139,11 @@ class ApplicantsApi {
   }
 
   static deleteDependant( user, dependentId) {
-    //console.log(user)
+    const baseUrl = global.devHost ;
+    const deleteDependantUrl = baseUrl + `/applicants/dependents/${dependentId}`;
     const {auth_token,user_email} = user;
     const headers = this.requestHeaders(auth_token,user_email);
-    const request = new Request(`http://13.126.41.88/applicants/dependents/${dependentId}`, {
+    const request = new Request(deleteDependantUrl , {
       method: 'DELETE',
       headers: headers
     });

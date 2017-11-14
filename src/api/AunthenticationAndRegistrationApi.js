@@ -11,11 +11,12 @@ class AunthenticationAndRegistrationApi {
   }
 
   	static registerApplicant( userAuthentication ) {
-	  	//const {auth_token,user_email} = user
+			const baseUrl = global.devHost ;
+	  	const registerApplicantUrl = baseUrl + '/users.json';
 	    const headers = this.requestHeaders();
 	    return axios({
 	      method: 'POST',
-	      url: 'http://13.126.41.88/users.json',
+	      url: registerApplicantUrl,
 	      headers: headers,
 	      data: JSON.stringify({
 	      	'user': userAuthentication

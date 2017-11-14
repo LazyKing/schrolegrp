@@ -22,8 +22,9 @@ class LoginAndRegistrationContainer extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.location)
-    if ( this.props.location.query.confirmLogin === 'true' ) {
+    //console.log(this.props.location)
+    if ( this.props.location.query && this.props.location.query.confirmLogin
+      && this.props.location.query.confirmLogin === 'true' ) {
       this.setState({ showConfirmEmailAlert: true });
     }
   }
