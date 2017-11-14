@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Card, 
+import { Button, Row, Col, Card,
   Modal, Form, Input, Icon } from 'antd';
 
 /*Import Redux functionalities*/
@@ -26,7 +26,7 @@ class EmergencyContact extends Component {
       }
     }
   }
-  
+
   componentWillReceiveProps(nextProps) {
     //console.log("componentWillReceiveProps emergency", nextProps)
     this.setState({emergency_contact:nextProps.emergency_contact})
@@ -79,7 +79,7 @@ class EmergencyContact extends Component {
       },
     };
     return (
-        <Card style={{'marginTop':'10px'}} title="Emergency Contact (optional)" extra={<Button onClick={this.showModal}>Edit</Button>}>
+        <Card className="card-header-background" style={{'marginTop':'10px'}} title="Emergency Contact (optional)" extra={<Button onClick={this.showModal}>Edit</Button>}>
           <Modal title="Emergency Contact"
             visible={this.state.visible}
             onOk={this.handleOk}

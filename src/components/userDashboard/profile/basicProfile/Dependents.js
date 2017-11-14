@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Card, 
+import { Button, Row, Col, Card,
   Icon, Modal, Form } from 'antd';
 import _ from 'lodash';
 
@@ -23,10 +23,10 @@ class Dependents extends Component {
         selectedDependent:{}
       }
   }
-    
+
   showModal = (props) => {
     const { target } = props;
-    const selectedDependent = _.find( this.state.dependentsArray, function(dependent) { 
+    const selectedDependent = _.find( this.state.dependentsArray, function(dependent) {
       return dependent.id == target.id;
     });
 
@@ -48,7 +48,7 @@ class Dependents extends Component {
 
     const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
     const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email }
-    
+
     this.props.createNewDependantDispatch(logoutPayloadHeader, payloadObj);
               this.setState({
             visible: false,
@@ -75,13 +75,13 @@ class Dependents extends Component {
     this.setState({
       visible: false,
     });
-  }  
-  
+  }
+
   render() {
     const listItems = this.state.dependentsArray.map((dependent) =>
           <DependentItem key={dependent.id} id={dependent.id} dependent={dependent}/> );
     return (
-        <Card title="Dependents" extra={<div><Button onClick={this.showModal}>Add Dependent</Button></div>}>
+        <Card className="card-header-background" title="Dependents" extra={<div><Button onClick={this.showModal}>Add Dependent</Button></div>}>
           <Modal title="Edit licence"
             visible={this.state.visible}
             onOk={this.handleOk}

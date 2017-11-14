@@ -21,7 +21,7 @@ class ContactDetails extends Component {
       contact_details:{}
     }
   }
-    
+
   componentWillReceiveProps(nextProps) {
     //console.log("componentWillReceiveProps emergency", nextProps)
     this.setState({contact_details:nextProps.contact_details})
@@ -64,7 +64,7 @@ class ContactDetails extends Component {
     this.setState({
       visible: false,
     });
-  } 
+  }
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -80,8 +80,8 @@ class ContactDetails extends Component {
     };
 
     return (
-        <Card title="Contact Details" extra={<Button onClick={this.showModal}>Edit</Button>}>
-          
+        <Card className="card-header-background" title="Contact Details" extra={<Button onClick={this.showModal}>Edit</Button>}>
+
           <Modal title="Contact Details"
             visible={this.state.visible}
             onOk={this.handleOk}
@@ -91,7 +91,7 @@ class ContactDetails extends Component {
             cancelText={'cancel'}
             width={'80%'}
           >
-            <Form>              
+            <Form>
               <FormItem
                 {...formItemLayout}
                 label="Address"
@@ -107,7 +107,7 @@ class ContactDetails extends Component {
                 {getFieldDecorator('address_line_2', { initialValue: this.state.contact_details.address_line_2 })(
                   <Input />
                 )}
-              </FormItem>              
+              </FormItem>
               <FormItem
                 {...formItemLayout}
                 label="Suburb"
@@ -193,7 +193,7 @@ class ContactDetails extends Component {
                 )}
               </FormItem>
             </Form>
-            
+
           </Modal>
 
           <div>
@@ -212,9 +212,9 @@ class ContactDetails extends Component {
               <Col><span><strong>Permanent Address</strong></span></Col>
               <Col>
               <span>
-                {this.state.contact_details.address_line_1} , 
-                {this.state.contact_details.address_line_2} , 
-                {this.state.contact_details.state} , 
+                {this.state.contact_details.address_line_1} ,
+                {this.state.contact_details.address_line_2} ,
+                {this.state.contact_details.state} ,
                 {this.state.contact_details.country}
               </span>
               </Col>

@@ -60,12 +60,12 @@ class CriminalConvictions extends Component {
     this.setState({
       visible: false,
     });
-  } 
+  }
 
   handleSelectChange = (value) => {
     ( value === 'no' ) ? this.setState({showDescription:false}) : this.setState({showDescription:true});
-  } 
-  
+  }
+
   render() {
     const { getFieldDecorator } = this.props.form;
     const formItemLayout = {
@@ -80,7 +80,7 @@ class CriminalConvictions extends Component {
     };
 
     return (
-        <Card style={{'marginTop':'10px'}} title="Criminal Convictions" extra={<Button onClick={this.showModal}>Edit</Button>}>
+        <Card className="card-header-background" style={{'marginTop':'10px'}} title="Criminal Convictions" extra={<Button onClick={this.showModal}>Edit</Button>}>
           <Modal title="Emergency Contact"
             visible={this.state.visible}
             onOk={this.handleOk}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Card, Modal, Form, 
+import { Button, Row, Col, Card, Modal, Form,
   Input, Icon, Select, DatePicker, Radio } from 'antd';
 import moment from 'moment';
 
@@ -14,7 +14,7 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 const RadioGroup = Radio.Group;
 
-const euPassportOptionsPayload = [ 
+const euPassportOptionsPayload = [
     {
       'value': 'no',
       'text':'NO'
@@ -24,7 +24,7 @@ const euPassportOptionsPayload = [
       'text':'Yes'
     }
 ]
-const genderOptionsPayload = [ 
+const genderOptionsPayload = [
     {
       'value': 'male',
       'text':'Male'
@@ -34,7 +34,7 @@ const genderOptionsPayload = [
       'text':'Female'
     }
 ]
-const maritialOptionsPayload = [ 
+const maritialOptionsPayload = [
     {
       'value': 'single',
       'text':'Single'
@@ -73,7 +73,7 @@ class PersonalDetails extends Component {
       }
     }
   }
-  
+
   componentWillReceiveProps(nextProps) {
     //console.log("componentWillReceiveProps - personal details",nextProps);
     this.setState({personalDetails:nextProps.personal_details})
@@ -111,7 +111,7 @@ class PersonalDetails extends Component {
       visible: false,
     });
   }
-  
+
   render() {
     const { getFieldDecorator } = this.props.form;
 
@@ -131,7 +131,7 @@ class PersonalDetails extends Component {
     };
 
     return (
-        <Card title="Personal Details" extra={<div><Button onClick={this.showModal}>Edit</Button></div>}>
+        <Card className="card-header-background" title="Personal Details" extra={<div><Button onClick={this.showModal}>Edit</Button></div>}>
           <Modal title="Personal Details"
             visible={this.state.visible}
             onOk={this.handleOk}
@@ -162,8 +162,8 @@ class PersonalDetails extends Component {
                 {...formItemLayout}
                 label="Other Citizenship"
               >
-              
-              {getFieldDecorator('other_citizenship', { initialValue: (this.state.personalDetails.other_citizenship) ? 'yes' : 'no' })( 
+
+              {getFieldDecorator('other_citizenship', { initialValue: (this.state.personalDetails.other_citizenship) ? 'yes' : 'no' })(
                 <RadioGroup>
                   <Radio value={'yes'}>Yes</Radio>
                   <Radio value={'no'}>No</Radio>
@@ -193,13 +193,13 @@ class PersonalDetails extends Component {
                 {...formItemLayout}
                 label="EU Passport"
               >
-              {getFieldDecorator('eu_passport', { initialValue: (this.state.personalDetails.eu_passport) ? 'yes' : 'no'  })( 
+              {getFieldDecorator('eu_passport', { initialValue: (this.state.personalDetails.eu_passport) ? 'yes' : 'no'  })(
                 <Select style={{ width: 120 }}>
                   {euPassportOptions}
                 </Select>
               )}
               </FormItem>
-              
+
               <FormItem
                 {...formItemLayout}
                 label="Gender"
@@ -208,9 +208,9 @@ class PersonalDetails extends Component {
                 <Select style={{ width: 120 }}>
                   {genderOptions}
                 </Select>
-              )}  
+              )}
               </FormItem>
-              
+
               <FormItem
                 {...formItemLayout}
                 label="Marital Status"
@@ -259,7 +259,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getPersonalDetailsDispatch: getPersonalDetailsDispatch, 
+  return bindActionCreators({ getPersonalDetailsDispatch: getPersonalDetailsDispatch,
       updatePersonalDetailsDispatch: updatePersonalDetailsDispatch }, dispatch);
 }
 
