@@ -8,6 +8,8 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getPersonalDetailsDispatch, updatePersonalDetailsDispatch } from "../../../../actions";
 
+/*import data*/
+import countryCodes from '../../../../assets/data/countryCodes.json'
 import enUS from 'antd/lib/locale-provider/en_US';
 
 const FormItem = Form.Item;
@@ -51,6 +53,7 @@ const maritialOptionsPayload = [
 const euPassportOptions = euPassportOptionsPayload.map(d => <Option key={d.value} value={d.value}>{d.text}</Option>);
 const genderOptions = genderOptionsPayload.map(d => <Option key={d.value} value={d.value}>{d.text}</Option>);
 const maritialOptions = maritialOptionsPayload.map(d => <Option key={d.value} value={d.value}>{d.text}</Option>);
+const countryOptions = countryCodes.map(d => <Option key={d.code} value={d.code}>{d.name}</Option>);
 
 class PersonalDetails extends Component {
 
@@ -147,16 +150,20 @@ class PersonalDetails extends Component {
                 label="Country of Birth"
               >
                 {getFieldDecorator('country_of_birth', { initialValue: this.state.personalDetails.country_of_birth })(
-                  <Input />
+                  <Select style={{ width: 220 }}>
+                    {countryOptions}
+                  </Select>
                 )}
               </FormItem>
               <FormItem
                 {...formItemLayout}
                 label="Country of Citizenship"
               >
-                {getFieldDecorator('country_of_citizenship', { initialValue: this.state.personalDetails.country_of_citizenship })(
-                  <Input />
-                )}
+              {getFieldDecorator('country_of_citizenship', { initialValue: this.state.personalDetails.country_of_citizenship })(
+                <Select style={{ width: 220 }}>
+                  {countryOptions}
+                </Select>
+              )}
               </FormItem>
               <FormItem
                 {...formItemLayout}
