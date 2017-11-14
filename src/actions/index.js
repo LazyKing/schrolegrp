@@ -46,6 +46,17 @@ export function updatePersonalDetailsDispatch(user, personalDetails) {
     });
   };
 }
+
+export function updateOtherInfoDispatch(user, personalDetails) {
+  return function(dispatch) {
+    return applicantsApi.updateOtherInfo(user, personalDetails).then(profile => {
+      dispatch(updateOtherInfo(profile));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
 export function updateEmergencyDetailsDispatch(user, personalDetails) {
   return function(dispatch) {
     return applicantsApi.updateApplicantsEmergencyContact(user, personalDetails).then(profile => {
@@ -123,6 +134,13 @@ export function createDependant(dependants) {
 export function updatePersonalDetails(profile) {
   return {
     type: "UPDATE_PERSONAL_DETAILS",
+    payload: profile
+  };
+}
+
+export function updateOtherInfo(profile) {
+  return {
+    type: "UPDATE_OTHER_INFO",
     payload: profile
   };
 }

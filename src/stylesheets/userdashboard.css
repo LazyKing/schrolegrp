@@ -1,5 +1,5 @@
 .breadCrumb-container{
-  padding: 10px 10px; 
+  padding: 10px 10px;
   font-size: medium;
 }
 
@@ -78,4 +78,10 @@
   border-top: 1px solid #fff;
   border-left: 0px;
   border-right: 0px;
+}
+
+.profile-pic-uploadButton {
+  display:flex;
+  justify-content: center;
+  padding-top:5px;
 }

@@ -3,7 +3,7 @@
 import {  browserHistory  } from 'react-router'
 import _ from 'lodash';
 
-const INITIAL_STATE = { 
+const INITIAL_STATE = {
 	applicantsProfile: {},
 	qualificationsDetails: {},
   experiences: {},
@@ -76,8 +76,8 @@ export default function(state = INITIAL_STATE, action) {
     case "CREATE_NEW_EXPERIENCE":
       //console.log(action.payload);
       var experiences = action.payload.experiences;
-      return Object.assign({}, state , {'experiences': experiences });    
-    
+      return Object.assign({}, state , {'experiences': experiences });
+
     case "UPDATE_QUALIFICATION":
       //console.log(action);
       var qualifications = action.payload.qualifications;
@@ -88,13 +88,18 @@ export default function(state = INITIAL_STATE, action) {
       console.log(action);
       var licences = action.payload.licences;
       var newApplicantsState = Object.assign({}, state.qualificationsDetails , {'licences': licences });
-      return { ...state, qualificationsDetails: newApplicantsState };  
+      return { ...state, qualificationsDetails: newApplicantsState };
 
     case "UPDATE_PERSONAL_DETAILS":
       //console.log(action);
       var personalDetails = action.payload.personal_details;
       var newApplicantsState = Object.assign({}, state.applicantsProfile , {'personal_details': personalDetails });
       return { ...state, applicantsProfile: newApplicantsState };
+
+		case "UPDATE_OTHER_INFO":
+				//console.log(action.payload);
+				var applicantsDetails = action.payload;
+				return { ...state, applicantsProfile: applicantsDetails };
 
     case "UPDATE_CONTACT_DETAILS":
       var contactDetails = action.payload.contact_details;
@@ -113,7 +118,7 @@ export default function(state = INITIAL_STATE, action) {
 
     case "UPDATE_EXPERIENCE":
       var experiences = action.payload.experiences;
-      return Object.assign({}, state , {'experiences': experiences });    
+      return Object.assign({}, state , {'experiences': experiences });
 
     case "UPDATE_PROFILE_IMAGE":
       var profilePic = action.payload.profile_pic_url;
@@ -128,7 +133,7 @@ export default function(state = INITIAL_STATE, action) {
       });
       var newApplicantsState = Object.assign({}, state.applicantsProfile , {'dependents': dependents });
       return { ...state, applicantsProfile: newApplicantsState };
-    
+
     case "LOGOUT_USER":
       localStorage.removeItem("userprofile");
         browserHistory.push({
@@ -136,7 +141,7 @@ export default function(state = INITIAL_STATE, action) {
         });
       return state;
 
-    default: 
+    default:
       return state;
   }
 }

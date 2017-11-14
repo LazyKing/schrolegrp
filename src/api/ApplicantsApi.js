@@ -138,6 +138,24 @@ class ApplicantsApi {
     });
   }
 
+  static updateOtherInfo( user, profileUpdate ) {
+    const baseUrl = global.devHost ;
+    const updateOtherInfoUrl = baseUrl + '/applicants/profile/other';
+    const {auth_token,user_email} = user;
+    const headers = this.requestHeaders(auth_token,user_email);
+    return axios({
+      method: 'PUT',
+      url: updateOtherInfoUrl,
+      headers: headers,
+      data: JSON.stringify({'data': profileUpdate})
+    }).then(function (response) {
+      return (response.data)
+    }).catch(function (error) {
+      //console.log("error",error.response);
+      return error.response ;
+    });
+  }
+
   static deleteDependant( user, dependentId) {
     const baseUrl = global.devHost ;
     const deleteDependantUrl = baseUrl + `/applicants/dependents/${dependentId}`;

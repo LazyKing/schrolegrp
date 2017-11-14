@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Card, Progress, 
+import { Button, Row, Col, Card, Progress,
           LocaleProvider, Form, Modal } from 'antd';
 
 import enUS from 'antd/lib/locale-provider/en_US';
@@ -17,7 +17,8 @@ import ImageUpload from './otherForms/ImageUpload'
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getPersonalDetailsDispatch, updateProfileImageDispatch } from "../../../actions";
+import { getPersonalDetailsDispatch, updateProfileImageDispatch,
+            updateOtherInfoDispatch } from "../../../actions";
 
 const otherDetailsForm = {
   'edit_other_personal_details' : OtherPersonalDetailsForm
@@ -28,13 +29,13 @@ class BasicProfile extends Component {
 
   constructor(props) {
     super(props);
-    //console.log(this.props);    
+    //console.log(this.props);
     this.state = {
       visible: false,
       confirmLoading: false,
       currentActiveForm: '',
       currentFormData: {},
-      renderFormComponent: {},
+      renderFormComponent: '',
       first_name: '',
       last_name: '',
       cv_url: '',
@@ -47,16 +48,16 @@ class BasicProfile extends Component {
       dependents:[]
     }
   }
-  
+
   componentDidMount() {
     const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
     const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email }
     const response = this.props.getPersonalDetailsDispatch(logoutPayloadHeader);
   }
-  
+
   componentWillReceiveProps(nextProps) {
     console.log("componentWillReceiveProps - basicprof",nextProps);
-    const { first_name, last_name, personal_details, emergency_contact, profile_pic_url, 
+    const { first_name, last_name, personal_details, emergency_contact, profile_pic_url,
       criminal_convictions, contact_details, dependents,link_to_video, cv_url } = nextProps.applicantsProfilePayload.applicantsProfile;
 
     this.setState({ first_name, last_name , personal_details, emergency_contact, profile_pic_url,
@@ -65,6 +66,7 @@ class BasicProfile extends Component {
 
   showModal = (props) => {
     const { target } = props;
+    console.log(target.id);
     const renderFormComponent = otherDetailsForm[target.id];
 
     this.setState({
@@ -81,21 +83,15 @@ class BasicProfile extends Component {
     //console.log(payloadObj)
     if ( this.state.currentActiveForm === 'edit_other_personal_details' ) {
       var payloadObj = this._genericOtherInfoForm.getFieldsValue();
-      payloadObj.dob = this._genericOtherInfoForm.getFieldsValue().date_of_completion._i;
 
-      this._genericOtherInfoForm.form.validateFields((err, values) => {
+      this._genericOtherInfoForm.validateFields((err, values) => {
         //console.log(err);
         if(!err) {
-          if(this.state.editMode){
-            this.props.updateQualificationDispatch(logoutPayloadHeader, payloadObj, this.state.selectedQualification.id );
-          }
-          else
-            this.props.createNewQualificationDispatch(logoutPayloadHeader, payloadObj);
+          this.props.updateOtherInfoDispatch(logoutPayloadHeader, payloadObj );
 
           setTimeout(() => {
             this.setState({
               visible: false,
-              editMode: false,
               confirmLoading: false,
             });
           }, 2000);
@@ -114,13 +110,13 @@ class BasicProfile extends Component {
   renderForm() {
     const { first_name, last_name, link_to_video, cv_url } = this.state;
     const formData = { first_name, last_name, link_to_video, cv_url };
-    
+
     if(this.state.renderFormComponent){
-      return ( <this.state.renderFormComponent formData={formData}  
-        ref={(ref) => this._genericOtherInfoForm = ref} /> ); 
+      return ( <this.state.renderFormComponent formData={formData}
+        ref={(ref) => this._genericOtherInfoForm = ref} /> );
     }
     else
-      return {}
+      return ''
   }
 
   render() {
@@ -138,13 +134,14 @@ class BasicProfile extends Component {
             cancelText={'cancel'}
             width={'70%'}
           >
-
+            {this.renderForm()}
           </Modal>
           <div className="profile-basic-info-container">
             <Row gutter={16}>
               <Col xs={0} sm={10} md={8} lg={6}>
                 <Card className="profile-pic-card" title={this.state.first_name + ' ' + this.state.last_name} style={{ height: 350 }}>
                   <img style={{ width: '100%', height:'100%' }} src= {profilePicUrl} />
+                  <ImageUpload />
                 </Card>
               </Col>
               <Col xs={0} sm={14} md={8} lg={10} >
@@ -155,7 +152,7 @@ class BasicProfile extends Component {
                   </div>
                   <hr style={{ border: '1px rgba(37, 132, 193, 0.9) solid' }}/>
                   <div>
-                    <Row> 
+                    <Row>
                       <Col>
                         <Button> View Cv </Button>
                       </Col>
@@ -163,11 +160,11 @@ class BasicProfile extends Component {
                         <a href={this.state.link_to_video} target="_blank">Link to tutorial Video</a>
                       </Col>
                       <Col>
-                        <ImageUpload />
+                        
                       </Col>
                     </Row>
                   </div>
-                </div>  
+                </div>
               </Col>
               <Col md={8} lg={8} className="hidden-sm hidden-xs">
                 <Card className="profile-percentage-card" title="Profile Completion Status" >
@@ -198,7 +195,7 @@ class BasicProfile extends Component {
                 <Col xs={0} sm={9} lg={8}>
                 </Col>
                 <Col xs={0} sm={6} lg={8} className="hidden-sm-down" >
-                  
+
                 </Col>
               </Row>
             </div>
@@ -215,7 +212,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ getPersonalDetailsDispatch: getPersonalDetailsDispatch,
-  updateProfileImageDispatch:updateProfileImageDispatch }, dispatch);
+        updateProfileImageDispatch:updateProfileImageDispatch,
+          updateOtherInfoDispatch:updateOtherInfoDispatch }, dispatch);
 }
 
 export default connect( mapStateToProps, mapDispatchToProps)(Form.create()(BasicProfile));

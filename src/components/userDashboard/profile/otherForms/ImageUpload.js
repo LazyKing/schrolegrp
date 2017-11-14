@@ -7,10 +7,10 @@ import { bindActionCreators } from "redux";
 import { updateProfileImageDispatch } from "../../../../actions";
 
 class ImageUpload extends Component {
- 
+
   constructor(props) {
     super(props);
-    //console.log(this.props);    
+    //console.log(this.props);
     this.state = {
       fileList: [],
       uploading: false,
@@ -41,8 +41,8 @@ class ImageUpload extends Component {
         fileList: [],
         uploading: false,
         visibleImageUploadModal: false,
-      }); 
-      fileReader.onload = function(fileLoadedEvent) 
+      });
+      fileReader.onload = function(fileLoadedEvent)
       {
         const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
         const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email }
@@ -88,7 +88,7 @@ class ImageUpload extends Component {
     };
 
     return (
-      <div>
+      <div className="profile-pic-uploadButton" >
         <Modal title="Profile Pic"
             visible={this.state.visibleImageUploadModal}
             confirmLoading={this.state.confirmLoading}
@@ -112,7 +112,7 @@ class ImageUpload extends Component {
             </Button>
           </Upload>
         </Modal>
-        <Button id="upload_profile_pic" onClick={this.showUploadModal}> Upload Image </Button>
+        <Button type="primary" id="upload_profile_pic" onClick={this.showUploadModal}> Upload Image </Button>
       </div>
     );
   }
