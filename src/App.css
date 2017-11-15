@@ -21,12 +21,12 @@
   background-repeat: no-repeat;
   background-position: top center;
   background-size: cover;
-  background-attachment: fixed; 
+  background-attachment: fixed;
 }
 
 .featured-list-container {
   background: '#ECECEC';
-  padding: 20px 0px; 
+  padding: 20px 0px;
 }
 
 .custom-card-image img {
@@ -111,7 +111,7 @@
 .login-form {
   padding-top: 10px;
   justify-content: center;
-  margin:auto; 
+  margin:auto;
 }
 
 .justify-content-center {
@@ -127,6 +127,11 @@
 
 .login-formControl-styles {
   border: 1px darkgrey solid;
+}
+
+.candidate-signup-pageContainer{
+    width: 85%;
+    margin: auto;
 }
 
 .height-fluid {

@@ -28,12 +28,14 @@ class ApplicantRegister extends Component {
 				const { registrationSuccessStatus } = nextProps.authenticationAndRegistration;
 				if( registrationSuccessStatus !== "" ) {
 					if ( registrationSuccessStatus === 201 || registrationSuccessStatus === 200  ){
-				 		const modal= Modal.success({
+						const successModal=Modal;
+						const modal= successModal.success({
 					 		title: 'Applicant has been successfully registered',
 					 		content: 'Confirmation email has been sent to your primary email address.Please follow the instructions to verify your email',
 							okText: 'Ok',
 							onOk() {
 								 modal.destroy();
+								 nextProps.resetStore('');
 								 browserHistory.push({
 									 pathname: '/Login'
 								 });
@@ -41,15 +43,16 @@ class ApplicantRegister extends Component {
 				 		});
 			 	} else {
 				const { errorMessage, errorSummary } = nextProps.authenticationAndRegistration;
-				 const modal= Modal.error({
+				const errorModal=Modal;
+				 const modal= errorModal.error({
 					 		title: errorSummary,
 					 		content: errorMessage,
 							okText: 'Ok',
 							onOk() {
 								 modal.destroy(),
-								 browserHistory.push({
-									 pathname: '/Login'
-								 });
+								 // browserHistory.push({
+									//  pathname: '/Login'
+								 // });
 								 nextProps.resetStore('');
 							},
 				 		});
@@ -97,6 +100,14 @@ class ApplicantRegister extends Component {
     	callback();
   	}
 
+		routeToHome = (event) => {
+	    event.preventDefault();
+	    event.stopPropagation();
+	    browserHistory.push({
+	        pathname: '/Login'
+	    });
+	  }
+
   	render() {
 
   		const { getFieldDecorator } = this.props.form;
@@ -124,9 +135,17 @@ class ApplicantRegister extends Component {
 	    };
 
 	    return (
-	        <Row type="flex" justify="center">
-	        	<Col>
-	        		<h2>Candidate Signup</h2>
+	        <Row type="flex" className="candidate-signup-pageContainer">
+	        	<Col sm={24}>
+							<Row type="flex" justify="space-between">
+								<Col>
+	        				<h2>Candidate Signup</h2>
+								</Col>
+								<Col>
+									<p>Already have an account?</p>
+									<Button size="large" onClick={this.routeToHome}>Sign in</Button>
+								</Col>
+							</Row>
 	        	</Col>
 
 	        	<Col sm={24}>
@@ -158,6 +177,7 @@ class ApplicantRegister extends Component {
 	        		<hr style={{ border: '1px rgba(37, 132, 193, 0.9) solid', margin:'10px 0px'}}/>
 	        	</Col>
 	        	<Col sm={24}>
+						<h2>User Details</h2>
 	        	<Form onSubmit={this.handleSubmit}>
 
 	        		<FormItem
@@ -250,8 +270,10 @@ class ApplicantRegister extends Component {
 			        </FormItem>
 
 
-			        <FormItem {...tailFormItemLayout}>
-			          <Button type="primary" htmlType="submit">Register</Button>
+			        <FormItem
+								{...tailFormItemLayout}
+								extra="We'll send you an email to activate your account.">
+			          <Button size="large" type="primary" htmlType="submit">Register</Button>
 			        </FormItem>
 	      		</Form>
 	      		</Col>
