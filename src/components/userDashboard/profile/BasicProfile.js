@@ -12,7 +12,8 @@ import CriminalConvictions from './basicProfile/CriminalConvictions';
 
 /*Form components*/
 import OtherPersonalDetailsForm from './otherForms/OtherPersonalDetailsForm';
-import ImageUpload from './otherForms/ImageUpload'
+import ImageUpload from './otherForms/ImageUpload';
+import CvUpload from './otherForms/CvUpload'
 
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
@@ -120,8 +121,8 @@ class BasicProfile extends Component {
   }
 
   render() {
-    var profilePicUrl = this.state.profile_pic_url; //.replace("original", "medium");
-    profilePicUrl = "http://13.126.41.88" + profilePicUrl;
+    var profilePicUrl = global.devHost + this.state.profile_pic_url; //.replace("original", "medium");
+    var cvUrl = global.devHost + this.state.cv_url;
 
     return (
       <div className="basic-profile-mainContainer">
@@ -155,12 +156,13 @@ class BasicProfile extends Component {
                     <Row>
                       <Col>
                         <Button> View Cv </Button>
+                        <a href={cvUrl} download="resume">Download</a>
                       </Col>
                       <Col>
                         <a href={this.state.link_to_video} target="_blank">Link to tutorial Video</a>
                       </Col>
                       <Col>
-                        
+
                       </Col>
                     </Row>
                   </div>
@@ -195,7 +197,7 @@ class BasicProfile extends Component {
                 <Col xs={0} sm={9} lg={8}>
                 </Col>
                 <Col xs={0} sm={6} lg={8} className="hidden-sm-down" >
-
+                  <CvUpload />
                 </Col>
               </Row>
             </div>

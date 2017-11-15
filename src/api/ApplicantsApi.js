@@ -138,6 +138,24 @@ class ApplicantsApi {
     });
   }
 
+  static updateResume( user, profileUpdate ) {
+    const baseUrl = global.devHost ;
+    const updateProfileImageUrl = baseUrl + '/applicants/profile/resume';
+    const {auth_token,user_email} = user;
+    const headers = this.requestHeaders(auth_token,user_email);
+    return axios({
+      method: 'POST',
+      url: updateProfileImageUrl,
+      headers: headers,
+      data: JSON.stringify({'resume': profileUpdate})
+    }).then(function (response) {
+      return (response.data)
+    }).catch(function (error) {
+      //console.log("error",error.response);
+      return error.response ;
+    });
+  }
+
   static updateOtherInfo( user, profileUpdate ) {
     const baseUrl = global.devHost ;
     const updateOtherInfoUrl = baseUrl + '/applicants/profile/other';

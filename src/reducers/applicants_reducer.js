@@ -125,6 +125,11 @@ export default function(state = INITIAL_STATE, action) {
       var newApplicantsState = Object.assign({}, state.applicantsProfile , {'profile_pic_url': profilePic });
       return { ...state, applicantsProfile: newApplicantsState };
 
+		case "UPDATE_RESUME":
+	      var cvUrl = action.payload.resume;
+	      var newApplicantsState = Object.assign({}, state.applicantsProfile , {'cv_url': cvUrl });
+	      return { ...state, applicantsProfile: newApplicantsState };
+
     case "DELETE_DEPENDANT":
       //creating a new copy of objects
       var dependents = JSON.parse(JSON.stringify(state.applicantsProfile.dependents))

@@ -87,6 +87,16 @@ export function updateProfileImageDispatch(user, profileImage) {
   };
 }
 
+export function updateResumeDispatch(user, resume) {
+  return function(dispatch) {
+    return applicantsApi.updateResume(user, resume).then(profile => {
+      dispatch(updateResume(profile));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
 export function createNewDependantDispatch(user, newDependant) {
   return function(dispatch) {
     return applicantsApi.createNewDependant(user, newDependant).then(response => {
@@ -162,6 +172,13 @@ export function updateEmergencyDetails(profile) {
 export function updateProfileImage(profile) {
   return {
     type: "UPDATE_PROFILE_IMAGE",
+    payload: profile
+  };
+}
+
+export function updateResume(profile) {
+  return {
+    type: "UPDATE_RESUME",
     payload: profile
   };
 }

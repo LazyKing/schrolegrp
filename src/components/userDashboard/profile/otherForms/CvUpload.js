@@ -4,9 +4,9 @@ import { Upload, Button, Icon, message, Modal } from 'antd';
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { updateProfileImageDispatch } from "../../../../actions";
+import { updateResumeDispatch } from "../../../../actions";
 
-class ImageUpload extends Component {
+class CvUpload extends Component {
 
   constructor(props) {
     super(props);
@@ -14,7 +14,7 @@ class ImageUpload extends Component {
     this.state = {
       fileList: [],
       uploading: false,
-      visibleImageUploadModal: false
+      visibleCvUploadModal: false
     }
   }
 
@@ -40,13 +40,13 @@ class ImageUpload extends Component {
       this.setState({
         fileList: [],
         uploading: false,
-        visibleImageUploadModal: false,
+        visibleCvUploadModal: false,
       });
       fileReader.onload = function(fileLoadedEvent)
       {
         const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
         const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email }
-        resolvePromise = self.props.updateProfileImageDispatch(logoutPayloadHeader, fileReader.result);
+        resolvePromise = self.props.updateResumeDispatch(logoutPayloadHeader, fileReader.result);
       };
       fileReader.readAsDataURL(fileToLoad);
     }
@@ -54,21 +54,21 @@ class ImageUpload extends Component {
 
   showUploadModal = (props) => {
     this.setState({
-      visibleImageUploadModal: true
+      visibleCvUploadModal: true
     });
   }
 
   handleCancelUpload = () => {
     this.setState({
-      visibleImageUploadModal: false,
+      visibleCvUploadModal: false,
     });
   }
 
   render() {
     const { uploading } = this.state;
     const props = {
-      accept: "image/*",
-      action: 'http://13.126.41.88/applicants/profile/picture',
+      accept: ".pdf",
+      action: 'http://13.126.41.88/applicants/profile/resume',
       onRemove: (file) => {
         this.setState(({ fileList }) => {
           const index = fileList.indexOf(file);
@@ -91,7 +91,7 @@ class ImageUpload extends Component {
     return (
       <div className="profile-pic-uploadButton" >
         <Modal title="Profile Pic"
-            visible={this.state.visibleImageUploadModal}
+            visible={this.state.visibleCvUploadModal}
             confirmLoading={this.state.confirmLoading}
             footer={[
               <Button key="back" size="large" onClick={this.handleCancelUpload}>Cancel</Button>,
@@ -109,11 +109,11 @@ class ImageUpload extends Component {
           >
           <Upload {...props}>
             <Button>
-              <Icon type="upload" /> Upload your Profile Pic
+              <Icon type="upload" /> Upload your Resume
             </Button>
           </Upload>
         </Modal>
-        <Button type="primary" id="upload_profile_pic" onClick={this.showUploadModal}> Upload Image </Button>
+        <Button type="primary" id="upload_profile_pic" onClick={this.showUploadModal}> Upload Resume </Button>
       </div>
     );
   }
@@ -125,7 +125,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ updateProfileImageDispatch:updateProfileImageDispatch }, dispatch);
+  return bindActionCreators({ updateResumeDispatch:updateResumeDispatch }, dispatch);
 }
 
-export default connect( mapStateToProps, mapDispatchToProps)(ImageUpload);
+export default connect( mapStateToProps, mapDispatchToProps)(CvUpload);
