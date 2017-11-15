@@ -107,6 +107,13 @@ class BasicProfile extends Component {
     });
   }
 
+  downloadCv = () => {
+    var cvUrl = global.devHost + this.state.cv_url;
+    var dl = document.createElement('a');
+    dl.setAttribute('href', cvUrl );
+    dl.setAttribute('download', 'filename.txt');
+    dl.click();
+  }
 
   renderForm() {
     const { first_name, last_name, link_to_video, cv_url } = this.state;
@@ -155,14 +162,17 @@ class BasicProfile extends Component {
                   <div>
                     <Row>
                       <Col>
-                        <Button> View Cv </Button>
-                        <a href={cvUrl} download="resume">Download</a>
-                      </Col>
-                      <Col>
                         <a href={this.state.link_to_video} target="_blank">Link to tutorial Video</a>
                       </Col>
                       <Col>
-
+                          <Row type="flex" justify="space-between">
+                            <Col>
+                              <Button onClick={this.downloadCv}> Download Cv </Button>
+                            </Col>
+                            <Col>
+                              <CvUpload />
+                            </Col>
+                          </Row>
                       </Col>
                     </Row>
                   </div>
@@ -197,7 +207,6 @@ class BasicProfile extends Component {
                 <Col xs={0} sm={9} lg={8}>
                 </Col>
                 <Col xs={0} sm={6} lg={8} className="hidden-sm-down" >
-                  <CvUpload />
                 </Col>
               </Row>
             </div>

@@ -89,7 +89,7 @@ class CvUpload extends Component {
     };
 
     return (
-      <div className="profile-pic-uploadButton" >
+      <div className="" >
         <Modal title="Profile Pic"
             visible={this.state.visibleCvUploadModal}
             confirmLoading={this.state.confirmLoading}
