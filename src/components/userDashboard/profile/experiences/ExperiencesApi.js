@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {  browserHistory  } from 'react-router'
 
-class ExperiencesApi { 
+class ExperiencesApi {
 
   static requestHeaders(auth_token,user_email) {
     return {
@@ -13,13 +13,15 @@ class ExperiencesApi {
   	}
 
 	static getAllExperiencesDetails(user) {
-	  	//console.log(user)
+      const baseUrl = global.devHost ;
+      const getAllExperiencesUrl = baseUrl + '/applicants/experiences';
+
 	  	const {auth_token,user_email} = user
 	    const headers = this.requestHeaders(auth_token,user_email);
 
 	    return axios({
 	      method: 'GET',
-	      url: 'http://13.126.41.88/applicants/experiences',
+	      url: getAllExperiencesUrl,
 	      headers: headers
 	    }).then(function (response) {
 	      //console.log("response",response);
@@ -31,12 +33,14 @@ class ExperiencesApi {
   	}
 
    	static createNewExperience( user, newExperience) {
-	    //console.log(user)
+      const baseUrl = global.devHost ;
+      const createNewExperienceUrl = baseUrl + '/applicants/experiences';
+
 	    const {auth_token,user_email} = user;
 	    const headers = this.requestHeaders(auth_token,user_email);
 	    return axios({
 	      method: 'POST',
-	      url: 'http://13.126.41.88/applicants/experiences',
+	      url: createNewExperienceUrl,
 	      headers: headers,
 	      data: JSON.stringify({'data': newExperience})
 	    }).then(function (response) {
@@ -49,12 +53,14 @@ class ExperiencesApi {
   	}
 
   	static updateExperience( user, experienceUpdate, experiencenId) {
-	    //console.log(experienceUpdate)
+      const baseUrl = global.devHost ;
+      const updateExperienceUrl = baseUrl + `/applicants/experiences/${experiencenId}`;
+
 	    const {auth_token,user_email} = user;
 	    const headers = this.requestHeaders(auth_token,user_email);
 	    return axios({
 	      method: 'PUT',
-	      url: `http://13.126.41.88/applicants/experiences/${experiencenId}`,
+	      url: updateExperienceUrl,
 	      headers: headers,
 	      data: JSON.stringify({'data': experienceUpdate})
 	    }).then(function (response) {
