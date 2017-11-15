@@ -30,18 +30,18 @@ class ExtraInfoAndDocsApi {
 	    });
 	}
 
-	static updateQualification( user, qualificationUpdate, qualificationId) {
-			const baseUrl = global.devHost ;
-			const updateQualificationUrl = baseUrl + `/applicants/qualifications/${qualificationId}`;
+	static updateExtraInfoBasicDetails( user, extraInfoBasicUpdate) {
+		const baseUrl = global.devHost ;
+		const updateExtraInfoBasicDetailsUrl = baseUrl + '/applicants/profile/extra';
 
 			const {auth_token,user_email} = user;
 	    const headers = this.requestHeaders(auth_token,user_email);
 
 	    return axios({
 	      method: 'PUT',
-	      url: updateQualificationUrl,
+	      url: updateExtraInfoBasicDetailsUrl,
 	      headers: headers,
-	      data: JSON.stringify({'data': qualificationUpdate})
+	      data: JSON.stringify({'data': extraInfoBasicUpdate})
 	    }).then(function (response) {
 	      return (response.data)
 	    }).catch(function (error) {

@@ -10,6 +10,16 @@ export function getExtraInfoBsicDetailsDispatch(user) {
   };
 }
 
+export function updateExtraInfoBasicDetailsDispatch(user, extraInfoBasicUpdate) {
+  return function(dispatch) {
+    return ExtraInfoAndDocsApi.updateExtraInfoBasicDetails(user, extraInfoBasicUpdate).then(extraInfo => {
+      dispatch(updateExtraInfoBasicDetails(extraInfo));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
 export function getExtraInfoBsicDetails(extraInfo) {
   return {
     type: "GET_EXTRA_INFO_BASIC",
@@ -17,9 +27,9 @@ export function getExtraInfoBsicDetails(extraInfo) {
   };
 }
 
-export function updateProfileImage(profile) {
+export function updateExtraInfoBasicDetails(extraInfo) {
   return {
-    type: "UPDATE_PROFILE_IMAGE",
-    payload: profile
+    type: "UPDATE_EXTRA_INFO_BASIC",
+    payload: extraInfo
   };
 }

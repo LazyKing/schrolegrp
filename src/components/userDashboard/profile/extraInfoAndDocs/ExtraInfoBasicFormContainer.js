@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import { Form, Row, Col, Button } from 'antd';
+import { Form, Row, Col, Button, Modal } from 'antd';
 
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-//import { getExtraInfoBsicDetailsDispatch } from "./ExtraInforAndDocs_Actions";
+import { updateExtraInfoBasicDetailsDispatch } from "./ExtraInforAndDocs_Actions";
 
-class ExtraInfoBasicFormContainer extends Component { 
-	
+/*import components*/
+import ExtraInfoBasicForm from './ExtraInfoBasicForm';
+
+class ExtraInfoBasicFormContainer extends Component {
+
 	constructor(props) {
 		super(props);
 		this.state = {
 			extraInfoDetails: {},
-			visible: false,
-	  		confirmLoading: false,
+			visibleExtraInfoForm: false,
+	  	confirmLoadingExtraInfoForm: false,
 		}
 	}
 
@@ -23,47 +26,50 @@ class ExtraInfoBasicFormContainer extends Component {
 		this.setState({ extraInfoDetails });
 	}
 
-	showModal = (props) => {
-    	//const { target } = props;
-    	this.setState({ visible: true }) 
+	showExtraInfoFormModal = (props) => {
+    	this.setState({ visibleExtraInfoForm: true })
 	}
 
-  handleOk = () => {
+  handleExtraInfoFormOk = () => {
     const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
     const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email }
 
-    //var payloadObj = this._qualificationFormProps.getFieldsValue();
-    //console.log(payloadObj);
-    
-    this.setState({
-      visible: false,
-      confirmLoading: false,
-    });
-    /*this._qualificationFormProps.form.validateFields((err, values) => {
+    var payloadObj = this._extraInfoFormProps.props.form.getFieldsValue();
+    console.log(payloadObj);
+
+
+    this._extraInfoFormProps.props.form.validateFields((err, values) => {
       //console.log(err);
       if(!err) {
-        //this.props.updateQualificationDispatch(logoutPayloadHeader, payloadObj, this.state.selectedQualification.id );
-        this.setState({
-          confirmLoading: true,
-        });
+        this.props.updateExtraInfoBasicDetailsDispatch(logoutPayloadHeader, payloadObj );
+        this.setState({ confirmLoadingExtraInfoForm: true });
         setTimeout(() => {
-          this.setState({
-            visible: false,
-            confirmLoading: false,
-          });
+          this.setState({ visibleExtraInfoForm: false, confirmLoadingExtraInfoForm: false });
         }, 2000);
       }
-    });*/
+    });
   }
 
-  handleCancel = () => {
-    this.setState({ visible: false });
+  handleExtraInfoFormCancel = () => {
+    this.setState({ visibleExtraInfoForm: false });
   }
 
   render() {
 
   	return (
-  		<div>
+  		<div className="extra_info_basic_container">
+				<Modal title="Edit Qualification"
+					visible={this.state.visibleExtraInfoForm}
+					onOk={this.handleExtraInfoFormOk}
+					confirmLoading={this.state.confirmLoadingExtraInfoForm}
+					onCancel={this.handleExtraInfoFormCancel}
+					okText={'Save'}
+					cancelText={'cancel'}
+					width={'70%'}
+				>
+					<ExtraInfoBasicForm extraInfoDetails={this.state.extraInfoDetails}
+						wrappedComponentRef={(ref) => this._extraInfoFormProps = ref} />
+				</Modal>
   			<Row>
   				<Col>
   					<Row type="flex" justify="space-between">
@@ -71,8 +77,8 @@ class ExtraInfoBasicFormContainer extends Component {
   						<h2>Extra Information</h2>
   					</Col>
   					<Col >
-  						<Button> Edit </Button>
-  					</Col>	
+  						<Button onClick={this.showExtraInfoFormModal}> Edit </Button>
+  					</Col>
   					</Row>
   				</Col>
   				<hr style={{ border: '1px rgba(37, 132, 193, 0.9) solid' }}/>
@@ -114,12 +120,11 @@ class ExtraInfoBasicFormContainer extends Component {
 
 function mapStateToProps(state) {
   //console.log("mapStateToProps, extrainfo",state);
-  return { };
-  //return { extraInfoDetails:  state.applicants.extraInfo };
+  return { extraInfoDetails:  state.applicants.extraInfo };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ }, dispatch);
+  return bindActionCreators({ updateExtraInfoBasicDetailsDispatch:updateExtraInfoBasicDetailsDispatch }, dispatch);
 }
 
 export default connect( mapStateToProps, mapDispatchToProps)(Form.create()(ExtraInfoBasicFormContainer));

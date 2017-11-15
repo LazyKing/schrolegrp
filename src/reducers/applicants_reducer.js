@@ -130,6 +130,10 @@ export default function(state = INITIAL_STATE, action) {
 	      var newApplicantsState = Object.assign({}, state.applicantsProfile , {'cv_url': cvUrl });
 	      return { ...state, applicantsProfile: newApplicantsState };
 
+	case "UPDATE_EXTRA_INFO_BASIC":
+			//console.log(action.payload)
+			return { ...state, extraInfo: action.payload }
+
     case "DELETE_DEPENDANT":
       //creating a new copy of objects
       var dependents = JSON.parse(JSON.stringify(state.applicantsProfile.dependents))
