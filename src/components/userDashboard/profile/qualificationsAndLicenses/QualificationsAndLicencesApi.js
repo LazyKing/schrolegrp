@@ -13,13 +13,15 @@ class QualificationsAndLicencesApi {
   	}
 
 	static getAllQualifiacationsDetails(user) {
-	  	//console.log(user)
+			const baseUrl = global.devHost ;
+			const getAllQualifiacationsUrl = baseUrl + '/applicants/qualifications';
+
 	  	const {auth_token,user_email} = user
 	    const headers = this.requestHeaders(auth_token,user_email);
 
 	    return axios({
 	      method: 'GET',
-	      url: 'http://13.126.41.88/applicants/qualifications',
+	      url: getAllQualifiacationsUrl,
 	      headers: headers
 	    }).then(function (response) {
 	      return (response.data)
@@ -30,13 +32,15 @@ class QualificationsAndLicencesApi {
 	}
 
 	static createNewQualification( user, newQualification) {
-	    //console.log(user)
+			const baseUrl = global.devHost ;
+			const createNewQualificationUrl = baseUrl + '/applicants/qualifications';
+
 	    const {auth_token,user_email} = user;
 	    const headers = this.requestHeaders(auth_token,user_email);
 
 	    return axios({
 	      method: 'POST',
-	      url: 'http://13.126.41.88/applicants/qualifications',
+	      url: createNewQualificationUrl,
 	      headers: headers,
 	      data: JSON.stringify({'data': newQualification})
 	    }).then(function (response) {
@@ -47,12 +51,15 @@ class QualificationsAndLicencesApi {
 	 }
 
 	static updateQualification( user, qualificationUpdate, qualificationId) {
-	    const {auth_token,user_email} = user;
+			const baseUrl = global.devHost ;
+			const updateQualificationUrl = baseUrl + `/applicants/qualifications/${qualificationId}`;
+
+			const {auth_token,user_email} = user;
 	    const headers = this.requestHeaders(auth_token,user_email);
 
 	    return axios({
 	      method: 'PUT',
-	      url: `http://13.126.41.88/applicants/qualifications/${qualificationId}`,
+	      url: updateQualificationUrl,
 	      headers: headers,
 	      data: JSON.stringify({'data': qualificationUpdate})
 	    }).then(function (response) {
@@ -63,12 +70,15 @@ class QualificationsAndLicencesApi {
   	}
 
   	static createNewLicence( user, newLicence) {
+			const baseUrl = global.devHost ;
+			const createNewLicenceUrl = baseUrl + '/applicants/licences';
+
 	    const {auth_token,user_email} = user;
 	    const headers = this.requestHeaders(auth_token,user_email);
 
 	    return axios({
 	      method: 'POST',
-	      url: 'http://13.126.41.88/applicants/licences',
+	      url: createNewLicenceUrl,
 	      headers: headers,
 	      data: JSON.stringify({'data': newLicence})
 	    }).then(function (response) {
@@ -81,13 +91,15 @@ class QualificationsAndLicencesApi {
   	}
 
   	static updateLicence( user, licenceUpdatePayload, licenceId ) {
-	    //console.log(user)
+			const baseUrl = global.devHost ;
+			const updateLicenceUrl = baseUrl + `/applicants/licences/${licenceId}`;
+
 	    const {auth_token,user_email} = user;
 	    const headers = this.requestHeaders(auth_token,user_email);
-	    
+
 	    return axios({
 	      method: 'PUT',
-	      url: `http://13.126.41.88/applicants/licences/${licenceId}`,
+	      url: updateLicenceUrl,
 	      headers: headers,
 	      data: JSON.stringify({'data': licenceUpdatePayload})
 	    }).then(function (response) {
