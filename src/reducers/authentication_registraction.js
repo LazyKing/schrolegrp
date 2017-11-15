@@ -13,39 +13,13 @@ export default function(state = INITIAL_STATE, action) {
   switch (action.type) {
 
     case "SUBMIT_LOGIN":
-		var baseUrl = global.devHost ;
-		const signInUrl = baseUrl + '/users/sign_in';
-	  	fetch( signInUrl , {
-		  method: 'POST',
-		  headers: {
-		    'Accept': 'application/json',
-		    'Content-Type': 'application/json',
-		  },
-		  body: JSON.stringify({
-		    "user":{
-		      "email":action.payload.email,
-		      "password":action.payload.password
-		    }
-		  })
-		}).then((response) => response.json())
-	  	.then((responseJson) => {
-	  		if(responseJson.success){
-	        	console.log(responseJson);
-	        	localStorage.setItem("userprofile", JSON.stringify(responseJson.user) );
-				browserHistory.push({
-					pathname: '/userprofile',
-					state: { stateData: responseJson.user }
-				});
-	  		} else {
-	  			alert("authentication failed");
-	  		}
-	        return true;
-	      })
-	      .catch((error) => {
-	      	alert("unauthorized");
-	        console.error(error);
-	      });
-      return action.payload;
+			//console.log(action.payload);
+			localStorage.setItem("userprofile", JSON.stringify(action.payload.data.user) );
+			browserHistory.push({
+				pathname: '/userprofile',
+				state: { stateData: action.payload.data.user }
+			});
+			return { ...state , registrationSuccessStatus: action.payload.status };
 
      case "FORGOT_PASSWORD":
 	    //console.log(action.payload);

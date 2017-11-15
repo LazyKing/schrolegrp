@@ -1,8 +1,17 @@
-import applicantsApi from '../api/ApplicantsApi';
+import AunthenticationAndRegistrationApi from '../api/AunthenticationAndRegistrationApi';
 
-export function submitLoginDispatch(user) {
-  return function (dispatch) {
-    dispatch(submitLogin(user));
+export function submitLoginDispatch( user, password) {
+
+  return function(dispatch) {
+    return AunthenticationAndRegistrationApi.applicantLogin( user, password).then(response => {
+      //console.log("dispatch login suc::",response);
+      if(response.status === 201 || response.status === 200)
+        dispatch(submitLogin(response));
+      else
+        dispatch(handleError(response));
+    }).catch(error => {
+      console.log("dispatch person::",error);
+    });
   };
 }
 
@@ -24,5 +33,19 @@ export function forgotPassword(user) {
   return {
     type: "FORGOT_PASSWORD",
     payload: user
+  };
+}
+
+export function resetStore(data) {
+  return {
+    type: "RESET_STORE",
+    payload: data
+  };
+}
+
+export function handleError(error) {
+  return {
+    type: "HANDLE_ERROR",
+    payload: error
   };
 }

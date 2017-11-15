@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Icon, Input, Button, Row, Col, Card } from 'antd';
+import { Form, Icon, Input, Button, Row, Col, Card, Modal } from 'antd';
 import {  Navbar } from 'react-bootstrap';
 
 import 'antd/dist/antd.css';
@@ -9,7 +9,7 @@ import {  browserHistory  } from 'react-router'
 
 /*Redux imports*/
 import { connect } from "react-redux";
-import { submitLogin, registerUser, forgotPassword } from "./actions/index";
+import { submitLoginDispatch, forgotPassword, resetStore } from "./actions/index";
 import { bindActionCreators } from "redux";
 
 import AppFooter from './AppFooter';
@@ -29,8 +29,29 @@ class LoginComponent extends Component {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    //console.log("componentWillReceiveProps -- register",nextProps);
+    if( nextProps.authenticationAndRegistration ) {
+      const { registrationSuccessStatus } = nextProps.authenticationAndRegistration;
+      if( registrationSuccessStatus !== "" ) {
+        if ( registrationSuccessStatus !== 201 || registrationSuccessStatus !== 200  ){
+          this.setState({loading:false});
+          const { errorMessage, errorSummary } = nextProps.authenticationAndRegistration;
+           const modal= Modal.error({
+                title: errorSummary,
+                content: errorMessage,
+                okText: 'Ok',
+                onOk() {
+                   nextProps.resetStore('');
+                },
+              });
+        }
+      }
+    }
+  }
+
   componentDidMount() {
-    console.log(this.props)
+    //console.log(this.props)
   }
   onEmailChange(event) {
     this.setState({ email:event.target.value});
@@ -51,7 +72,7 @@ class LoginComponent extends Component {
   onLogin(event) {
     //console.log(this.state);
     this.setState({loading:true});
-    this.props.submitLogin(this.state)
+    this.props.submitLoginDispatch(this.state.email, this.state.password);
   }
 
   candidateSignUp(){
@@ -119,17 +140,15 @@ class LoginComponent extends Component {
 }
 
 function mapStateToProps(state) {
-  //console.log(state);
-  return {
-    email: state.email,
-    password: state.password
-  };
+  console.log(state);
+  return { authenticationAndRegistration: state.authenticationAndRegistration };
 }
 
 // Anything returned from this function will end up as props
 // on the BookList container
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ submitLogin: submitLogin, registerUser:registerUser , forgotPassword:forgotPassword }, dispatch);
+  return bindActionCreators({ submitLoginDispatch: submitLoginDispatch, forgotPassword:forgotPassword,
+  resetStore:resetStore }, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);

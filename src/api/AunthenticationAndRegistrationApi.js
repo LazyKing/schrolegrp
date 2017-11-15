@@ -3,12 +3,34 @@ import {  browserHistory  } from 'react-router'
 
 class AunthenticationAndRegistrationApi {
 
-	static requestHeaders() {
-    	return {
-		    'Accept': 'application/json',
-		    'Content-Type': 'application/json'
+		static requestHeaders() {
+	    	return {
+			    'Accept': 'application/json',
+			    'Content-Type': 'application/json'
+			}
+	  }
+
+		static applicantLogin( email, password ) {
+			var baseUrl = global.devHost ;
+			const signInUrl = baseUrl + '/users/sign_in';
+			const headers = this.requestHeaders();
+
+			return axios({
+				method: 'POST',
+				url: signInUrl,
+				headers: headers,
+				data: JSON.stringify({
+					"user":{
+						"email":email,
+						"password":password
+					}
+				})
+			}).then(function (response) {
+				return response;
+			}).catch(function (error) {
+				return error.response ;
+			});
 		}
-  }
 
   	static registerApplicant( userAuthentication ) {
 			const baseUrl = global.devHost ;
