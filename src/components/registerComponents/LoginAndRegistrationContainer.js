@@ -17,7 +17,9 @@ class LoginAndRegistrationContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showConfirmEmailAlert: false
+      showConfirmEmailAlert: false,
+      alertDescription:'',
+      alertMessage:'',
     };
   }
 
@@ -25,8 +27,19 @@ class LoginAndRegistrationContainer extends Component {
     //console.log(this.props.location)
     if ( this.props.location.query && this.props.location.query.confirmLogin
       && this.props.location.query.confirmLogin === 'true' ) {
-      this.setState({ showConfirmEmailAlert: true });
-    }
+      this.setState({
+        showConfirmEmailAlert: true,
+        alertMessage: 'Email confirmed successfully',
+        alertDescription: 'Your email has been confirmed.Please login to continue.'
+      });
+    } else if ( this.props.location.query && this.props.location.query.unlock
+      && this.props.location.query.unlock === 'true' ) {
+        this.setState({
+          showConfirmEmailAlert: true,
+          alertMessage: 'Account Unlocked',
+          alertDescription: 'Please Login to continue'
+        });
+      }
   }
 
   routeToHome(event) {
@@ -41,8 +54,8 @@ class LoginAndRegistrationContainer extends Component {
   displayConfirmEmailAlertAlert () {
       return ( <Alert
         style={{'margin': 5 }}
-        message="Email confirmed successfully"
-        description="Your email has been confirmed.Please login to continue."
+        message={this.state.alertMessage}
+        description={this.state.alertDescription}
         type="success"
         showIcon
         closable
