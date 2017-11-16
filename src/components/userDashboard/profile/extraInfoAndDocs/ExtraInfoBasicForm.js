@@ -45,7 +45,7 @@ class ExtraInfoBasicForm extends Component {
             {...formItemLayout}
             label="Are you a registered teacher in your home country?"
           >
-            {getFieldDecorator('registered_teacher', { initialValue: registered_teacher })(
+            {getFieldDecorator('registered_teacher', { initialValue: registered_teacher ? 'yes' : 'no' })(
               <Select style={{ width: 220 }}>
                 {registeredTeacherOptions}
               </Select>

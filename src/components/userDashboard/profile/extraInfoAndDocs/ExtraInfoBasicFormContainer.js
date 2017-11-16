@@ -21,7 +21,7 @@ class ExtraInfoBasicFormContainer extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		//console.log("componentWillReceiveProps ExtraInfoBasicFormContainer", nextProps)
+		console.log("componentWillReceiveProps ExtraInfoBasicFormContainer", nextProps)
 		const { extraInfoDetails } = nextProps;
 		this.setState({ extraInfoDetails });
 	}
@@ -35,8 +35,7 @@ class ExtraInfoBasicFormContainer extends Component {
     const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email }
 
     var payloadObj = this._extraInfoFormProps.props.form.getFieldsValue();
-    console.log(payloadObj);
-
+		payloadObj.registered_teacher = ( payloadObj.registered_teacher === 'yes' ) ? true : false ;
 
     this._extraInfoFormProps.props.form.validateFields((err, values) => {
       //console.log(err);
@@ -55,7 +54,7 @@ class ExtraInfoBasicFormContainer extends Component {
   }
 
   render() {
-
+		//console.log(this.state);
   	return (
   		<div className="extra_info_basic_container">
 				<Modal title="Edit Qualification"
@@ -85,31 +84,31 @@ class ExtraInfoBasicFormContainer extends Component {
   				<Col >
   					<Row type="flex" justify="space-between" className="first-data-row">
 		              <Col><span><strong>Registered Teacher?</strong></span></Col>
-		              <Col><span>{this.state.registered_teacher ? 'Yes' : 'No'}</span></Col>
+		              <Col><span>{this.state.extraInfoDetails.registered_teacher ? 'Yes' : 'No'}</span></Col>
             		</Row>
             		<Row type="flex" justify="space-between" className="data-display-row-styles">
 		              <Col><span><strong>Total number of years of full-time relevant/teaching experience</strong></span></Col>
-		              <Col><span>{this.state.registered_teacher}</span></Col>
+		              <Col><span>{this.state.extraInfoDetails.total_relevant_experience}</span></Col>
             		</Row>
             		<Row type="flex" justify="space-between" className="data-display-row-styles">
 		              <Col><span><strong>Activities you can lead or coach</strong></span></Col>
-		              <Col><span>{this.state.can_coach_activities}</span></Col>
+		              <Col><span>{this.state.extraInfoDetails.can_coach_activities}</span></Col>
             		</Row>
             		<Row type="flex" justify="space-between" className="data-display-row-styles">
 		              <Col><span><strong>Interests</strong></span></Col>
-		              <Col><span>{this.state.interests}</span></Col>
+		              <Col><span>{this.state.extraInfoDetails.interests}</span></Col>
             		</Row>
             		<Row type="flex" justify="space-between" className="data-display-row-styles">
 		              <Col><span><strong>Skills</strong></span></Col>
-		              <Col><span>{this.state.skills}</span></Col>
+		              <Col><span>{this.state.extraInfoDetails.skills}</span></Col>
             		</Row>
             		<Row type="flex" justify="space-between" className="data-display-row-styles">
 		              <Col><span><strong>Experiences</strong></span></Col>
-		              <Col><span>{this.state.other_experiences}</span></Col>
+		              <Col><span>{this.state.extraInfoDetails.other_experiences}</span></Col>
             		</Row>
             		<Row type="flex" justify="space-between" className="data-display-row-styles">
 		              <Col><span><strong>Comments</strong></span></Col>
-		              <Col><span>{this.state.comments}</span></Col>
+		              <Col><span>{this.state.extraInfoDetails.comments}</span></Col>
             		</Row>
   				</Col>
   			</Row>
