@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Layout, Menu, Breadcrumb, Icon, LocaleProvider } from 'antd';
+import enUS from 'antd/lib/locale-provider/en_US';
 
 /*import css*/
 import '../../App.css';
@@ -28,7 +29,7 @@ const masterTabs = {
 }
 
 class UserProfileDashboard extends Component {
-  
+
   onMenuClick = (e) => {
     this.setState({
       currentTab: e.key,
@@ -46,7 +47,7 @@ class UserProfileDashboard extends Component {
     const currentMasterTabName = pathnam.replace(/^\/userprofile\//, '');
     const currentMasterTabKey  = masterTabs[currentMasterTabName];
     if( currentMasterTabKey ){
-      console.log(currentMasterTabName, currentMasterTabKey)
+      //console.log(currentMasterTabName, currentMasterTabKey)
       this.setState ({ currentTab: currentMasterTabKey});
     }
 
@@ -106,16 +107,18 @@ class UserProfileDashboard extends Component {
                 </Menu.SubMenu>
               </Menu>
             </Header>
-            <Layout> 
+            <Layout>
               <Content style={{ padding: '0 20px' }}>
                 <Breadcrumb separator=">" routes={this.props.routes} params={this.props.params} className="breadCrumb-container" />
                 <div style={{ background: '#fff', padding: 15, minHeight: 280 }}>
                   <div>
-                    {this.props.children}
+                    <LocaleProvider  locale={enUS}>
+                      {this.props.children}
+                    </LocaleProvider>
                   </div>
                 </div>
               </Content>
-            </Layout> 
+            </Layout>
             <Footer style={{ textAlign: 'center' }}>
               Ant Design ©2016 Created by Ant UED
             </Footer>
