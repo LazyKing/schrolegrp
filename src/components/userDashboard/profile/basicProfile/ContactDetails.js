@@ -82,7 +82,8 @@ class ContactDetails extends Component {
     return (
         <Card className="card-header-background" title="Contact Details" extra={<Button onClick={this.showModal}>Edit</Button>}>
 
-          <Modal title="Contact Details"
+          <Modal className="card-header-background" 
+            title="Contact Details"
             visible={this.state.visible}
             onOk={this.handleOk}
             confirmLoading={this.state.confirmLoading}

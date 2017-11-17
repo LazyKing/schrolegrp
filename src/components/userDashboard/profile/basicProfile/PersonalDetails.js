@@ -135,7 +135,8 @@ class PersonalDetails extends Component {
 
     return (
         <Card className="card-header-background" title="Personal Details" extra={<div><Button onClick={this.showModal}>Edit</Button></div>}>
-          <Modal title="Personal Details"
+          <Modal className="card-header-background" 
+            title="Personal Details"
             visible={this.state.visible}
             onOk={this.handleOk}
             confirmLoading={this.state.confirmLoading}

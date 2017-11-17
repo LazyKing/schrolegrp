@@ -57,7 +57,8 @@ class ExtraInfoBasicFormContainer extends Component {
 		//console.log(this.state);
   	return (
   		<div className="extra_info_basic_container">
-				<Modal title="Edit Qualification"
+				<Modal className="card-header-background" 
+					title="Edit Qualification"
 					visible={this.state.visibleExtraInfoForm}
 					onOk={this.handleExtraInfoFormOk}
 					confirmLoading={this.state.confirmLoadingExtraInfoForm}

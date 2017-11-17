@@ -82,7 +82,8 @@ class Dependents extends Component {
           <DependentItem key={dependent.id} id={dependent.id} dependent={dependent}/> );
     return (
         <Card className="card-header-background" title="Dependents" extra={<div><Button onClick={this.showModal}>Add Dependent</Button></div>}>
-          <Modal title="Edit licence"
+          <Modal className="card-header-background" 
+            title="Edit licence"
             visible={this.state.visible}
             onOk={this.handleOk}
             confirmLoading={this.state.confirmLoading}
