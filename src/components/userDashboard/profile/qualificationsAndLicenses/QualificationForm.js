@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Card, Modal, Form, 
+import { Button, Row, Col, Card, Modal, Form,
   Input, Icon, DatePicker, Select } from 'antd';
 import _ from 'lodash';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 
+/*import data*/
+import countryCodes from '../../../../assets/data/countryCodes.json'
+
 const FormItem = Form.Item;
 const Option = Select.Option;
 moment.locale('en');
-
-const qualificationTypePayload = [ 
+const qualificationTypePayload = [
     {
       'value': 'diploma',
       'text':'Diploma'
@@ -40,7 +42,7 @@ const qualificationTypePayload = [
     },
 ]
 
-const courseDurationPayload = [ 
+const courseDurationPayload = [
     {
       'value': 10,
       'text':'10 years(s)'
@@ -84,6 +86,7 @@ const courseDurationPayload = [
 ]
 const qualificationTypeOptions = qualificationTypePayload.map(d => <Option key={d.value} value={d.value}>{d.text}</Option>);
 const courseDurationOptions = courseDurationPayload.map(d => <Option key={d.value} value={d.value}>{d.text}</Option>);
+const countryOptions = countryCodes.map(d => <Option key={d.code} value={d.code}>{d.name}</Option>);
 
 class QualificationForm extends Component {
 
@@ -93,15 +96,9 @@ class QualificationForm extends Component {
       //currentQualification:{}
     }
   }
-  
-  /*componentWillReceiveProps(nextProps) {
-    //console.log("componentWillReceiveProps AllQualifications", nextProps)
-    this.setState({qualificationsArray:nextProps.qualificationsArray})
-  }*/
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    //this.updateFormValues(this.state.applicantsProfile);
     const formItemLayout = {
       labelCol: {
         xs: { span: 24 },
@@ -112,11 +109,11 @@ class QualificationForm extends Component {
         sm: { span: 14 },
       },
     };
-    const { name='', place_of_study='', qualification_type='diploma', 
+    const { name='', place_of_study='', qualification_type='',
     country='', date_of_completion='1993-02-21', duration=2 } = this.props.currentQualification;
     const dateConfig = {
       rules: [{ type: 'object', required: true, message: 'Please select date!' }],
-      initialValue: moment(  date_of_completion, 'YYYY-MM-DD')
+      initialValue: new moment(  date_of_completion, 'YYYY-MM-DD')
     };
 
     return (
@@ -138,12 +135,12 @@ class QualificationForm extends Component {
                   <Input />
                 )}
               </FormItem>
-                            
+
               <FormItem
                 {...formItemLayout}
                 label="Qualification Type"
               >
-              {getFieldDecorator('qualification_type', { initialValue: qualification_type })(
+              {getFieldDecorator('qualification_type', { defaultValue: 'diploma', initialValue: qualification_type })(
                 <Select style={{ width: 120 }}>
                   {qualificationTypeOptions}
                 </Select>
@@ -155,7 +152,9 @@ class QualificationForm extends Component {
                 label="Place of Study Country"
               >
                 {getFieldDecorator('country', { initialValue: country })(
-                  <Input />
+                  <Select style={{ width: 220 }}>
+                    {countryOptions}
+                  </Select>
                 )}
               </FormItem>
               <FormItem
@@ -166,7 +165,7 @@ class QualificationForm extends Component {
                   <DatePicker />
                 )}
               </FormItem>
-              
+
               <FormItem
                 {...formItemLayout}
                 label="Qualification Type"
@@ -182,4 +181,21 @@ class QualificationForm extends Component {
   }
 }
 
-export default Form.create()(QualificationForm);
+export default Form.create({
+  onFieldsChange(props, changedFields) {
+    //console.log(props, changedFields);
+  },
+  mapPropsToFields(props) {
+    //console.log(props);
+    var updatedState = {};
+    _.forEach( props.currentQualification, function(value, key) {
+      if(key === 'date_of_completion' ){
+        updatedState[key] = { 'value': new moment(value, 'YYYY-MM-DD') }
+      }
+      else{
+        updatedState[key] = { 'value': value }
+      }
+    });
+    return updatedState;
+  }
+})(QualificationForm);
