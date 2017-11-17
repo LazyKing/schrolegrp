@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Card, Modal, Form,
-  Input, Icon, DatePicker, Select } from 'antd';
+import { Button, Row, Col, Card, Modal } from 'antd';
 import _ from 'lodash';
 
 /*Import Redux functionalities*/
@@ -12,14 +11,10 @@ import { createNewQualificationDispatch, updateQualificationDispatch } from "./Q
 import QualificationCard from './QualificationCard';
 import QualificationForm from './QualificationForm';
 
-const FormItem = Form.Item;
-const Option = Select.Option;
-
 class AllQualifications extends Component {
 
   constructor(props) {
     super(props);
-    //this.state = { };
     //console.log(this.props);
     this.state = {
       editMode: false,
@@ -101,7 +96,7 @@ class AllQualifications extends Component {
 
     return (
       <div className="qualification-mainContainer">
-          <Modal className="card-header-background" 
+          <Modal className="card-header-background"
             title={FormHeader}
             visible={this.state.visible}
             onOk={this.handleOk}
@@ -145,4 +140,4 @@ function mapDispatchToProps(dispatch) {
   updateQualificationDispatch:updateQualificationDispatch }, dispatch);
 }
 
-export default connect( mapStateToProps, mapDispatchToProps)(Form.create()(AllQualifications));
+export default connect( mapStateToProps, mapDispatchToProps)(AllQualifications);
