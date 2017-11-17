@@ -161,6 +161,11 @@
   justify-content: center;
 }
 
+.column-alignItems-center {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+}
 .footer-icons{
   padding: 0px 3px;
 }

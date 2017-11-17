@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
+import { LocaleProvider, Row, Col } from 'antd';
+import enUS from 'antd/lib/locale-provider/en_US';
 
+/*import components*/
+import AcademicReferences from './references/AcademicReferences';
+import AdministrativeReferences from './references/AdministrativeReferences';
 
 class References extends Component {
 
@@ -11,19 +16,36 @@ class References extends Component {
 
   render() {
     return (
-      <div className="references-mainContainer">
-          <div className="">
-            <h1 style={{'textAlign': 'center','color': '#1968a5'}}>
-                Connecting international schools with the best qualified teachers. Simply.
-            </h1>
-            <p style={{'textAlign': 'center','color': '#333333'}}>
-              <strong>
-                Schrole Connect’s unique software solutions help to attract and match the best qualified teachers with hard to fill roles in international schools.
-                Reducing recruitment time and costs.<br />
-              </strong>
+
+        <LocaleProvider locale={enUS}>
+        <div className="references-mainContainer">
+          <Row className="">
+            <h1> References </h1>
+            <p>
+              <strong>Important:</strong>
+                Your referees will be contacted to provide a confidential reference.
+                You may wish to let them know an email link will be sent to them,
+                but sometimes this may be sent to the spam folder.
             </p>
-          </div>
-      </div>
+            <Col>
+              <li>The 'EDIT' button will appear next to referees that have not yet confirmed their details or completed their reference.</li>
+              <li>A 'In Progress' label will appear next to referees that have confirmed their details and your relationship, but not yet completed your reference.</li>
+              <li>Once a week has passed, if a referee has not confirmed their details or completed your reference, you will be able to send the referee a reminder email via the 'SEND REMINDER' button next to the referee.</li>
+              <li>A 'Complete' label will appear next to referees once they have completed their reference.</li>
+            </Col>
+            <hr style={{ marginTop:'10px', border: '1px rgba(37, 132, 193, 0.9) solid' }}/>
+          </Row>
+          <Row>
+            <Col sm={10} offset={1}>
+              <AcademicReferences />
+            </Col>
+            <Col sm={10} offset={1}>
+              <AdministrativeReferences />
+            </Col>
+          </Row>
+        </div>
+        </LocaleProvider>
+
     );
   }
 }
