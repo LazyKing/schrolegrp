@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Card, Modal, Form, 
+import { Button, Row, Col, Card, Modal, Form,
   Input, Icon, DatePicker, Select } from 'antd';
 import _ from 'lodash';
 
@@ -25,7 +25,7 @@ class AllLicences extends Component {
       selectedLicence:{}
     }
   }
-  
+
   componentWillReceiveProps(nextProps) {
     this.setState({licencesArray:nextProps.licencesArray})
   }
@@ -33,7 +33,7 @@ class AllLicences extends Component {
   showModal = (props) => {
     const { target } = props;
     if( target.className.indexOf('edit_license') !== -1 ) {
-      const selectedLicence = _.find( this.state.licencesArray, function(licence) { 
+      const selectedLicence = _.find( this.state.licencesArray, function(licence) {
         return licence.id == target.id;
       });
 
@@ -41,7 +41,7 @@ class AllLicences extends Component {
         visible: true,
         editMode: true,
         selectedLicence: (selectedLicence) ? selectedLicence : {}
-      }); 
+      });
     } else {
       this.setState({ visible: true, editMode: false });
     }
@@ -52,7 +52,6 @@ class AllLicences extends Component {
     const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
     const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email };
     var payloadObj = this._licenceFormProps.props.form.getFieldsValue();
-    console.log(payloadObj);
 
     this._licenceFormProps.props.form.validateFields((err, values) => {
       //console.log(err);
@@ -69,6 +68,7 @@ class AllLicences extends Component {
         setTimeout(() => {
           this.setState({
             visible: false,
+            editMode: false,
             confirmLoading: false,
           });
         }, 2000);
@@ -79,15 +79,18 @@ class AllLicences extends Component {
   handleCancel = () => {
     this.setState({
       visible: false,
+      editMode: false
     });
   }
   render() {
     const listItems = this.state.licencesArray.map((licence) =>
           <LicenceCard key={licence.id} licence={licence} onclick={this.showModal}/> );
+    const FormHeader = this.state.editMode ? ('Edit Licence') : ('Add Licence');
 
     return (
       <div className="qualification-mainContainer">
-          <Modal title="Edit licence"
+          <Modal className="card-header-background"
+            title={FormHeader}
             visible={this.state.visible}
             onOk={this.handleOk}
             confirmLoading={this.state.confirmLoading}
@@ -99,7 +102,7 @@ class AllLicences extends Component {
           <LicenceForm currentLicence={this.state.selectedLicence}
           wrappedComponentRef={(ref) => this._licenceFormProps = ref}/>
           </Modal>
-        
+
           <Row type="flex" justify="center" style={{'marginTop':'10px'}}>
             <Col sm={22}>
               <Row type="flex" justify="space-between">
@@ -120,12 +123,12 @@ class AllLicences extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log("mapStateToProps, licences",state);
+  //console.log("mapStateToProps, licences",state);
   return { licencesArray:  state.applicants.qualificationsDetails.licences };
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ updateLicenceDispatch: updateLicenceDispatch, 
+  return bindActionCreators({ updateLicenceDispatch: updateLicenceDispatch,
   createLicenceDispatch:createLicenceDispatch }, dispatch);
 }
 
