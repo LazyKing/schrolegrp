@@ -143,6 +143,24 @@ export default function(state = INITIAL_STATE, action) {
       var newApplicantsState = Object.assign({}, state.applicantsProfile , {'dependents': dependents });
       return { ...state, applicantsProfile: newApplicantsState };
 
+		case "DELETE_QUALIFICATION":
+			//creating a new copy of objects
+			var qualifications = JSON.parse(JSON.stringify(state.qualificationsDetails.qualifications))
+			_.remove(qualifications, function( qualification ) {
+				return qualification.id === action.payload.qualification.id;
+			});
+			var newApplicantsState = Object.assign({}, state.qualificationsDetails , {'qualifications': qualifications });
+			return { ...state, qualificationsDetails: newApplicantsState };
+
+		case "DELETE_LICENCE":
+			//creating a new copy of objects
+			var licences = JSON.parse(JSON.stringify(state.qualificationsDetails.licences))
+			_.remove(licences, function( licence ) {
+				return licence.id === action.payload.licence.id;
+			});
+			var newApplicantsState = Object.assign({}, state.qualificationsDetails , {'licences': licences });
+			return { ...state, qualificationsDetails: newApplicantsState };
+
     case "LOGOUT_USER":
       localStorage.removeItem("userprofile");
         browserHistory.push({

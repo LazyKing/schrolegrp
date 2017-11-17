@@ -6,7 +6,8 @@ import _ from 'lodash';
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { updateLicenceDispatch, createLicenceDispatch } from "./QualificationAndLicences_Actions";
+import { updateLicenceDispatch, createLicenceDispatch,
+deleteLicenceDispatch } from "./QualificationAndLicences_Actions";
 
 /*import components*/
 import LicenceCard from './LicenceCard';
@@ -28,6 +29,14 @@ class AllLicences extends Component {
 
   componentWillReceiveProps(nextProps) {
     this.setState({licencesArray:nextProps.licencesArray})
+  }
+
+  deleteLicence = (props) => {
+    const { target } = props;
+    const licenceId = target.getAttribute('licenceid');
+    const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
+    const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email };
+    this.props.deleteLicenceDispatch(logoutPayloadHeader, licenceId);
   }
 
   showModal = (props) => {
@@ -84,7 +93,7 @@ class AllLicences extends Component {
   }
   render() {
     const listItems = this.state.licencesArray.map((licence) =>
-          <LicenceCard key={licence.id} licence={licence} onclick={this.showModal}/> );
+          <LicenceCard key={licence.id} licence={licence} onLicenceDelete={this.deleteLicence} onclick={this.showModal}/> );
     const FormHeader = this.state.editMode ? ('Edit Licence') : ('Add Licence');
 
     return (
@@ -129,7 +138,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ updateLicenceDispatch: updateLicenceDispatch,
-  createLicenceDispatch:createLicenceDispatch }, dispatch);
+  createLicenceDispatch:createLicenceDispatch, deleteLicenceDispatch:deleteLicenceDispatch }, dispatch);
 }
 
 export default connect( mapStateToProps, mapDispatchToProps)(Form.create()(AllLicences));

@@ -55,6 +55,26 @@ export function updateLicenceDispatch(user, licenceUpdatePayload, licenceId ) {
   };
 }
 
+export function deleteQualificationDispatch(user, qualificationId) {
+  return function(dispatch) {
+    return qualificationAndLicenceApi.deleteQualification(user, qualificationId).then(response => {
+      dispatch(deleteQualification(response));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+export function deleteLicenceDispatch(user, licenceId) {
+  return function(dispatch) {
+    return qualificationAndLicenceApi.deleteLicence(user, licenceId).then(response => {
+      dispatch(deleteLicence(response));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
 export function getAllQualifiacations(profile) {
   return {
     type: "GET_ALL_QUALIFICATIONS",
@@ -94,5 +114,19 @@ export function updateLicense(licence) {
   return {
     type: "UPDATE_LICENSE",
     payload: licence
+  };
+}
+
+export function deleteQualification(qualifications) {
+  return {
+    type: "DELETE_QUALIFICATION",
+    payload: qualifications
+  };
+}
+
+export function deleteLicence(licences) {
+  return {
+    type: "DELETE_LICENCE",
+    payload: licences
   };
 }

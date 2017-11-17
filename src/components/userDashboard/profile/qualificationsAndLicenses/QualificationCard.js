@@ -24,7 +24,10 @@ class QualificationCard extends Component {
   render() {
     return (
       <Col span={8} style={{'marginTop': 10,'padding': 5 }}>
-        <Card className="card-header-background" title={this.props.qualification.name} extra={<div><Button className="edit_qualification" id={this.props.qualification.id} onClick={this.props.onclick}>Edit</Button></div>}>
+        <Card className="card-header-background" title={this.props.qualification.name} extra={<div>
+          <Button className="edit_qualification" id={this.props.qualification.id} onClick={this.props.onclick}>Edit</Button>
+          <Button qualificationid={this.props.qualification.id} onClick={this.props.onQualificationDelete}><Icon type="delete" /></Button></div>}
+          >
           <div>
             <Row type="flex" justify="space-between">
               <Col><span><strong>Country</strong></span></Col>

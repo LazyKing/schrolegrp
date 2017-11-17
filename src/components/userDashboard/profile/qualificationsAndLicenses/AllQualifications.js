@@ -5,7 +5,8 @@ import _ from 'lodash';
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { createNewQualificationDispatch, updateQualificationDispatch } from "./QualificationAndLicences_Actions";
+import { createNewQualificationDispatch, updateQualificationDispatch,
+deleteQualificationDispatch } from "./QualificationAndLicences_Actions";
 
 /*import components*/
 import QualificationCard from './QualificationCard';
@@ -28,6 +29,14 @@ class AllQualifications extends Component {
   componentWillReceiveProps(nextProps) {
     //console.log("componentWillReceiveProps AllQualifications", nextProps)
     this.setState({qualificationsArray:nextProps.qualificationsArray})
+  }
+
+  deleteQualification = (props) => {
+    const { target } = props;
+    const qualificationid = target.getAttribute('qualificationid');
+    const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
+    const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email };
+    this.props.deleteQualificationDispatch(logoutPayloadHeader, qualificationid);
   }
 
   showModal = (props) => {
@@ -92,7 +101,7 @@ class AllQualifications extends Component {
   render() {
     const FormHeader = this.state.editMode ? ('Edit Qualification') : ('Add Qualification');
     const listItems = this.state.qualificationsArray.map((qualification) =>
-          <QualificationCard key={qualification.id} qualification={qualification} onclick={this.showModal}/> );
+          <QualificationCard key={qualification.id} qualification={qualification} onQualificationDelete={this.deleteQualification} onclick={this.showModal}/> );
 
     return (
       <div className="qualification-mainContainer">
@@ -137,7 +146,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ createNewQualificationDispatch: createNewQualificationDispatch,
-  updateQualificationDispatch:updateQualificationDispatch }, dispatch);
+  updateQualificationDispatch:updateQualificationDispatch, deleteQualificationDispatch:deleteQualificationDispatch }, dispatch);
 }
 
 export default connect( mapStateToProps, mapDispatchToProps)(AllQualifications);

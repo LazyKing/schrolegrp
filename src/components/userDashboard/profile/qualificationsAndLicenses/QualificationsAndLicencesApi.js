@@ -111,6 +111,41 @@ class QualificationsAndLicencesApi {
 	    });
   	}
 
+		static deleteQualification( user, qualificationId) {
+			const baseUrl = global.devHost ;
+			const deleteQualificationIdUrl = baseUrl + `/applicants/qualifications/${qualificationId}`;
+			const {auth_token,user_email} = user;
+			const headers = this.requestHeaders(auth_token,user_email);
+
+			return axios({
+				method: 'DELETE',
+				url: deleteQualificationIdUrl,
+				headers: headers
+			}).then(function (response) {
+				return (response.data)
+			}).catch(function (error) {
+				//console.log("error",error.response);
+				return error.response ;
+			});
+		}
+
+		static deleteLicence( user, licenceId) {
+			const baseUrl = global.devHost ;
+			const deleteLicenceUrl = baseUrl + `/applicants/licences/${licenceId}`;
+			const {auth_token,user_email} = user;
+			const headers = this.requestHeaders(auth_token,user_email);
+
+			return axios({
+				method: 'DELETE',
+				url: deleteLicenceUrl,
+				headers: headers
+			}).then(function (response) {
+				return (response.data)
+			}).catch(function (error) {
+				//console.log("error",error.response);
+				return error.response ;
+			});
+		}
 }
 
 
