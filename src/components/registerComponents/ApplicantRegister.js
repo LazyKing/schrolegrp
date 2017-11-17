@@ -187,7 +187,7 @@ class ApplicantRegister extends Component {
 			        >
 			          {getFieldDecorator('first_name', {
 			            rules: [{
-			              required: true, message: 'Please input your E-mail!',
+			              required: true, message: 'Please input your First name!',
 			            }],
 			          })(
 			            <Input />
@@ -201,7 +201,7 @@ class ApplicantRegister extends Component {
 			        >
 			          {getFieldDecorator('last_name', {
 			            rules: [{
-			              required: true, message: 'Please input your E-mail!',
+			              required: true, message: 'Please input your Last name!',
 			            }],
 			          })(
 			            <Input />

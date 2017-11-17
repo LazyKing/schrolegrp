@@ -71,8 +71,12 @@ class LoginComponent extends Component {
 
   onLogin(event) {
     //console.log(this.state);
-    this.setState({loading:true});
-    this.props.submitLoginDispatch(this.state.email, this.state.password);
+    this.props.form.validateFieldsAndScroll((err, values) => {
+      if (!err) {
+        this.setState({loading:true});
+        this.props.submitLoginDispatch(this.state.email, this.state.password);
+      }
+    });
   }
 
   candidateSignUp(){
@@ -92,7 +96,7 @@ class LoginComponent extends Component {
   }
 
   render() {
-
+    const { getFieldDecorator } = this.props.form;
     return (
     <div className="AppHeader">
       <div className="float-none col-sm-4 login-formControl-styles login-form-styles container-fluid">
@@ -101,10 +105,24 @@ class LoginComponent extends Component {
                 <h3 className="col-sm-12 login-formControl-align">Welcome to Schol</h3>
             </FormItem>
             <FormItem>
+              {getFieldDecorator('email', {
+                rules: [{
+                  type: 'email', message: 'The input is not valid E-mail!',
+                }, {
+                  required: true, message: 'Please input your E-mail!',
+                }],
+              })(
                 <Input onChange={this.onEmailChange.bind(this)} prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />
+              )}
             </FormItem>
             <FormItem>
-                <Input onChange={this.onPasswordChange.bind(this)} prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password" />
+                {getFieldDecorator('password', {
+                  rules: [{
+                    required: true, message: 'Please input the password!',
+                  }],
+                })(
+                  <Input onChange={this.onPasswordChange.bind(this)} prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password" />
+                )}
             </FormItem>
             <FormItem>
                 <a id="forgotPassword" style={{ textAlign: 'right' }} className="login-form-forgot col-sm-12" onClick={this.onForgotPassword.bind(this)} href="javascript:void(0)">Forgot password</a>
@@ -151,4 +169,4 @@ function mapDispatchToProps(dispatch) {
   resetStore:resetStore }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(LoginComponent));
