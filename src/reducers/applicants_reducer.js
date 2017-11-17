@@ -161,6 +161,14 @@ export default function(state = INITIAL_STATE, action) {
 			var newApplicantsState = Object.assign({}, state.qualificationsDetails , {'licences': licences });
 			return { ...state, qualificationsDetails: newApplicantsState };
 
+		case "DELETE_EXPERIENCE":
+				//creating a new copy of objects
+				var experiences = JSON.parse(JSON.stringify(state.experiences))
+				_.remove(experiences, function( experience ) {
+					return experience.id === action.payload.experience.id;
+				});
+				return Object.assign({}, state , {'experiences': experiences });
+
     case "LOGOUT_USER":
       localStorage.removeItem("userprofile");
         browserHistory.push({

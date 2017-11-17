@@ -15,16 +15,14 @@ class ExperienceCard extends Component {
 /*  componentWillReceiveProps(nextProps) {
     //console.log("componentWillReceiveProps emergency", nextProps)
     this.setState({emergency_contact:nextProps.emergency_contact})
-  }
-
-  componentDidMount() {
-    //this.props
   }*/
 experience
   render() {
     return (
       <Col span={8} style={{'marginTop': 10,'padding': 5 }}>
-        <Card className="card-header-background" title={this.props.experience.position} extra={<div><Button className="edit_experience" id={this.props.experience.id} onClick={this.props.onclick}>Edit</Button></div>}>
+        <Card className="card-header-background" title={this.props.experience.position} extra={<div><Button className="edit_experience" id={this.props.experience.id} onClick={this.props.onclick}>Edit</Button>
+        <Button experienceid={this.props.experience.id} onClick={this.props.onExperienceDelete}><Icon type="delete" /></Button></div>}
+        >
           <div>
             <Row type="flex" justify="space-between">
               <Col><span><strong>Country</strong></span></Col>

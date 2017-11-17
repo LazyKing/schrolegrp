@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Card, Modal, Form, 
+import { Button, Row, Col, Card, Modal, Form,
   Input, Icon, DatePicker, Select } from 'antd';
 import _ from 'lodash';
 import moment from 'moment';
 import 'moment/locale/zh-cn';
 
+/*import data*/
+import countryCodes from '../../../../assets/data/countryCodes.json'
+
 const FormItem = Form.Item;
 const Option = Select.Option;
 moment.locale('en');
 
-const qualificationTypePayload = [ 
+const qualificationTypePayload = [
     {
       'value': 'diploma',
       'text':'Diploma'
@@ -40,7 +43,7 @@ const qualificationTypePayload = [
     },
 ]
 
-const courseDurationPayload = [ 
+const courseDurationPayload = [
     {
       'value': 10,
       'text':'10 years(s)'
@@ -84,6 +87,7 @@ const courseDurationPayload = [
 ]
 const qualificationTypeOptions = qualificationTypePayload.map(d => <Option key={d.value} value={d.value}>{d.text}</Option>);
 const courseDurationOptions = courseDurationPayload.map(d => <Option key={d.value} value={d.value}>{d.text}</Option>);
+const countryOptions = countryCodes.map(d => <Option key={d.code} value={d.code}>{d.name}</Option>);
 
 class ExperienceForm extends Component {
 
@@ -92,7 +96,7 @@ class ExperienceForm extends Component {
     this.state = {
     }
   }
-  
+
 
   render() {
     const { getFieldDecorator } = this.props.form;
@@ -107,7 +111,7 @@ class ExperienceForm extends Component {
         sm: { span: 12 },
       },
     };
-    const { name_of_school='', position='', school_level='diploma', 
+    const { name_of_school='', position='', school_level='diploma',
     country='', from='1993-02-21', to='1993-02-21', duration=3 } = this.props.currentExperience;
 
     const fromdateConfig = {
@@ -138,7 +142,7 @@ class ExperienceForm extends Component {
                   <Input />
                 )}
               </FormItem>
-                            
+
               <FormItem
                 {...formItemLayout}
                 label="School Level"
@@ -155,7 +159,9 @@ class ExperienceForm extends Component {
                 label="Country"
               >
                 {getFieldDecorator('country', { initialValue: country })(
-                  <Input />
+                  <Select style={{ width: 220 }}>
+                    {countryOptions}
+                  </Select>
                 )}
               </FormItem>
 
@@ -176,7 +182,7 @@ class ExperienceForm extends Component {
                   <DatePicker />
                 )}
               </FormItem>
-              
+
               <FormItem
                 {...formItemLayout}
                 label="Qualification Type"

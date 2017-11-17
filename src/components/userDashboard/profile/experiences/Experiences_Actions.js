@@ -50,3 +50,20 @@ export function updateExperience(experiences) {
     payload: experiences
   };
 }
+
+export function deleteExperienceDispatch(user, experienceId) {
+  return function(dispatch) {
+    return ExperiencesApi.deleteExperience(user, experienceId).then(response => {
+      dispatch(deleteExperience(response));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+export function deleteExperience(experiences) {
+  return {
+    type: "DELETE_EXPERIENCE",
+    payload: experiences
+  };
+}

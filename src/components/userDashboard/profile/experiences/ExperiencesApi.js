@@ -72,6 +72,24 @@ class ExperiencesApi {
 	    });
   	}
 
+    static deleteExperience( user, experiencenId) {
+      const baseUrl = global.devHost ;
+      const deleteExperienceUrl = baseUrl + `/applicants/experiences/${experiencenId}`;
+      const {auth_token,user_email} = user;
+      const headers = this.requestHeaders(auth_token,user_email);
+
+      return axios({
+        method: 'DELETE',
+        url: deleteExperienceUrl,
+        headers: headers
+      }).then(function (response) {
+        return (response.data)
+      }).catch(function (error) {
+        //console.log("error",error.response);
+        return error.response ;
+      });
+    }
+
 }
 
 export default ExperiencesApi;

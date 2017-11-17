@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Card, Modal, Form, 
+import { Button, Row, Col, Card, Modal, Form,
   Input, Icon, DatePicker, Select } from 'antd';
 import _ from 'lodash';
 import moment from 'moment';
@@ -8,7 +8,8 @@ import 'moment/locale/zh-cn';
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { createNewExperienceDispatch, updateExperienceDispatch } from "./Experiences_Actions";
+import { createNewExperienceDispatch, updateExperienceDispatch,
+deleteExperienceDispatch } from "./Experiences_Actions";
 
 
 /*import components*/
@@ -33,16 +34,24 @@ class AllExperiences extends Component {
       selectedExperience:{}
     }
   }
-  
+
   componentWillReceiveProps(nextProps) {
     //console.log("componentWillReceiveProps AllQualifications", nextProps)
     this.setState({experiencesArray:nextProps.experiencesArray})
   }
-  
+
+  deleteExperience = (props) => {
+    const { target } = props;
+    const experienceid = target.getAttribute('experienceid');
+    const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
+    const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email };
+    this.props.deleteExperienceDispatch(logoutPayloadHeader, experienceid);
+  }
+
   showModal = (props) => {
     const { target } = props;
     if( target.className.indexOf('edit_experience') !== -1 ) {
-      const selectedExperience = _.find( this.state.experiencesArray, function(experiences) { 
+      const selectedExperience = _.find( this.state.experiencesArray, function(experiences) {
         return experiences.id == target.id;
       });
       this.setState({
@@ -52,7 +61,7 @@ class AllExperiences extends Component {
       });
     } else {
       this.setState({
-        visible: true, 
+        visible: true,
         editMode: false
       });
     }
@@ -97,7 +106,7 @@ class AllExperiences extends Component {
   }
   render() {
     const listItems = this.state.experiencesArray.map((experience) =>
-          <ExperienceCard key={experience.id} experience={experience} onclick={this.showModal}/> );
+          <ExperienceCard key={experience.id} experience={experience} onExperienceDelete={this.deleteExperience} onclick={this.showModal}/> );
 
     return (
       <div className="qualification-mainContainer">
@@ -113,7 +122,7 @@ class AllExperiences extends Component {
             <ExperienceForm currentExperience={this.state.selectedExperience}
             ref={(ref) => this._expirenceFormProps = ref} />
           </Modal>
-        
+
           <Row type="flex" justify="center" style={{'marginTop':'10px'}}>
             <Col sm={22}>
               <Row type="flex" justify="space-between">
@@ -139,8 +148,9 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ createNewExperienceDispatch: createNewExperienceDispatch, 
-  updateExperienceDispatch:updateExperienceDispatch }, dispatch);
+  return bindActionCreators({ createNewExperienceDispatch: createNewExperienceDispatch,
+  updateExperienceDispatch:updateExperienceDispatch,
+    deleteExperienceDispatch:deleteExperienceDispatch }, dispatch);
 }
 
 export default connect( mapStateToProps, mapDispatchToProps)(Form.create()(AllExperiences));
