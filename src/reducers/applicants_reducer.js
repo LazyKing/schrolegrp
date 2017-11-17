@@ -47,7 +47,7 @@ export default function(state = INITIAL_STATE, action) {
         return { ...state, experiences: action.payload.experiences }
 
     case "GET_EXTRA_INFO_BASIC":
-    console.log(action.payload)
+    //console.log(action.payload)
       if( action.payload.status === 401 ) {
         localStorage.removeItem("userprofile");
         browserHistory.push({
@@ -85,7 +85,7 @@ export default function(state = INITIAL_STATE, action) {
       return { ...state, qualificationsDetails: newApplicantsState };
 
     case "UPDATE_LICENSE":
-      console.log(action);
+      //console.log(action);
       var licences = action.payload.licences;
       var newApplicantsState = Object.assign({}, state.qualificationsDetails , {'licences': licences });
       return { ...state, qualificationsDetails: newApplicantsState };
@@ -132,7 +132,7 @@ export default function(state = INITIAL_STATE, action) {
 
 	case "UPDATE_EXTRA_INFO_BASIC":
 			//console.log(action.payload)
-			return { ...state, extraInfo: action.payload }
+			return { ...state, extraInfo: action.payload.extra }
 
     case "DELETE_DEPENDANT":
       //creating a new copy of objects
