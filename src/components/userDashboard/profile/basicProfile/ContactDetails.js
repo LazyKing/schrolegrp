@@ -82,7 +82,7 @@ class ContactDetails extends Component {
     return (
         <Card className="card-header-background" title="Contact Details" extra={<Button onClick={this.showModal}>Edit</Button>}>
 
-          <Modal className="card-header-background" 
+          <Modal className="card-header-background"
             title="Contact Details"
             visible={this.state.visible}
             onOk={this.handleOk}
@@ -160,7 +160,7 @@ class ContactDetails extends Component {
                   }],
                   initialValue: this.state.contact_details.email
                 })(
-                  <Input />
+                  <Input disabled={true} />
                 )}
               </FormItem>
               <FormItem
