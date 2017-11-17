@@ -90,7 +90,8 @@ class ImageUpload extends Component {
 
     return (
       <div className="profile-pic-uploadButton" >
-        <Modal title="Profile Pic"
+        <Modal className="card-header-background"
+            title="Profile Pic"
             visible={this.state.visibleImageUploadModal}
             confirmLoading={this.state.confirmLoading}
             footer={[

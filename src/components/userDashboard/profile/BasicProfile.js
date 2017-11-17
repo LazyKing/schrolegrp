@@ -133,7 +133,8 @@ class BasicProfile extends Component {
 
     return (
       <div className="basic-profile-mainContainer">
-          <Modal title="Edit Qualification"
+          <Modal className="card-header-background"
+            title="Edit Details"
             visible={this.state.visible}
             onOk={this.handleOk}
             confirmLoading={this.state.confirmLoading}

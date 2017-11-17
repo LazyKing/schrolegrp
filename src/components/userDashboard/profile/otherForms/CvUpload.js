@@ -90,7 +90,8 @@ class CvUpload extends Component {
 
     return (
       <div className="" >
-        <Modal title="Profile Pic"
+        <Modal className="card-header-background" 
+            title="Profile Pic"
             visible={this.state.visibleCvUploadModal}
             confirmLoading={this.state.confirmLoading}
             footer={[
