@@ -52,6 +52,40 @@ class CvUpload extends Component {
     }
   }
 
+  onCvRemovedFromList = (file) => {
+    this.setState(({ fileList }) => {
+      const index = fileList.indexOf(file);
+      const newFileList = fileList.slice();
+      newFileList.splice(index, 1);
+      return {
+        fileList: newFileList,
+      };
+    });
+  }
+
+  beforeCvUpload = (file) => {
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error('File size must smaller than 2MB!');
+    }
+    else {
+      this.setState(({ fileList }) => ({
+        fileList: [...fileList, file],
+      }));
+    }
+    return false;
+  }
+
+  handleCvFileChange = (info) => {
+    let fileList = info.fileList;
+    //allowing only one file per upload...
+    fileList = fileList.slice(-1);
+    const isLt2M = fileList[0].size / 1024 / 1024 < 2;
+    if (isLt2M) {
+      this.setState({ fileList });
+    }
+  }
+
   showUploadModal = (props) => {
     this.setState({
       visibleCvUploadModal: true
@@ -69,28 +103,15 @@ class CvUpload extends Component {
     const props = {
       accept: ".pdf",
       action: 'http://13.126.41.88/applicants/profile/resume',
-      onRemove: (file) => {
-        this.setState(({ fileList }) => {
-          const index = fileList.indexOf(file);
-          const newFileList = fileList.slice();
-          newFileList.splice(index, 1);
-          return {
-            fileList: newFileList,
-          };
-        });
-      },
-      beforeUpload: (file) => {
-        this.setState(({ fileList }) => ({
-          fileList: [...fileList, file],
-        }));
-        return false;
-      },
+      onRemove: this.onCvRemovedFromList,
+      beforeUpload: this.beforeCvUpload,
+      onChange: this.handleCvFileChange,
       fileList: this.state.fileList,
     };
 
     return (
       <div className="" >
-        <Modal className="card-header-background" 
+        <Modal className="card-header-background"
             title="Profile Pic"
             visible={this.state.visibleCvUploadModal}
             confirmLoading={this.state.confirmLoading}
