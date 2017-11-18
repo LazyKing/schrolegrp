@@ -24,7 +24,6 @@ class ImageUpload extends Component {
     const { fileList } = this.state;
     const formData = new FormData();
     fileList.forEach((file) => {
-      console.log(file);
       formData.append('files[]', file);
     });
 
@@ -64,27 +63,48 @@ class ImageUpload extends Component {
     });
   }
 
+  onImageRemovedFromList = (file) => {
+    this.setState(({ fileList }) => {
+      const index = fileList.indexOf(file);
+      const newFileList = fileList.slice();
+      newFileList.splice(index, 1);
+      return {
+        fileList: newFileList,
+      };
+    });
+  }
+
+  beforeImageUpload = (file) => {
+    const isLt2M = file.size / 1024 / 1024 < 2;
+    if (!isLt2M) {
+      message.error('Image must smaller than 2MB!');
+    }
+    else {
+      this.setState(({ fileList }) => ({
+        fileList: [...fileList, file],
+      }));
+    }
+    return false;
+  }
+
+  handleImageChange = (info) => {
+    let fileList = info.fileList;
+    //allowing only one file per upload...
+    fileList = fileList.slice(-1);
+    const isLt2M = fileList[0].size / 1024 / 1024 < 2;
+    if (isLt2M) {
+      this.setState({ fileList });
+    }
+  }
+
   render() {
     const { uploading } = this.state;
-    const props = {
+    const uploadImageProps = {
       accept: "image/*",
       action: 'http://13.126.41.88/applicants/profile/picture',
-      onRemove: (file) => {
-        this.setState(({ fileList }) => {
-          const index = fileList.indexOf(file);
-          const newFileList = fileList.slice();
-          newFileList.splice(index, 1);
-          return {
-            fileList: newFileList,
-          };
-        });
-      },
-      beforeUpload: (file) => {
-        this.setState(({ fileList }) => ({
-          fileList: [...fileList, file],
-        }));
-        return false;
-      },
+      onRemove: this.onImageRemovedFromList,
+      beforeUpload: this.beforeImageUpload,
+      onChange: this.handleImageChange,
       fileList: this.state.fileList,
     };
 
@@ -108,7 +128,7 @@ class ImageUpload extends Component {
             ]}
             width={'70%'}
           >
-          <Upload {...props}>
+          <Upload {...uploadImageProps}>
             <Button>
               <Icon type="upload" /> Upload your Profile Pic
             </Button>
