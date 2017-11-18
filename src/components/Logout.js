@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { Icon, Button, Menu } from 'antd';
+import { Icon, Button } from 'antd';
 
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { logout } from "../actions";
+import { logoutDispatch } from "../actions";
 
 
 class Logout extends Component {
@@ -12,11 +12,11 @@ class Logout extends Component {
   constructor(props) {
     super(props);
   }
- 
+
   onLogout(e) {
   	//console.log(this.props.auth_token,this.props.user_email,);
-  	const logoutPayloadHeader = { 'auth_token': this.props.auth_token, 'user_email': this.props.user_email }
-  	this.props.logout(logoutPayloadHeader);
+    const { auth_token, user_email} = this.props;
+  	this.props.logoutDispatch(user_email, auth_token);
   }
 
   renderLogoutType() {
@@ -29,7 +29,7 @@ class Logout extends Component {
   	} else if ( this.props.type === "menuItem" ) {
   		return (
   			<ul title="Search" onClick={this.onLogout.bind(this)}><Icon type="logout" />Log out</ul>
-  		);	
+  		);
   	} else {
 
   	}
@@ -47,7 +47,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ logout: logout }, dispatch);
+  return bindActionCreators({ logoutDispatch }, dispatch);
 }
 
 export default connect( mapStateToProps, mapDispatchToProps)(Logout);

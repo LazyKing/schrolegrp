@@ -22,9 +22,6 @@ class LoginComponent extends Component {
     super(props);
 
     this.state = {
-      email: '',
-      password: '',
-      passwordConfirm: '',
       loading: false
     };
   }
@@ -53,28 +50,17 @@ class LoginComponent extends Component {
   componentDidMount() {
     //console.log(this.props)
   }
-  onEmailChange(event) {
-    this.setState({ email:event.target.value});
-  }
-
-  onPasswordChange(event) {
-    this.setState({ password:event.target.value});
-  }
-
-  onPasswordConfirmChange(event) {
-    this.setState({ passwordConfirm:event.target.value});
-  }
 
   onForgotPassword(event) {
     this.props.forgotPassword(this.state)
   }
 
   onLogin(event) {
-    //console.log(this.state);
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
+        const { email, password } = this.props.form.getFieldsValue();
         this.setState({loading:true});
-        this.props.submitLoginDispatch(this.state.email, this.state.password);
+        this.props.submitLoginDispatch( email, password);
       }
     });
   }
@@ -112,7 +98,7 @@ class LoginComponent extends Component {
                   required: true, message: 'Please input your E-mail!',
                 }],
               })(
-                <Input onChange={this.onEmailChange.bind(this)} prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />
+                <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />
               )}
             </FormItem>
             <FormItem>
@@ -121,7 +107,7 @@ class LoginComponent extends Component {
                     required: true, message: 'Please input the password!',
                   }],
                 })(
-                  <Input onChange={this.onPasswordChange.bind(this)} prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password" />
+                  <Input prefix={<Icon type="lock" style={{ fontSize: 13 }} />} type="password" placeholder="Password" />
                 )}
             </FormItem>
             <FormItem>

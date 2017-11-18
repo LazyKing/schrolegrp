@@ -32,6 +32,24 @@ class AunthenticationAndRegistrationApi {
 			});
 		}
 
+		static logout( email, token ) {
+			var baseUrl = global.devHost ;
+			const logoutUrl = baseUrl + '/users/sign_out';
+			var headers = this.requestHeaders();
+			headers['X-API-TOKEN'] = token;
+			headers['X-API-EMAIL'] = email;
+
+			return axios({
+				method: 'DELETE',
+				url: logoutUrl,
+				headers: headers
+			}).then(function (response) {
+				return response;
+			}).catch(function (error) {
+				return error.response ;
+			});
+		}
+
   	static registerApplicant( userAuthentication ) {
 			const baseUrl = global.devHost ;
 	  	const registerApplicantUrl = baseUrl + '/users.json';

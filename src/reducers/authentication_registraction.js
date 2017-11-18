@@ -55,39 +55,19 @@ export default function(state = INITIAL_STATE, action) {
 
 
     case "LOG_OUT":
-		var baseUrl = global.devHost ;
-		const logoutUrl = baseUrl + '/users/sign_out';
-	  	fetch(logoutUrl, {
-		  method: 'DELETE',
-		  headers: {
-		    'Accept': 'application/json',
-		    'Content-Type': 'application/json',
-		    'X-API-TOKEN' : action.payload.auth_token,
-		    'X-API-EMAIL' : action.payload.user_email
-		  }
-		}).then((response) => response.json())
-	  	.then((responseJson) => {
-	  		//console.log(responseJson);
-	  		if(responseJson.success){
-	        	localStorage.removeItem("userprofile");
+			if(action.payload.status === 200 ){
+				localStorage.removeItem("userprofile");
 				browserHistory.push({
 					pathname: '/Login'
 				});
-	  		} else {
-	  			alert("Invalid session");
-	  			localStorage.removeItem("userprofile");
+			} else {
+				//alert("Invalid session");
+				localStorage.removeItem("userprofile");
 				browserHistory.push({
 					pathname: '/Login'
 				});
-
-	  		}
-	        return true;
-	      })
-	      .catch((error) => {
-	      	alert("unauthorized");
-	        console.error(error);
-	      });
-      return action.payload;
+			}
+      return state;
 
     case "REGISTER_APPLICANT":
     //console.log(action.payload);

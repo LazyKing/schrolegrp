@@ -15,6 +15,20 @@ export function submitLoginDispatch( user, password) {
   };
 }
 
+export function logoutDispatch( userEmail, token) {
+  return function(dispatch) {
+    return AunthenticationAndRegistrationApi.logout( userEmail, token).then(response => {
+      //console.log("dispatch login suc::",response);
+      if(response.status === 201 || response.status === 200)
+        dispatch(logout(response));
+      else
+        dispatch(handleError(response));
+    }).catch(error => {
+      console.log("dispatch person::",error);
+    });
+  };
+}
+
 export function submitLogin(user) {
   return {
     type: "SUBMIT_LOGIN",
