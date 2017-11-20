@@ -57,7 +57,7 @@ class BasicProfile extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log("componentWillReceiveProps - basicprof",nextProps);
+    //console.log("componentWillReceiveProps - basicprof",nextProps);
     const { first_name, last_name, personal_details, emergency_contact, profile_pic_url,
       criminal_convictions, contact_details, dependents,link_to_video, cv_url } = nextProps.applicantsProfilePayload.applicantsProfile;
 
@@ -67,7 +67,6 @@ class BasicProfile extends Component {
 
   showModal = (props) => {
     const { target } = props;
-    console.log(target.id);
     const renderFormComponent = otherDetailsForm[target.id];
 
     this.setState({

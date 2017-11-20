@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Card, Progress } from 'antd';
+import { Row } from 'antd';
 import { NavItem, Nav } from 'react-bootstrap';
 import '../../App.css';
 
@@ -33,7 +33,7 @@ class Profile extends Component {
 
   renderActiveTab(){
     if ( this.state.activeProfileDetailsTab )
-      return ( <this.state.activeProfileDetailsTab /> ); 
+      return ( <this.state.activeProfileDetailsTab /> );
   }
 
   render() {
@@ -54,7 +54,7 @@ class Profile extends Component {
           </Row>
           <Row>
             {this.renderActiveTab()}
-          </Row>    
+          </Row>
         </div>
       </div>
     );

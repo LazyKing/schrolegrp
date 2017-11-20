@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Card } from 'antd';
+import { Row, Col, Card } from 'antd';
 import '../../App.css';
 
 
@@ -40,7 +40,7 @@ class Dashboard extends Component {
                 <p>Card content</p>
               </Card>
             </Col>
-          </Row>    
+          </Row>
         </div>
       </div>
     );

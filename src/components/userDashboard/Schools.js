@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Card } from 'antd';
+import { Row, Col } from 'antd';
 import '../../stylesheets/userdashboard.css';
 import '../../App.css';
 
@@ -10,7 +10,7 @@ class Schools extends Component {
   constructor(props) {
     super(props);
     //console.log(this.props);
-    this.state = { 'schools' : [ { 'id': 1, 'title': 'test2', 'location': 'Australia' }, 
+    this.state = { 'schools' : [ { 'id': 1, 'title': 'test2', 'location': 'Australia' },
                                   { 'id': 2, 'title': 'test3', 'location': 'India' } ]
     }
   }
@@ -32,7 +32,7 @@ class Schools extends Component {
               </Row>
               {listItems}
             </Col>
-          </Row>    
+          </Row>
         </div>
       </div>
     );

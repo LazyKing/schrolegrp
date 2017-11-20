@@ -69,7 +69,7 @@ class LoginAndRegistrationContainer extends Component {
 	            <Navbar.Header>
 	              <Navbar.Brand>
 	                <a onClick={this.routeToHome} href="javascript.void(0)" style={{'width':200,'height':50,'padding':0}}>
-	                    <img src={webLogo} title="Schrole_Connect" width="200" height="50" />
+	                    <img src={webLogo} alt="not found" title="Schrole_Connect" width="200" height="50" />
 	                </a>
 	              </Navbar.Brand>
 	              <Navbar.Toggle />

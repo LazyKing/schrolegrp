@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col,
-Form, Input, Icon, Button, Modal } from 'antd';
+import { Row, Col, Form, Input, Button, Modal } from 'antd';
 
 /*Import redux components*/
 /*Redux imports*/
@@ -62,7 +61,6 @@ class ApplicantRegister extends Component {
 		}
 
   	handleSubmit = (e) => {
-  		var registerUserPromise = '';
     	e.preventDefault();
 	    this.props.form.validateFieldsAndScroll((err, values) => {
 	      if (!err) {
@@ -73,7 +71,7 @@ class ApplicantRegister extends Component {
 	        var user_info = { first_name, last_name, alt_email };
 	        userAuthentication['user_info'] = user_info ;
 
-	        registerUserPromise=this.props.registerApplicantDispatch( userAuthentication );
+	        this.props.registerApplicantDispatch( userAuthentication );
 	      }
 	    });
   	}
