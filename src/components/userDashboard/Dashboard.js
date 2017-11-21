@@ -2,13 +2,17 @@ import React, { Component } from 'react';
 import { Row, Col, Card } from 'antd';
 import '../../App.css';
 
+/*import components*/
+import DashboardSchoolList from './dashboardComponents/DashboardSchoolList';
+import DashboardVanaciesList from './dashboardComponents/DashboardVanaciesList';
+import DashboardApplicationsList from './dashboardComponents/DashboardApplicationsList';
 
 class Dashboard extends Component {
 
   constructor(props) {
     super(props);
     //this.state = { };
-    console.log(this.props);
+    //console.log(this.props);
   }
 
   render() {
@@ -17,28 +21,17 @@ class Dashboard extends Component {
         <h1 style={{'textAlign': 'left','color': '#1968a5', padding: '10px'}}>
           Welcome to your Schrole Dashboard
         </h1>
+        <hr style={{ border: '1px rgba(37, 132, 193, 0.9) solid', 'margin': '10px 0px' }}/>
         <div className="" style={{ background: '#ECECEC', padding: '30px' }} >
           <Row gutter={16}>
             <Col span={8}>
-              <Card title="Registered Schools" extra={<a href="#">View All</a>} style={{ width: 300 }}>
-                <p>Card content</p>
-                <p>Card content</p>
-                <p>Card content</p>
-              </Card>
+              <DashboardSchoolList />
             </Col>
             <Col span={8}>
-              <Card title="Recent Vacancies" extra={<a href="#">View All</a>} style={{ width: 300 }}>
-                <p>Card content</p>
-                <p>Card content</p>
-                <p>Card content</p>
-              </Card>
+              <DashboardVanaciesList />
             </Col>
             <Col span={8}>
-              <Card title="My Applications" extra={<a href="#">View All</a>} style={{ width: 300 }}>
-                <p>Card content</p>
-                <p>Card content</p>
-                <p>Card content</p>
-              </Card>
+              <DashboardApplicationsList />
             </Col>
           </Row>
         </div>

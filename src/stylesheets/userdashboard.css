@@ -3,6 +3,10 @@
   font-size: medium;
 }
 
+.dashboard-card{
+  margin: 5px 0px;
+}
+
 .school-card-container {
   display: flex;
   flex-direction: row;

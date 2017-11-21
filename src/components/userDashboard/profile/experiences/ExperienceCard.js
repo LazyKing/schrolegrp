@@ -12,11 +12,6 @@ class ExperienceCard extends Component {
     //console.log(this.props);
   }
 
-/*  componentWillReceiveProps(nextProps) {
-    //console.log("componentWillReceiveProps emergency", nextProps)
-    this.setState({emergency_contact:nextProps.emergency_contact})
-  }*/
-experience
   render() {
     return (
       <Col span={8} style={{'marginTop': 10,'padding': 5 }}>
