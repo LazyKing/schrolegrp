@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Row, Col, Card, Modal, Form,
   Input, Icon, Select, DatePicker, Radio } from 'antd';
 import moment from 'moment';
+import 'moment/locale/zh-cn';
 
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
@@ -10,7 +11,7 @@ import { getPersonalDetailsDispatch, updatePersonalDetailsDispatch } from "../..
 
 /*import data*/
 import countryCodes from '../../../../assets/data/countryCodes.json'
-import enUS from 'antd/lib/locale-provider/en_US';
+moment.locale('en');
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -128,14 +129,20 @@ class PersonalDetails extends Component {
         sm: { span: 14 },
       },
     };
+
+    const { country_of_birth = 'us', country_of_citizenship = 'us', dob = '1997-12-12',
+            eu_passport, gender = 'male', marital_status = 'single', other_citizenship = 'no',
+            other_citizenship_country = 'us' } = this.state.personalDetails;
+
+    var dobFix = ( dob === null ) ? '1997-12-12' : dob ;
     const dateConfig = {
       rules: [{ type: 'object', required: true, message: 'Please select date!' }],
-      initialValue: moment( this.state.personalDetails.dob, 'YYYY-MM-DD')
+      initialValue: moment( dobFix, 'YYYY-MM-DD')
     };
 
     return (
         <Card className="card-header-background" title="Personal Details" extra={<div><Button onClick={this.showModal}>Edit</Button></div>}>
-          <Modal className="card-header-background" 
+          <Modal className="card-header-background"
             title="Personal Details"
             visible={this.state.visible}
             onOk={this.handleOk}
@@ -150,7 +157,7 @@ class PersonalDetails extends Component {
                 {...formItemLayout}
                 label="Country of Birth"
               >
-                {getFieldDecorator('country_of_birth', { initialValue: this.state.personalDetails.country_of_birth })(
+                {getFieldDecorator('country_of_birth', { initialValue: country_of_birth })(
                   <Select style={{ width: 220 }}>
                     {countryOptions}
                   </Select>
@@ -160,7 +167,7 @@ class PersonalDetails extends Component {
                 {...formItemLayout}
                 label="Country of Citizenship"
               >
-              {getFieldDecorator('country_of_citizenship', { initialValue: this.state.personalDetails.country_of_citizenship })(
+              {getFieldDecorator('country_of_citizenship', { initialValue: country_of_citizenship })(
                 <Select style={{ width: 220 }}>
                   {countryOptions}
                 </Select>
@@ -171,7 +178,7 @@ class PersonalDetails extends Component {
                 label="Other Citizenship"
               >
 
-              {getFieldDecorator('other_citizenship', { initialValue: (this.state.personalDetails.other_citizenship) ? 'yes' : 'no' })(
+              {getFieldDecorator('other_citizenship', { initialValue: (other_citizenship) ? 'yes' : 'no' })(
                 <RadioGroup>
                   <Radio value={'yes'}>Yes</Radio>
                   <Radio value={'no'}>No</Radio>
@@ -183,7 +190,7 @@ class PersonalDetails extends Component {
                 {...formItemLayout}
                 label="Other citizenship's"
               >
-                {getFieldDecorator('other_citizenship_country', { initialValue: this.state.personalDetails.other_citizenship_country })(
+                {getFieldDecorator('other_citizenship_country', { initialValue: other_citizenship_country })(
                   <Input />
                 )}
               </FormItem>
@@ -201,7 +208,7 @@ class PersonalDetails extends Component {
                 {...formItemLayout}
                 label="EU Passport"
               >
-              {getFieldDecorator('eu_passport', { initialValue: (this.state.personalDetails.eu_passport) ? 'yes' : 'no'  })(
+              {getFieldDecorator('eu_passport', { initialValue: (eu_passport) ? 'yes' : 'no'  })(
                 <Select style={{ width: 120 }}>
                   {euPassportOptions}
                 </Select>
