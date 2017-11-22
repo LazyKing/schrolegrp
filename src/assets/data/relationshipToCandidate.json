@@ -1,0 +1,55 @@
+
+{
+    "supervisory":[
+        {
+          "value": "diploma",
+          "text":"Diploma"
+        },
+        {
+          "value":"graduate_certificate",
+          "text":"Graduate Certificate"
+        },
+        {
+          "value":"pgce",
+          "text":"PGCE"
+        },
+        {
+          "value":"pgde",
+          "text":"PGDE"
+        },
+        {
+          "value":"bachelor",
+          "text":"Bachelor"
+        },
+        {
+          "value":"master",
+          "text":"Master"
+        },
+        {
+          "value":"others",
+          "text":"Others"
+        }
+    ],
+  "other": [
+    {
+      "value":"co_worker",
+      "text":"Co-worker"
+    },
+    {
+      "value":"colleague",
+      "text":"Colleague"
+    },
+    {
+      "value":"colleague_university_instructor",
+      "text":"Colleague/University Instructor"
+    },
+    {
+      "value":"instructor",
+      "text":"Instructor"
+    },
+    {
+      "value":"other",
+      "text":"Other"
+    }
+  ]
+}

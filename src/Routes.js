@@ -11,8 +11,12 @@ import About from './About';
 import UserProfile from './components/userDashboard/UserProfileDashboard';
 import Application from './components/userDashboard/Application';
 import Dashboard from './components/userDashboard/Dashboard';
-import Schools from './components/userDashboard/Schools';
 import Profile from './components/userDashboard/Profile';
+
+/*School routes*/
+import Schools from './components/userDashboard/Schools';
+import SchoolList from './components/userDashboard/schools/SchoolList';
+import SchoolDetails from './components/userDashboard/schools/SchoolDetails';
 
 /*Login&Registration components*/
 import LoginAndRegistrationContainer from './components/registerComponents/LoginAndRegistrationContainer'
@@ -37,10 +41,13 @@ export default (
       <Route path="/RegisterApplicant" component={ApplicantRegister} />
     </Route>
 
-    
+
     <Route name="userprofile" breadcrumbName="User Profile" path="/userprofile" component={UserProfile}>
       <IndexRoute name="Dashboard" breadcrumbName="Dashboard" component={Dashboard} />
-      <Route name="Schools" breadcrumbName="Schools" path="/userprofile/schools" component={Schools} />
+      <Route name="Schools" breadcrumbName="Schools" path="/userprofile/schools" component={Schools}>
+        <IndexRoute name="SchoolList" breadcrumbName="SchoolList" component={SchoolList} />
+        <Route name="SchoolDetails" path="/schools/:id" component={SchoolDetails} />
+      </Route>
       <Route name="Vacancies" breadcrumbName="Vacancies" path="/userprofile/vacancies" component={About} />
       <Route name="Application" breadcrumbName="Application" path="/userprofile/application" component={Application} />
       <Route name="Profile" breadcrumbName="Profile" path="/userprofile/profile" component={Profile} />

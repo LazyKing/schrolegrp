@@ -25,12 +25,15 @@ class Dashboard extends Component {
         <div className="" style={{ background: '#ECECEC', padding: '30px' }} >
           <Row gutter={16}>
             <Col span={8}>
+              <p style={{padding: '10px'}}>The 3 most recent schools you've registered with.</p>
               <DashboardSchoolList />
             </Col>
             <Col span={8}>
+              <p style={{padding: '10px'}}>The 3 latest vacancies from schools you're registered with.</p>
               <DashboardVanaciesList />
             </Col>
             <Col span={8}>
+              <p style={{padding: '10px'}}>The 3 most recent vacancies you've applied for.</p>
               <DashboardApplicationsList />
             </Col>
           </Row>
