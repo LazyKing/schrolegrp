@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import { LocaleProvider, Row, Col } from 'antd';
 import enUS from 'antd/lib/locale-provider/en_US';
 
+/*Import Redux functionalities*/
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { getAllReferencesDetailsDispatch } from "./references/References_Actions";
+
 /*import components*/
 import AcademicReferences from './references/AcademicReferences';
 import AdministrativeReferences from './references/AdministrativeReferences';
@@ -10,8 +15,23 @@ class References extends Component {
 
   constructor(props) {
     super(props);
-    //this.state = { };
-    console.log(this.props);
+    //console.log(this.props);
+    this.state = {
+      academic:[],
+      administrativeReferences:[]
+    }
+  }
+
+  componentDidMount() {
+    const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
+    const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email }
+    const response = this.props.getAllReferencesDetailsDispatch(logoutPayloadHeader);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log("componentWillReceiveProps QualificationAndLicenses",nextProps);
+    const { academic } = nextProps.references;
+    this.setState({ academic });
   }
 
   render() {
@@ -37,7 +57,7 @@ class References extends Component {
           </Row>
           <Row>
             <Col sm={10} offset={1}>
-              <AcademicReferences />
+              <AcademicReferences academicReferences={this.state.academic}/>
             </Col>
             <Col sm={10} offset={1}>
               <AdministrativeReferences />
@@ -50,4 +70,14 @@ class References extends Component {
   }
 }
 
-export default References;
+function mapStateToProps(state) {
+  //console.log("mapStateToProps-qalifications",state);
+  return { references: state.applicants.references};
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ getAllReferencesDetailsDispatch }, dispatch);
+}
+
+
+export default connect( mapStateToProps, mapDispatchToProps)(References);

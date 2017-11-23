@@ -1,133 +1,130 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Card, Modal } from 'antd';
+import { Button, Row, Col, Modal } from 'antd';
 import _ from 'lodash';
 
 /*Import Redux functionalities*/
-// import { connect } from "react-redux";
-// import { bindActionCreators } from "redux";
-// import { updateLicenceDispatch, createLicenceDispatch } from "./QualificationAndLicences_Actions";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { updateAcademicReferencesDispatch, createNewAcademicReferenceDispatch} from "./References_Actions";
 
 /*import components*/
-// import LicenceCard from './LicenceCard';
-// import LicenceForm from './LicenceForm';
+import AcademicReferencesCard from './AcademicReferencesCard';
+import AcademicReferencesForm from './AcademicReferencesForm';
 
 class AcademicReferences extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      visible: false,
-      confirmLoading: false,
-      licencesArray:[],
-      selectedLicence:{}
+      academicModalVisible: false,
+      academicModalLoading: false,
+      academicReferenceArray:[],
+      selectedAcademicReference:{}
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({licencesArray:nextProps.licencesArray})
+    this.setState({academicReferenceArray:nextProps.academicReferences})
   }
 
-  showModal = (props) => {
+  showAcademicModal = (props) => {
     const { target } = props;
-    if( target.className.indexOf('edit_license') !== -1 ) {
-      const selectedLicence = _.find( this.state.licencesArray, function(licence) {
-        return licence.id == target.id;
+    if( target.className.indexOf('edit_academic_reference') !== -1 ) {
+      const selectedAcademicReference = _.find( this.state.academicReferenceArray, function(currentAcademicReference) {
+        return currentAcademicReference.id == target.id;
       });
 
       this.setState({
-        visible: true,
+        academicModalVisible: true,
         editMode: true,
-        selectedLicence: (selectedLicence) ? selectedLicence : {}
+        selectedAcademicReference: (selectedAcademicReference) ? selectedAcademicReference : {}
       });
     } else {
-      this.setState({ visible: true, editMode: false });
+      this.setState({ academicModalVisible: true, editMode: false });
     }
   }
 
-  handleOk = () => {
-    //console.log(this._licenceFormProps.props.form.getFieldsValue());
+  onAademicModalOk = () => {
+    //console.log(this._academicReferenceFormProps.props.form.getFieldsValue());
     const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
     const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email };
-    var payloadObj = this._licenceFormProps.props.form.getFieldsValue();
+    var payloadObj = this._academicReferenceFormProps.props.form.getFieldsValue();
 
-    this._licenceFormProps.props.form.validateFields((err, values) => {
+    this._academicReferenceFormProps.props.form.validateFields((err, values) => {
       //console.log(err);
       if(!err) {
         if(this.state.editMode){
-          this.props.updateLicenceDispatch(logoutPayloadHeader, payloadObj, this.state.selectedLicence.id );
+          this.props.updateAcademicReferencesDispatch(logoutPayloadHeader, payloadObj, this.state.selectedAcademicReference.id );
         }
         else
-          this.props.createLicenceDispatch(logoutPayloadHeader, payloadObj);
+          this.props.createNewAcademicReferenceDispatch(logoutPayloadHeader, payloadObj);
 
         this.setState({
-          confirmLoading: true,
+          academicModalLoading: true,
         });
         setTimeout(() => {
           this.setState({
-            visible: false,
+            academicModalVisible: false,
             editMode: false,
-            confirmLoading: false,
+            academicModalLoading: false,
           });
         }, 2000);
       }
     });
   }
 
-  handleCancel = () => {
+  onAademicModalCancel = () => {
     this.setState({
-      visible: false,
+      academicModalVisible: false,
       editMode: false
     });
   }
   render() {
-    // const listItems = this.state.licencesArray.map((licence) =>
-    //       <LicenceCard key={licence.id} licence={licence} onclick={this.showModal}/> );
-    // const FormHeader = this.state.editMode ? ('Edit Licence') : ('Add Licence');
-
-    /*
-    <Modal className="card-header-background"
-      title={FormHeader}
-      visible={this.state.visible}
-      onOk={this.handleOk}
-      confirmLoading={this.state.confirmLoading}
-      onCancel={this.handleCancel}
-      okText={'Save'}
-      cancelText={'cancel'}
-      width={'70%'}
-    >
-    <LicenceForm currentLicence={this.state.selectedLicence}
-    wrappedComponentRef={(ref) => this._licenceFormProps = ref}/>
-    </Modal>*/
+     const listItems = this.state.academicReferenceArray.map((academicReference) =>
+           <AcademicReferencesCard key={academicReference.id} academicReference={academicReference} onclick={this.showAcademicModal}/> );
+     const FormHeader = this.state.editMode ? ('Edit Licence') : ('Add Licence');
 
     return (
       <div className="academic-reference-mainContainer">
-          <Row style={{'marginTop':'10px'}}>
-            <Col sm={24}>
-              <Row className="column-alignItems-center">
-                <Col><h3>Academic References</h3></Col>
-                <Col><p>Add Academic referees if applying/registering for teaching positions.</p></Col>
-                <Col><Button onClick={this.showModal}>ADD ACADEMIC REFEREE</Button></Col>
-              </Row>
-              <hr style={{ border: '1px rgba(37, 132, 193, 0.9) solid', 'marginTop': 20 }}/>
-              <Row>
-
-              </Row>
-            </Col>
-          </Row>
+        <Modal className="card-header-background"
+          title={FormHeader}
+          visible={this.state.academicModalVisible}
+          onOk={this.onAademicModalOk}
+          confirmLoading={this.state.academicModalLoading}
+          onCancel={this.onAademicModalCancel}
+          okText={'Save'}
+          cancelText={'cancel'}
+          width={'70%'}
+        >
+        <AcademicReferencesForm currentAcademicReference={this.state.selectedAcademicReference}
+        wrappedComponentRef={(ref) => this._academicReferenceFormProps = ref}/>
+        </Modal>
+        <Row style={{'marginTop':'10px'}}>
+          <Col sm={24}>
+            <Row className="column-alignItems-center">
+              <Col><h3>Academic References</h3></Col>
+              <Col><p>Add Academic referees if applying/registering for teaching positions.</p></Col>
+              <Col><Button onClick={this.showAcademicModal}>ADD ACADEMIC REFEREE</Button></Col>
+            </Row>
+            <hr style={{ border: '1px rgba(37, 132, 193, 0.9) solid', 'marginTop': 20 }}/>
+            <Row>
+              {listItems}
+            </Row>
+          </Col>
+        </Row>
       </div>
     );
   }
 }
 
-// function mapStateToProps(state) {
-//   //console.log("mapStateToProps, licences",state);
-//   return { licencesArray:  state.applicants.qualificationsDetails.licences };
-// }
-//
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ updateLicenceDispatch: updateLicenceDispatch,
-//   createLicenceDispatch:createLicenceDispatch }, dispatch);
-// }
+function mapStateToProps(state) {
+  //console.log("mapStateToProps, licences",state);
+  return { academicReferenceArray:  state.applicants.references.academicReferences };
+}
 
-//export default connect( mapStateToProps, mapDispatchToProps)(Form.create()(AcademicReferences));
-export default AcademicReferences;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ updateAcademicReferencesDispatch,
+  createNewAcademicReferenceDispatch }, dispatch);
+}
+
+export default connect( mapStateToProps, mapDispatchToProps)(AcademicReferences);

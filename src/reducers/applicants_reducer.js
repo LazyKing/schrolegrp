@@ -7,7 +7,8 @@ const INITIAL_STATE = {
 	applicantsProfile: {},
 	qualificationsDetails: {},
   experiences: {},
-  extraInfo: {}
+  extraInfo: {},
+	references: {}
 }
 
 export default function(state = INITIAL_STATE, action) {
@@ -58,6 +59,18 @@ export default function(state = INITIAL_STATE, action) {
       else
         return { ...state, extraInfo: action.payload }
 
+			case "GET_ALL_REFERENCES":
+	    console.log(action.payload)
+	      if( action.payload.status === 401 ) {
+	        localStorage.removeItem("userprofile");
+	        browserHistory.push({
+	          pathname: '/Login'
+	        });
+	        return { ...state, references: {} }
+	      }
+	      else
+	        return { ...state, references: action.payload.references }
+
     case "CREATE_NEW_DEPENDANT":
     //console.log(action.payload);
     var newApplicantsState = Object.assign({}, state.applicantsProfile , {'dependents': action.payload.dependent });
@@ -77,6 +90,16 @@ export default function(state = INITIAL_STATE, action) {
       //console.log(action.payload);
       var experiences = action.payload.experiences;
       return Object.assign({}, state , {'experiences': experiences });
+
+		case "CREATE_NEW_ACADEMIC_REFERENCE":
+		//console.log(action.payload);
+		var newApplicantsState = Object.assign({}, state.references , {'academic': action.payload.academic });
+		return { ...state, references: newApplicantsState };
+
+		case "CREATE_NEW_ADMINISTRATIVE_REFERENCE":
+		//console.log(action.payload);
+		var newApplicantsState = Object.assign({}, state.references , {'administrative': action.payload.administrative });
+		return { ...state, references: newApplicantsState };
 
     case "UPDATE_QUALIFICATION":
       //console.log(action);

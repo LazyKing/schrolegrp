@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row, Col, Card, Modal } from 'antd';
+import { Button, Row, Col, Modal } from 'antd';
 import _ from 'lodash';
 
 /*Import Redux functionalities*/
@@ -8,8 +8,8 @@ import _ from 'lodash';
 // import { updateLicenceDispatch, createLicenceDispatch } from "./QualificationAndLicences_Actions";
 
 /*import components*/
-// import LicenceCard from './LicenceCard';
-// import LicenceForm from './LicenceForm';
+ import AdministrativeReferencesCard from './AdministrativeReferencesCard';
+ //import AdministrativeReferencesForm from './AdministrativeReferencesForm';
 
 class AdministrativeReferences extends Component {
 
@@ -98,7 +98,7 @@ class AdministrativeReferences extends Component {
     <LicenceForm currentLicence={this.state.selectedLicence}
     wrappedComponentRef={(ref) => this._licenceFormProps = ref}/>
     </Modal>*/
-
+    
     return (
       <div className="academic-reference-mainContainer">
           <Row style={{'marginTop':'10px'}}>
@@ -110,7 +110,9 @@ class AdministrativeReferences extends Component {
               </Row>
               <hr style={{ border: '1px rgba(37, 132, 193, 0.9) solid', 'marginTop': 20 }}/>
               <Row>
-
+                <Col>
+                  <AdministrativeReferencesCard />
+                </Col>
               </Row>
             </Col>
           </Row>
