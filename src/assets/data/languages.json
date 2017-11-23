@@ -1,0 +1,26 @@
+[
+    {
+      "value": "english",
+      "text":"english"
+    },
+    {
+      "value":"spanish",
+      "text":"spanish"
+    },
+    {
+      "value":"french",
+      "text":"french"
+    },
+    {
+      "value":"mandarin",
+      "text":"mandarin"
+    },
+    {
+      "value":"chinese",
+      "text":"chinese"
+    },
+    {
+      "value":"japanese",
+      "text":"japanese"
+    }
+]

@@ -1,0 +1,42 @@
+[
+    {
+      "value": "community_service",
+      "text":"Community Service"
+    },
+    {
+      "value":"computers",
+      "text":"computers"
+    },
+    {
+      "value":"dance",
+      "text":"dance"
+    },
+    {
+      "value":"drama",
+      "text":"drama"
+    },
+    {
+      "value":"excursions_expeditions",
+      "text":"Excursions/Expeditions"
+    },
+    {
+      "value":"literary_magazine",
+      "text":"Literary Magazine"
+    },
+    {
+      "value":"mun",
+      "text":"MUN"
+    },
+    {
+      "value":"newspaper",
+      "text":"newspaper"
+    },
+    {
+      "value":"photography",
+      "text":"photography"
+    },
+    {
+      "value":"student_government",
+      "text":"Student Government"
+    }
+]

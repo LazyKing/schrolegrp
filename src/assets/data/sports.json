@@ -1,0 +1,42 @@
+[
+    {
+      "value": "badminton",
+      "text":"Badminton"
+    },
+    {
+      "value":"baseball",
+      "text":"Baseball"
+    },
+    {
+      "value":"basketball",
+      "text":"Basketball"
+    },
+    {
+      "value":"golf",
+      "text":"Golf"
+    },
+    {
+      "value":"swimming",
+      "text":"Swimming"
+    },
+    {
+      "value":"table_tennis",
+      "text":"Table Tennis"
+    },
+    {
+      "value":"tennis",
+      "text":"Tennis"
+    },
+    {
+      "value":"track_and_field",
+      "text":"Track & Field"
+    },
+    {
+      "value":"volleyball",
+      "text":"Volleyball"
+    },
+    {
+      "value":"football",
+      "text":"Football"
+    }
+]
