@@ -65,6 +65,13 @@ class LoginComponent extends Component {
     });
   }
 
+  schoolSignUp() {
+    browserHistory.push({
+      pathname: '/RegisterSchool'
+    });
+    return true;
+  }
+
   candidateSignUp(){
     browserHistory.push({
       pathname: '/RegisterApplicant'
@@ -125,7 +132,7 @@ class LoginComponent extends Component {
             <Card style={{'textAlign':'center'}} title="CALLING all SCHOOLS" bordered={false}>
               <p>Are you a school looking to sign up for our services?
                Click below to go to our sign up page.</p>
-               <Button>Sign Up</Button>
+               <Button onClick={this.schoolSignUp.bind(this)}>Sign Up</Button>
             </Card>
           </Col>
           <Col span={10}>

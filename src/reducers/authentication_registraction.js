@@ -73,6 +73,10 @@ export default function(state = INITIAL_STATE, action) {
     //console.log(action.payload);
     	return { ...state , registrationSuccessStatus: action.payload.status };
 
+		case "REGISTER_SCHOOL":
+			//console.log(action.payload);
+				return { ...state , registrationSuccessStatus: action.payload.status };
+
     case "HANDLE_ERROR":
     //console.log(action.payload);
     	return { ...state , registrationSuccessStatus: action.payload.status,

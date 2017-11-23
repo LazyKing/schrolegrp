@@ -21,7 +21,8 @@ import SchoolDetails from './components/userDashboard/schools/SchoolDetails';
 /*Login&Registration components*/
 import LoginAndRegistrationContainer from './components/registerComponents/LoginAndRegistrationContainer'
 import LoginPageAnt from './LoginAnt';
-import ApplicantRegister from './components/registerComponents/ApplicantRegister'
+import ApplicantRegister from './components/registerComponents/ApplicantRegister';
+import SchoolRegisterForm from './components/registerComponents/SchoolRegisterForm'
 
 /**
  * All routes go here.
@@ -39,6 +40,7 @@ export default (
     <Route path="/Login" component={LoginAndRegistrationContainer}>
       <IndexRoute component={LoginPageAnt} />
       <Route path="/RegisterApplicant" component={ApplicantRegister} />
+      <Route path="/RegisterSchool" component={SchoolRegisterForm} />
     </Route>
 
 
