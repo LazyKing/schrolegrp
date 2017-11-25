@@ -71,7 +71,7 @@ class SchoolRegisterForm extends Component {
 	        var user_info = { school_name };
 	        userAuthentication['user_info'] = user_info ;
 
-	        this.props.registerApplicantDispatch( userAuthentication );
+	        this.props.registerSchoolDispatch( userAuthentication );
 	      }
 	    });
   	}
