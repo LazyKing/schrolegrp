@@ -3,10 +3,10 @@ import { Navbar, NavItem, NavDropdown, Nav } from 'react-bootstrap';
 import './App.css';
 import { Link } from 'react-router'
 
-import webLogo from './assets/Schrole_Connect.png';
+import webLogo from './assets/IES_logo.png';
 
 class AppHeader extends Component {
-  
+
   constructor(props) {
     super(props);
 
@@ -25,8 +25,9 @@ class AppHeader extends Component {
       <Navbar collapseOnSelect className="navbar-fixed-top">
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#" style={{'width':200,'height':50,'padding':0}}>
-              <img src={webLogo} title="Schrole_Connect" width="200" height="50" />
+            <a href="#" style={{'width':100,'height':50,'padding':0}}>
+              <img src={webLogo} title="Schrole_Connect" width="100" height="40"
+              style={{'marginTop':5}} />
             </a>
           </Navbar.Brand>
           <Navbar.Toggle />

@@ -11,7 +11,7 @@ import { createStore, applyMiddleware } from "redux";
 import thunk from 'redux-thunk';
 import authenticationAndRegistration from "../../reducers";
 
-import webLogo from '../../assets/Schrole_Connect.png';
+import webLogo from '../../assets/IES_logo.png';
 
 class LoginAndRegistrationContainer extends Component {
   constructor(props) {
@@ -68,8 +68,9 @@ class LoginAndRegistrationContainer extends Component {
 	        <Navbar collapseOnSelect>
 	            <Navbar.Header>
 	              <Navbar.Brand>
-	                <a onClick={this.routeToHome} href="javascript.void(0)" style={{'width':200,'height':50,'padding':0}}>
-	                    <img src={webLogo} alt="not found" title="Schrole_Connect" width="200" height="50" />
+	                <a onClick={this.routeToHome} href="javascript.void(0)" style={{'width':100,'height':50,'padding':0}}>
+	                    <img src={webLogo} alt="not found" title="Schrole_Connect" width="100" height="40"
+                      style={{'marginTop':5}} />
 	                </a>
 	              </Navbar.Brand>
 	              <Navbar.Toggle />

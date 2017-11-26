@@ -36,12 +36,12 @@ class MainDiv extends Component {
         <div className="App-header home-page-imageContainer">
           <div className="col-sm-6 float-right home-page-intro-text">
             <h1 style={{'textAlign': 'center','color': '#1968a5'}}>
-                Connecting international schools with the best qualified teachers. Simply.
+                Matching highly qualified teachers, and administrators to extremely desirable international schools.
             </h1>
             <p style={{'textAlign': 'center','color': '#333333'}}>
               <strong>
-                Schrole Connect’s unique software solutions help to attract and match the best qualified teachers with hard to fill roles in international schools.
-                Reducing recruitment time and costs.<br />
+                International Education Services travel the globe to find a diversified teaching pool for schools to choose from.
+                In doing so, we expedite the recruiting and hiring process for both teachers and international education institutions.<br />
               </strong>
             </p>
           </div>

@@ -130,15 +130,13 @@ class LoginComponent extends Component {
         <Row type="flex" justify="space-between">
           <Col span={10}>
             <Card style={{'textAlign':'center'}} title="CALLING all SCHOOLS" bordered={false}>
-              <p>Are you a school looking to sign up for our services?
-               Click below to go to our sign up page.</p>
+              <p>Are you a school looking to sign up for our services? Please click below to go to our sign up page.</p>
                <Button onClick={this.schoolSignUp.bind(this)}>Sign Up</Button>
             </Card>
           </Col>
           <Col span={10}>
             <Card style={{'textAlign':'center'}} title="CALLING all CANDIDATES" bordered={false}>
-              <p>Haven't got an account with Schrole yet? Want to get the Schrole Advantage?
-               Sign up for Premium below.</p>
+              <p>Haven't got an account with IES yet? Want to become an IES Candidate? Sign up now.</p>
               <Button onClick={this.candidateSignUp.bind(this)}>Sign Up</Button>
             </Card>
           </Col>
