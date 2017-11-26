@@ -5,24 +5,36 @@ import { Route, IndexRoute } from 'react-router'
  */
 import App from './App';
 import MainDiv from './MainDiv';
-
 import JobBoard from './JobBoard';
 import About from './About';
-import UserProfile from './components/userDashboard/UserProfileDashboard';
-import Application from './components/userDashboard/Application';
-import Dashboard from './components/userDashboard/Dashboard';
-import Profile from './components/userDashboard/Profile';
-
-/*School routes*/
-import Schools from './components/userDashboard/Schools';
-import SchoolList from './components/userDashboard/schools/SchoolList';
-import SchoolDetails from './components/userDashboard/schools/SchoolDetails';
 
 /*Login&Registration components*/
 import LoginAndRegistrationContainer from './components/registerComponents/LoginAndRegistrationContainer'
 import LoginPageAnt from './LoginAnt';
 import ApplicantRegister from './components/registerComponents/ApplicantRegister';
-import SchoolRegisterForm from './components/registerComponents/SchoolRegisterForm'
+import SchoolRegisterForm from './components/registerComponents/SchoolRegisterForm';
+import SchoolRegisterBasicPage from './components/registerComponents/schoolRegister/SchoolRegisterBasicPage';
+
+/*user profile components*/
+import UserProfile from './components/userDashboard/UserProfileDashboard';
+import Application from './components/userDashboard/Application';
+import Dashboard from './components/userDashboard/Dashboard';
+import Profile from './components/userDashboard/Profile';
+/*userProfile:: School components*/
+import Schools from './components/userDashboard/Schools';
+import SchoolList from './components/userDashboard/schools/SchoolList';
+import SchoolDetails from './components/userDashboard/schools/SchoolDetails';
+
+/*school profile components*/
+import SchoolDetailsProfile from './components/schoolDashboard/UserProfileDashboard';
+import SchoolApplication from './components/schoolDashboard/Application';
+import SchoolDashboard from './components/schoolDashboard/Dashboard';
+import SchoolProfile from './components/schoolDashboard/Profile';
+/*schoolProfile:: School components*/
+// import Schools from './components/schoolDashboard/Schools';
+// import SchoolList from './components/schoolDashboard/schools/SchoolList';
+// import SchoolDetails from './components/schoolDashboard/schools/SchoolDetails';
+
 
 /**
  * All routes go here.
@@ -41,8 +53,20 @@ export default (
       <IndexRoute component={LoginPageAnt} />
       <Route path="/RegisterApplicant" component={ApplicantRegister} />
       <Route path="/RegisterSchool" component={SchoolRegisterForm} />
+      <Route path="/SchoolRegisterBasicPage" component={SchoolRegisterBasicPage} />
     </Route>
 
+    <Route name="schoolprofile" breadcrumbName="School Profile" path="/schoolprofile" component={SchoolDetailsProfile}>
+      <IndexRoute name="School_Dashboard" breadcrumbName="Dashboard" component={SchoolDashboard} />
+      <Route name="Schools" breadcrumbName="Schools" path="/schoolprofile/schools" component={Schools}>
+        <IndexRoute name="SchoolList" breadcrumbName="SchoolList" component={SchoolList} />
+        <Route name="SchoolDetails" path="/schools/:id" component={SchoolDetails} />
+      </Route>
+      <Route name="School_Vacancies" breadcrumbName="Vacancies" path="/schoolprofile/vacancies" component={About} />
+      <Route name="School_Application" breadcrumbName="Application" path="/schoolprofile/application" component={SchoolApplication} />
+      <Route name="School_Profile" breadcrumbName="Profile" path="/schoolprofile/profile" component={SchoolProfile} />
+      <Route name="School_Search" breadcrumbName="Search" path="/schoolprofile/search" component={About} />
+    </Route>
 
     <Route name="userprofile" breadcrumbName="User Profile" path="/userprofile" component={UserProfile}>
       <IndexRoute name="Dashboard" breadcrumbName="Dashboard" component={Dashboard} />

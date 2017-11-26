@@ -15,10 +15,18 @@ export default function(state = INITIAL_STATE, action) {
     case "SUBMIT_LOGIN":
 			//console.log(action.payload);
 			localStorage.setItem("userprofile", JSON.stringify(action.payload.data.user) );
-			browserHistory.push({
-				pathname: '/userprofile',
-				state: { stateData: action.payload.data.user }
-			});
+			if( action.payload.data.user.user_type === "applicant" ) {
+				browserHistory.push({
+					pathname: '/userprofile',
+					state: { stateData: action.payload.data.user }
+				});
+			} else {
+				//new_registration
+				browserHistory.push({
+					pathname: '/schoolprofile',
+					state: { stateData: action.payload.data.user }
+				});
+			}
 			return { ...state , registrationSuccessStatus: action.payload.status };
 
      case "FORGOT_PASSWORD":
