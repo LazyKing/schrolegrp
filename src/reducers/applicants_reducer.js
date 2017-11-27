@@ -8,7 +8,8 @@ const INITIAL_STATE = {
 	qualificationsDetails: {},
   experiences: {},
   extraInfo: {},
-	references: {}
+	references: {},
+	schools:[]
 }
 
 export default function(state = INITIAL_STATE, action) {
@@ -60,7 +61,7 @@ export default function(state = INITIAL_STATE, action) {
         return { ...state, extraInfo: action.payload }
 
 			case "GET_ALL_REFERENCES":
-	    console.log(action.payload)
+	    //console.log(action.payload)
 	      if( action.payload.status === 401 ) {
 	        localStorage.removeItem("userprofile");
 	        browserHistory.push({
@@ -70,6 +71,18 @@ export default function(state = INITIAL_STATE, action) {
 	      }
 	      else
 	        return { ...state, references: action.payload.references }
+
+			case "GET_ALL_SCHOOLS":
+				console.log(action.payload)
+					if( action.payload.status === 401 ) {
+						localStorage.removeItem("userprofile");
+						browserHistory.push({
+							pathname: '/Login'
+						});
+						return { ...state, schools: {} }
+					}
+					else
+						return { ...state, schools: action.payload }
 
     case "CREATE_NEW_DEPENDANT":
     //console.log(action.payload);
