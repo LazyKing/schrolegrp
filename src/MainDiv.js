@@ -14,7 +14,10 @@ import { testDispatch } from "./actions/index";
 //import BookList from "./book-list";
 
 /*Import Images*/
-import webLogo from './assets/about_us.jpg';
+//import webLogo from './assets/about_us.jpg';
+import carousel_1 from './assets/IMG_1089.JPG';
+import carousel_2 from './assets/HongKong.JPG';
+import carousel_3 from './assets/the_great_wall.png';
 import feature_1 from './assets/feature_1.jpg';
 import feature_2 from './assets/feature_2.jpg';
 import feature_3 from './assets/feature_3.jpg';
@@ -89,21 +92,21 @@ class MainDiv extends Component {
         <div className="carousel-container">
           <Carousel>
             <Carousel.Item animateIn>
-              <img width={900} height={800} alt="900x500" src={webLogo}/>
+              <img width={900} alt="900x500" src={carousel_1}/>
               <Carousel.Caption>
                 <h3>First slide label</h3>
                 <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item animateIn>
-              <img width={900} height={500} alt="900x500" src={webLogo}/>
+              <img width={900} alt="900x500" src={carousel_2}/>
               <Carousel.Caption>
                 <h3>Second slide label</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
               </Carousel.Caption>
             </Carousel.Item>
             <Carousel.Item animateIn>
-              <img width={900} height={500} alt="900x500" src={webLogo}/>
+              <img width={900} alt="900x500" src={carousel_3}/>
               <Carousel.Caption>
                 <h3>Third slide label</h3>
                 <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>

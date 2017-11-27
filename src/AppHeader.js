@@ -25,7 +25,7 @@ class AppHeader extends Component {
       <Navbar collapseOnSelect className="navbar-fixed-top">
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#" style={{'width':100,'height':50,'padding':0}}>
+            <a href="/" style={{'width':100,'height':50,'padding':0}}>
               <img src={webLogo} title="Schrole_Connect" width="100" height="40"
               style={{'marginTop':5}} />
             </a>
