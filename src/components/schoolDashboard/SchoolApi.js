@@ -30,21 +30,22 @@ class SchoolApi {
     });
   }
 
-  static updateApplicantsPersonalDetails( user, personalDetails) {
+  static updateSchoolDetails( user, schoolDetails, schoolId) {
     const baseUrl = global.devHost ;
-    const updateApplicantsPersonalDetailsUrl = baseUrl + '/applicants/profile/personal_details';
+    const updateSchoolDetailsUrl = baseUrl + `/schools/profile`;
   	const {auth_token,user_email} = user;
     const headers = this.requestHeaders(auth_token,user_email);
-    const request = new Request(updateApplicantsPersonalDetailsUrl , {
-      method: 'PUT',
-      headers: headers,
-      body: JSON.stringify({'data': personalDetails})
-    });
 
-    return fetch(request).then(response => {
-      return response.json();
-    }).catch(error => {
-      return error;
+    return axios({
+      method: 'PUT',
+      url: updateSchoolDetailsUrl,
+      headers: headers,
+      data: JSON.stringify({'data': schoolDetails})
+    }).then(function (response) {
+      return (response.data)
+    }).catch(function (error) {
+      //console.log("error",error.response);
+      return error.response ;
     });
   }
 

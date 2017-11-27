@@ -12,10 +12,10 @@ export function getSchoolDetailsDispatch(user) {
   };
 }
 
-export function updatePersonalDetailsDispatch(user, personalDetails) {
+export function updateSchoolDetailsDispatch(user, schoolDetails, schoolId) {
   return function(dispatch) {
-    return SchoolApi.updateApplicantsPersonalDetails(user, personalDetails).then(profile => {
-      dispatch(updatePersonalDetails(profile));
+    return SchoolApi.updateSchoolDetails(user, schoolDetails, schoolId).then(schoolDetails => {
+      dispatch(updateSchoolDetails(schoolDetails));
     }).catch(error => {
       throw(error);
     });
@@ -72,16 +72,6 @@ export function updateResumeDispatch(user, resume) {
   };
 }
 
-export function createNewDependantDispatch(user, newDependant) {
-  return function(dispatch) {
-    return SchoolApi.createNewDependant(user, newDependant).then(response => {
-      dispatch(createDependant(response));
-    }).catch(error => {
-      throw(error);
-    });
-  };
-}
-
 export function deleteDependantDispatch(user, dependentId) {
   return function(dispatch) {
     return SchoolApi.deleteDependant(user, dependentId).then(response => {
@@ -109,17 +99,10 @@ export function getSchoolDetails(profile) {
   };
 }
 
-export function createDependant(dependants) {
+export function updateSchoolDetails(schoolDetails) {
   return {
-    type: "CREATE_NEW_DEPENDANT",
-    payload: dependants
-  };
-}
-
-export function updatePersonalDetails(profile) {
-  return {
-    type: "UPDATE_PERSONAL_DETAILS",
-    payload: profile
+    type: "UPDATE_SCHOOL_DETAILS",
+    payload: schoolDetails
   };
 }
 

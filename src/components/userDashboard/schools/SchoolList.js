@@ -34,7 +34,7 @@ class SchoolList extends Component {
 
   render() {
     const listItems = this.state.schoolList.map((school) =>
-            <SchoolCard key={school.id} title={school.school_name} location={school.location} /> );
+            <SchoolCard key={school.id} schoolDetails={school} title={school.school_name} location={school.location} /> );
     return (
       <div className="">
         <h1 style={{'textAlign': 'left','color': '#1968a5' , padding: '10px' }}>
@@ -45,7 +45,7 @@ class SchoolList extends Component {
             <Col span={24}>
               <Row className="school-list-header" type="flex" justify="space-between">
                 <Col><span><strong>Schools</strong></span></Col>
-                <Col><span><strong>Results:2</strong></span></Col>
+                <Col><span><strong>Results:{this.state.schoolList.length}</strong></span></Col>
               </Row>
               {listItems}
             </Col>

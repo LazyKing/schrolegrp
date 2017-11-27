@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Row, Col, Alert } from 'antd';
+import { Row, Col, Alert, Button } from 'antd';
+import {  browserHistory  } from 'react-router'
 import '../../App.css';
 
 /*import components*/
@@ -19,7 +20,9 @@ class Dashboard extends Component {
     this.state = {
       'schoolProfile': {},
       'step_no': 1,
-      'new_registration': false
+      'schoold_id': '',
+      'new_registration': false,
+      'details_updated': false
     };
   }
 
@@ -31,24 +34,48 @@ class Dashboard extends Component {
 
   componentWillReceiveProps(nextProps) {
     //console.log("componentWillReceiveProps - Dashboard",nextProps);
-    const { step_no, new_registration } = nextProps.schoolProfile;
-    this.setState({ 'schoolProfile': nextProps.schoolProfile, step_no, new_registration });
+    const { step_no, new_registration, id, details_updated } = nextProps.schoolProfile;
+    this.setState({ 'schoolProfile': nextProps.schoolProfile, 'schoold_id':id, step_no, new_registration, details_updated });
+  }
+
+  continueSchoolUpdate = (props) => {
+    // console.log(this.state.schoold_id);
+    // console.log(this.state.step_no);
+    // console.log(this.state.new_registration);
+    const formContinueDetails = {
+      schoold_id: this.state.schoold_id,
+      step_no: this.state.step_no,
+      new_registration: this.state.new_registration
+    }
+    browserHistory.push({
+      pathname: '/SchoolRegisterBasicPage',
+      state: { formContinueDetails }
+    });
   }
 
   displayConfirmEmailAlertAlert () {
-      return ( <Alert
-        style={{'margin': 5 }}
-        message="Update Details"
-        description="Your school profile details has not been updated.Click on update button to continue with the process and once updated you be able to view/edit the same in profile section"
-        type="info"
-        showIcon
-      /> ) ;
+      return (
+          <Row>
+            <Col>
+              <Alert
+                style={{'margin': 5 }}
+                message="Update Details"
+                description="Your school profile details has not been updated.Click on update button to continue with the process and once updated you be able to view/edit the same in profile section"
+                type="info"
+                showIcon
+              />
+            </Col>
+            <Col>
+              <Button onClick={this.continueSchoolUpdate}>Continue to details</Button>
+            </Col>
+          </Row>
+        ) ;
   }
 
   render() {
     return (
       <div className="">
-        { (this.state.new_registration) ? this.displayConfirmEmailAlertAlert() : '' }
+        { (this.state.new_registration || this.state.details_updated) ? this.displayConfirmEmailAlertAlert() : '' }
 
         <h1 style={{'textAlign': 'left','color': '#1968a5', padding: '10px'}}>
           Welcome to your Schrole Dashboard

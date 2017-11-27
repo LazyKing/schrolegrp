@@ -10,7 +10,7 @@ class SchoolCard extends Component {
   constructor(props) {
     super(props);
     //this.state = { };
-    console.log(this.props);
+    //console.log(this.props);
   }
 
   render() {
@@ -31,7 +31,7 @@ class SchoolCard extends Component {
             <Button>Update Questions</Button>
           </Row>
           <Row className="school-card-actions-container">
-            <Link to={'/schools/' + '1'}>Anirudh</Link>
+            <Link to={'/schools/' + this.props.schoolDetails.id}>Details</Link>
           </Row>
         </Col>
       </Row>
