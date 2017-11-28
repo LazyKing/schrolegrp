@@ -31,43 +31,24 @@ class SchoolsApi {
 	    });
 	}
 
-	static createNewQualification( user, newQualification) {
-			const baseUrl = global.devHost ;
-			const createNewQualificationUrl = baseUrl + '/applicants/qualifications';
+	static getCurrentSchoolDetails(user, schoolId) {
+		const baseUrl = global.devHost ;
+		const getCurrentSchoolDetailsUrl = baseUrl + `/schools/${schoolId}`;
 
-	    const {auth_token,user_email} = user;
-	    const headers = this.requestHeaders(auth_token,user_email);
+		const {auth_token,user_email} = user;
+		const headers = this.requestHeaders(auth_token,user_email);
 
-	    return axios({
-	      method: 'POST',
-	      url: createNewQualificationUrl,
-	      headers: headers,
-	      data: JSON.stringify({'data': newQualification})
-	    }).then(function (response) {
-	      return (response.data)
-	    }).catch(function (error) {
-	      return error.response ;
-	    });
-	 }
+		return axios({
+			method: 'GET',
+			url: getCurrentSchoolDetailsUrl,
+			headers: headers
+		}).then(function (response) {
+			return (response.data)
+		}).catch(function (error) {
+			return error.response ;
+		});
+	}
 
-	static updateQualification( user, qualificationUpdate, qualificationId) {
-			const baseUrl = global.devHost ;
-			const updateQualificationUrl = baseUrl + `/applicants/qualifications/${qualificationId}`;
-
-			const {auth_token,user_email} = user;
-	    const headers = this.requestHeaders(auth_token,user_email);
-
-	    return axios({
-	      method: 'PUT',
-	      url: updateQualificationUrl,
-	      headers: headers,
-	      data: JSON.stringify({'data': qualificationUpdate})
-	    }).then(function (response) {
-	      return (response.data)
-	    }).catch(function (error) {
-	      return error.response ;
-	    });
-  	}
 }
 
 

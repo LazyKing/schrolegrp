@@ -31,7 +31,7 @@ class SchoolCard extends Component {
             <Button>Update Questions</Button>
           </Row>
           <Row className="school-card-actions-container">
-            <Link to={'/schools/' + this.props.schoolDetails.id}>Details</Link>
+            <Link to={'/userprofile/schools/' + this.props.schoolDetails.id}>Details</Link>
           </Row>
         </Col>
       </Row>

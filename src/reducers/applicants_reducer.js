@@ -9,7 +9,8 @@ const INITIAL_STATE = {
   experiences: {},
   extraInfo: {},
 	references: {},
-	schools:[]
+	schools:[],
+	schoolDetails: {}
 }
 
 export default function(state = INITIAL_STATE, action) {
@@ -73,7 +74,7 @@ export default function(state = INITIAL_STATE, action) {
 	        return { ...state, references: action.payload.references }
 
 			case "GET_ALL_SCHOOLS":
-				console.log(action.payload)
+				//console.log(action.payload)
 					if( action.payload.status === 401 ) {
 						localStorage.removeItem("userprofile");
 						browserHistory.push({
@@ -83,6 +84,10 @@ export default function(state = INITIAL_STATE, action) {
 					}
 					else
 						return { ...state, schools: action.payload }
+
+		case "CURRENT_SCHOOL_DETAILS":
+			//console.log(action.payload);
+			return { ...state, schoolDetails: action.payload }
 
     case "CREATE_NEW_DEPENDANT":
     //console.log(action.payload);

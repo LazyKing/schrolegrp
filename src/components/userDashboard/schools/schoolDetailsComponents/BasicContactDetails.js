@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import { Row, Col, Card, Icon } from 'antd';
 import { Well } from 'react-bootstrap';
 
-/*Import Redux functionalities*/
-// import { connect } from "react-redux";
-// import { bindActionCreators } from "redux";
-
 class BasicContactDetails extends Component {
 
   constructor(props) {
@@ -23,11 +19,12 @@ class BasicContactDetails extends Component {
 
   componentWillReceiveProps(nextProps) {
     //console.log("componentWillReceiveProps emergency", nextProps)
-    //this.setState({contact_details:nextProps.contact_details})
+    if( nextProps.contact_details){
+      this.setState({contact_details:nextProps.contact_details});
+    }
   }
 
   render() {
-
     return (
         <Well>
           <div>
@@ -48,15 +45,4 @@ class BasicContactDetails extends Component {
   }
 }
 
-// function mapStateToProps(state) {
-//   //console.log("mapStateToProps-qalifications",state);
-//   return { contactDetails: state.applicants.applicantsProfile.contact_details};
-// }
-//
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ updateApplicantsContactDetailsDispatch }, dispatch);
-// }
-
-
-//export default connect( mapStateToProps, mapDispatchToProps)(ContactDetails);
 export default BasicContactDetails;

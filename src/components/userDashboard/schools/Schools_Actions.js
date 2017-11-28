@@ -10,21 +10,10 @@ export function getSchoolListDispatch(user) {
   };
 }
 
-
-export function createNewQualificationDispatch(user, newQualification) {
+export function getCurrentSchoolDetailsDispatch(user, id) {
   return function(dispatch) {
-    return SchoolsApi.createNewQualification(user, newQualification).then(response => {
-      dispatch(createQualification(response));
-    }).catch(error => {
-      throw(error);
-    });
-  };
-}
-
-export function updateQualificationDispatch(user, qualificationUpdatePayload, qualificationId) {
-  return function(dispatch) {
-    return SchoolsApi.updateQualification(user, qualificationUpdatePayload, qualificationId).then(response => {
-      dispatch(updateQualification(response));
+    return SchoolsApi.getCurrentSchoolDetails(user, id).then(schoolsDetails => {
+      dispatch(getCurrentSchoolDetails(schoolsDetails));
     }).catch(error => {
       throw(error);
     });
@@ -38,16 +27,9 @@ export function getSchoolList(schools) {
   };
 }
 
-export function createQualification(qualifications) {
+export function getCurrentSchoolDetails(schoolDetails) {
   return {
-    type: "CREATE_NEW_QUALIFICATION",
-    payload: qualifications
-  };
-}
-
-export function updateQualification(qualification) {
-  return {
-    type: "UPDATE_QUALIFICATION",
-    payload: qualification
+    type: "CURRENT_SCHOOL_DETAILS",
+    payload: schoolDetails
   };
 }
