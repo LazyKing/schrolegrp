@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Button, Modal } from 'antd';
 import _ from 'lodash';
 
 /*Redux imports*/
- import { Link } from 'react-router';
+ import { Link, browserHistory } from 'react-router';
 import { connect } from "react-redux";
 import { updateSchoolDetailsDispatch, getSchoolDetailsDispatch } from "../School_Actions";
 import { bindActionCreators } from "redux";
@@ -53,54 +53,46 @@ class SchoolRegisterBasicPage extends Component {
         const currentForm = schoolFormMappings[key];
         this.setState({ stepCount:step_no, schoold_id:id, currentForm  });
       }
-			// if( nextProps.authenticationAndRegistration ) {
-			// 	const { registrationSuccessStatus } = nextProps.authenticationAndRegistration;
-			// 	if( registrationSuccessStatus !== "" ) {
-			// 		if ( registrationSuccessStatus === 201 || registrationSuccessStatus === 200  ){
-			// 			const successModal=Modal;
-			// 			const modal= successModal.success({
-			// 		 		title: 'Applicant has been successfully registered',
-			// 		 		content: 'Confirmation email has been sent to your primary email address.Please follow the instructions to verify your email',
-			// 				okText: 'Ok',
-			// 				onOk() {
-			// 					 modal.destroy();
-			// 					 nextProps.resetStore('');
-			// 					 browserHistory.push({
-			// 						 pathname: '/Login'
-			// 					 });
-			// 				},
-			// 	 		});
-			//  	} else {
-			// 	const { errorMessage, errorSummary } = nextProps.authenticationAndRegistration;
-			// 	const errorModal=Modal;
-			// 	 const modal= errorModal.error({
-			// 		 		title: errorSummary,
-			// 		 		content: errorMessage,
-			// 				okText: 'Ok',
-			// 				onOk() {
-			// 					 modal.destroy(),
-			// 					 // browserHistory.push({
-			// 						//  pathname: '/Login'
-			// 					 // });
-			// 					 nextProps.resetStore('');
-			// 				},
-			// 	 		});
-			//  		}
-			// 	}
-			// }
 		}
+
+    // routerWillLeave(nextLocation) {
+    // }
 
     componentDidMount() {
       //console.log(this.props.location);
-      const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
-      const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email }
+      //this.props.router.setRouteLeaveHook(this.props.route, this.routerWillLeave)
       if( this.props.location && this.props.location.action && this.props.location.action === "POP") {
+          const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
+          const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email };
           this.props.getSchoolDetailsDispatch(logoutPayloadHeader);
       } else if ( this.props.location && this.props.location.action && this.props.location.action === "PUSH" ) {
         const formContinueDetails = this.props.location && this.props.location.state && this.props.location.state.formContinueDetails;
         const { schoold_id, step_no=1 } = formContinueDetails;
         stepCountGlobal = step_no;
-        this.setState({ stepCount:step_no, schoold_id });
+        const key = 'step_' + step_no;
+        const currentForm = schoolFormMappings[key];
+        this.setState({ stepCount:step_no, schoold_id, currentForm });
+      }
+    }
+
+    routeToSchoolPageOnConfirm = () => {
+      if( this._currentFormProps.props.form.isFieldsTouched() ) {
+      const confirmModal =  Modal.confirm({
+          title: 'Form contains usaved data!',
+          content: 'Form contains usaved data!The data will be lost on navigation,Do you wish to continue?',
+          onOk() {
+            browserHistory.push({
+              pathname: '/schoolprofile'
+            });
+            confirmModal.destroy();
+            return true;
+          },
+          onCancel() { return false }
+        });
+      } else {
+        browserHistory.push({
+          pathname: '/schoolprofile'
+        });
       }
     }
 
@@ -110,6 +102,9 @@ class SchoolRegisterBasicPage extends Component {
 
       var payloadObj = this._currentFormProps.props.form.getFieldsValue();
       payloadObj.step_no = stepCountGlobal+1;
+      if( payloadObj.step_no === 8) {
+        payloadObj.details_updated = true;
+      }
       this._currentFormProps.props.form.validateFields((err, values) => {
         //console.log(payloadObj);
         if(!err) {
@@ -143,8 +138,7 @@ class SchoolRegisterBasicPage extends Component {
 	        				<h2>School Details Form</h2>
 								</Col>
 								<Col>
-                  <Link role="button" to={{ pathname: '/schoolprofile' }}>Visit your school page</Link>
-
+                  <Button onClick={this.routeToSchoolPageOnConfirm}> Visit your school page </Button>
 								</Col>
 							</Row>
 	        	</Col>
@@ -179,7 +173,7 @@ class SchoolRegisterBasicPage extends Component {
 	        	</Col>
 	        	<Col sm={24}>
               <div>{this.renderCurrentStepForm()}</div>
-              <Button onClick={this.onClickNextForm}> Next </Button>
+              <Button onClick={this.onClickNextForm}>{ stepCountGlobal === 8 ? 'Submit' : 'Next' } </Button>
 	      		</Col>
 	        </Row>
 	    );
@@ -187,7 +181,7 @@ class SchoolRegisterBasicPage extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log("mapStateToProps, schoolregi",state);
+  //console.log("mapStateToProps, schoolregi",state);
   const schoolDetails = state.schools && state.schools.schoolProfile
   return { schoolDetails };
 }

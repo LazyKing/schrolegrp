@@ -75,7 +75,7 @@ class Dashboard extends Component {
   render() {
     return (
       <div className="">
-        { (this.state.new_registration || this.state.details_updated) ? this.displayConfirmEmailAlertAlert() : '' }
+        { (this.state.new_registration || !this.state.details_updated) ? this.displayConfirmEmailAlertAlert() : '' }
 
         <h1 style={{'textAlign': 'left','color': '#1968a5', padding: '10px'}}>
           Welcome to your Schrole Dashboard
