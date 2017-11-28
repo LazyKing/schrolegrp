@@ -143,7 +143,7 @@ class AllExperiences extends Component {
 }
 
 function mapStateToProps(state) {
-  //console.log("mapStateToProps, qualification",state);
+  //console.log("mapStateToProps, experiences",state);
   return { experiencesArray:  state.applicants.experiences };
 }
 

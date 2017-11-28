@@ -217,7 +217,7 @@ class BasicProfile extends Component {
 }
 
 function mapStateToProps(state) {
-  //console.log("mapStateToProps",state);
+  //console.log("mapStateToProps basic prof",state);
   return { applicantsProfilePayload: state.applicants};
 }
 
