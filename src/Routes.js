@@ -13,7 +13,6 @@ import LoginAndRegistrationContainer from './components/registerComponents/Login
 import LoginPageAnt from './LoginAnt';
 import ApplicantRegister from './components/registerComponents/ApplicantRegister';
 import SchoolRegisterForm from './components/registerComponents/SchoolRegisterForm';
-import SchoolRegisterBasicPage from './components/registerComponents/schoolRegister/SchoolRegisterBasicPage';
 
 /*user profile components*/
 import UserProfile from './components/userDashboard/UserProfileDashboard';
@@ -26,7 +25,8 @@ import SchoolList from './components/userDashboard/schools/SchoolList';
 import SchoolDetails from './components/userDashboard/schools/SchoolDetails';
 
 /*school profile components*/
-import SchoolDetailsProfile from './components/schoolDashboard/UserProfileDashboard';
+import SchoolRegisterBasicPage from './components/schoolDashboard/schoolRegister/SchoolRegisterBasicPage';
+import SchoolProfileDashboard from './components/schoolDashboard/SchoolProfileDashboard';
 import SchoolApplication from './components/schoolDashboard/Application';
 import SchoolDashboard from './components/schoolDashboard/Dashboard';
 import SchoolProfile from './components/schoolDashboard/Profile';
@@ -53,14 +53,14 @@ export default (
       <IndexRoute component={LoginPageAnt} />
       <Route path="/RegisterApplicant" component={ApplicantRegister} />
       <Route path="/RegisterSchool" component={SchoolRegisterForm} />
-      <Route path="/SchoolRegisterBasicPage" component={SchoolRegisterBasicPage} />
     </Route>
 
-    <Route name="schoolprofile" breadcrumbName="School Profile" path="/schoolprofile" component={SchoolDetailsProfile}>
+    <Route name="schoolprofile" breadcrumbName="School Profile" path="/schoolprofile" component={SchoolProfileDashboard}>
       <IndexRoute name="School_Dashboard" breadcrumbName="Dashboard" component={SchoolDashboard} />
+      <Route path="/SchoolRegisterBasicPage" component={SchoolRegisterBasicPage} />
       <Route name="Schools" breadcrumbName="Schools" path="/schoolprofile/schools" component={Schools}>
         <IndexRoute name="SchoolList" breadcrumbName="SchoolList" component={SchoolList} />
-        <Route name="SchoolDetails" path="/schools/:id" component={SchoolDetails} />
+        <Route name="SchoolDetails" path="/schoolprofile/schools/:id" component={SchoolDetails} />
       </Route>
       <Route name="School_Vacancies" breadcrumbName="Vacancies" path="/schoolprofile/vacancies" component={About} />
       <Route name="School_Application" breadcrumbName="Application" path="/schoolprofile/application" component={SchoolApplication} />
@@ -72,7 +72,7 @@ export default (
       <IndexRoute name="Dashboard" breadcrumbName="Dashboard" component={Dashboard} />
       <Route name="Schools" breadcrumbName="Schools" path="/userprofile/schools" component={Schools}>
         <IndexRoute name="SchoolList" breadcrumbName="SchoolList" component={SchoolList} />
-        <Route name="SchoolDetails" path="/schools/:id" component={SchoolDetails} />
+        <Route name="SchoolDetails" path="/userprofile/schools/:id" component={SchoolDetails} />
       </Route>
       <Route name="Vacancies" breadcrumbName="Vacancies" path="/userprofile/vacancies" component={About} />
       <Route name="Application" breadcrumbName="Application" path="/userprofile/application" component={Application} />

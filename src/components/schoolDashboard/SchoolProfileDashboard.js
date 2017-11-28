@@ -28,7 +28,7 @@ const masterTabs = {
   'search' : '6'
 }
 
-class UserProfileDashboard extends Component {
+class SchoolProfileDashboard extends Component {
 
   onMenuClick = (e) => {
     this.setState({
@@ -51,7 +51,7 @@ class UserProfileDashboard extends Component {
       this.setState ({ currentTab: currentMasterTabKey});
     }
 
-    if(this.props.location.state) {
+    if(this.props.location.state && this.props.location.state.stateData ) {
       const { email, auth_token} = this.props.location.state.stateData ;
       this.setState({ user: email , authToken: auth_token });
     } else if ( localStorage.getItem("userprofile") ) {
@@ -130,4 +130,4 @@ class UserProfileDashboard extends Component {
   }
 }
 
-export default UserProfileDashboard;
+export default SchoolProfileDashboard;
