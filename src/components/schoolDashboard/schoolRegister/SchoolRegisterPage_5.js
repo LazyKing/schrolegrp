@@ -9,6 +9,7 @@ import extra_curricular_programs from "../../../assets/data/extra_curricular_pro
 import type_of_curriculum from "../../../assets/data/type_of_curriculum.json";
 import sports from "../../../assets/data/sports.json";
 import examinationAndTests from "../../../assets/data/examinationAndTests.json";
+import school_type from "../../../assets/data/school_type.json";
 
 /*import components*/
 const FormItem = Form.Item;
@@ -20,6 +21,7 @@ const extraCurricularProgramsOptions = extra_curricular_programs.map( extra_curr
 const typeOfCurriculumOptions = type_of_curriculum.map( type_of_curriculum => <Option key={type_of_curriculum.value} value={type_of_curriculum.value}>{type_of_curriculum.text}</Option>);
 const sportsOptions = sports.map( sport => <Option key={sport.value} value={sport.value}>{sport.text}</Option>);
 const examinationAndTestsOptions = examinationAndTests.map( examinationAndTest => <Option key={examinationAndTest.value} value={examinationAndTest.value}>{examinationAndTest.text}</Option>);
+const schoolTypeOptions = school_type.map( schoolType => <Option key={schoolType.value} value={schoolType.value}>{schoolType.text}</Option>);
 
 
 class SchoolRegisterPage_5 extends Component {
@@ -85,7 +87,7 @@ class SchoolRegisterPage_5 extends Component {
                 label="Elementary"
 
               >
-                {getFieldDecorator('elementary', {
+                {getFieldDecorator('elementary_class_size', {
                   rules: [{
                     required: true, message: 'Value is required',
                   }],
@@ -98,7 +100,7 @@ class SchoolRegisterPage_5 extends Component {
                 label="Secondary"
 
               >
-                {getFieldDecorator('secondary', {
+                {getFieldDecorator('secondary_class_size', {
                   rules: [{
                     required: true, message: 'Value is required',
                   }],
@@ -107,6 +109,17 @@ class SchoolRegisterPage_5 extends Component {
                 )}
               </FormItem>
 
+							<FormItem
+								{...formItemLayout}
+								label="School Type"
+							>
+							{getFieldDecorator('school_type', { initialValue: 'day' })(
+								<Select
+								style={{ width: '100%' }}>
+									{schoolTypeOptions}
+								</Select>
+							)}
+							</FormItem>
 
               <FormItem
                 {...formItemLayout}
@@ -185,7 +198,7 @@ class SchoolRegisterPage_5 extends Component {
                 {...formItemLayout}
                 label="Examination and Tests"
               >
-              {getFieldDecorator('examinationAndTestsOptions', { initialValue: 'SAT' })(
+              {getFieldDecorator('examination_and_tests', { initialValue: 'SAT' })(
                 <Select
                 mode="multiple"
                 style={{ width: '100%' }}>

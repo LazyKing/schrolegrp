@@ -1,0 +1,18 @@
+[
+    {
+      "value": "international",
+      "text":"International"
+    },
+    {
+      "value":"for_profit",
+      "text":"For Profit"
+    },
+    {
+      "value":"day",
+      "text":"Day"
+    },
+    {
+      "value":"co-educational",
+      "text":"Co-Educational"
+    }
+]
