@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Form, Input, InputNumber } from 'antd';
 
-/*Import redux components*/
-/*Redux imports*/
-import { connect } from "react-redux";
-import { registerApplicantDispatch, resetStore } from "../../../actions/Register_Actions";
-import { bindActionCreators } from "redux";
-
 /*import components*/
 const FormItem = Form.Item;
 
@@ -14,17 +8,10 @@ class SchoolRegisterPage_4 extends Component {
 
 		constructor(props) {
     	super(props);
-
-	    this.state = {
-	      confirmDirty: ''
-	    };
+	    this.state = {};
   	}
 
-		componentWillReceiveProps(nextProps) {
-		}
-
   	render() {
-
   		const { getFieldDecorator } = this.props.form;
       const formItemLayout = {
 	      labelCol: {
@@ -63,7 +50,7 @@ class SchoolRegisterPage_4 extends Component {
                 label="Low:"
 
               >
-                {getFieldDecorator('low', {
+                {getFieldDecorator('tuition_low', {
                   rules: [{
                     required: true, message: 'Value is required',
                   }],
@@ -77,7 +64,7 @@ class SchoolRegisterPage_4 extends Component {
                 label="High:"
 
               >
-                {getFieldDecorator('high', {
+                {getFieldDecorator('tution_high', {
                   rules: [{
                     required: true, message: 'Value is required',
                   }],
@@ -93,15 +80,4 @@ class SchoolRegisterPage_4 extends Component {
   	}
 }
 
-function mapStateToProps(state) {
-  //console.log(state);
-  return { };
-}
-
-// Anything returned from this function will end up as props
-// on the BookList container
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ registerApplicantDispatch:registerApplicantDispatch }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(SchoolRegisterPage_4));
+export default Form.create()(SchoolRegisterPage_4);

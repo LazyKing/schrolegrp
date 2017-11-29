@@ -1,12 +1,6 @@
 import React, { Component } from 'react';
 import { Row, Col, Form, Input, InputNumber } from 'antd';
 
-/*Import redux components*/
-/*Redux imports*/
-import { connect } from "react-redux";
-import { registerApplicantDispatch, resetStore } from "../../../actions/Register_Actions";
-import { bindActionCreators } from "redux";
-
 /*import components*/
 const FormItem = Form.Item;
 
@@ -14,17 +8,10 @@ class SchoolRegisterPage_3 extends Component {
 
 		constructor(props) {
     	super(props);
-
-	    this.state = {
-	      confirmDirty: ''
-	    };
+	    this.state = { };
   	}
 
-		componentWillReceiveProps(nextProps) {
-		}
-
   	render() {
-
   		const { getFieldDecorator } = this.props.form;
       const formItemLayout = {
 	      labelCol: {
@@ -137,7 +124,7 @@ class SchoolRegisterPage_3 extends Component {
                 label="Nursery/Infants:"
 
               >
-                {getFieldDecorator('nursery', {
+                {getFieldDecorator('no_of_nursery_students', {
                   rules: [{
                     required: true, message: 'Value is required',
                   }],
@@ -150,7 +137,7 @@ class SchoolRegisterPage_3 extends Component {
                 label="PreK"
 
               >
-                {getFieldDecorator('prek', {
+                {getFieldDecorator('no_of_prek_students', {
                   rules: [{
                     required: true, message: 'Value is required',
                   }],
@@ -163,7 +150,7 @@ class SchoolRegisterPage_3 extends Component {
                 label="Elementary K-5"
 
               >
-                {getFieldDecorator('elementary', {
+                {getFieldDecorator('no_of_elementary_students', {
                   rules: [{
                     required: true, message: 'Value is required',
                   }],
@@ -176,7 +163,7 @@ class SchoolRegisterPage_3 extends Component {
                 label="Middle School 6-8"
 
               >
-                {getFieldDecorator('middle_school', {
+                {getFieldDecorator('no_of_middle_school_students', {
                   rules: [{
                     required: true, message: 'Value is required',
                   }],
@@ -189,7 +176,7 @@ class SchoolRegisterPage_3 extends Component {
                 label="High School 9-12"
 
               >
-                {getFieldDecorator('high_school', {
+                {getFieldDecorator('no_of_high_school_students', {
                   rules: [{
                     required: true, message: 'Value is required',
                   }],
@@ -202,7 +189,7 @@ class SchoolRegisterPage_3 extends Component {
                 label="Grade 13"
 
               >
-                {getFieldDecorator('grade', {
+                {getFieldDecorator('no_of_grade_students', {
                   rules: [{
                     required: true, message: 'Value is required',
                   }],
@@ -218,7 +205,7 @@ class SchoolRegisterPage_3 extends Component {
                 label="US"
 
               >
-                {getFieldDecorator('us', {
+                {getFieldDecorator('no_of_us_nationalities', {
                   rules: [{
                     required: true, message: 'Value is required',
                   }],
@@ -233,7 +220,7 @@ class SchoolRegisterPage_3 extends Component {
                 label="UK"
 
               >
-                {getFieldDecorator('uk', {
+                {getFieldDecorator('no_of_uk_nationalities', {
                   rules: [{
                     required: true, message: 'Value is required',
                   }],
@@ -247,7 +234,7 @@ class SchoolRegisterPage_3 extends Component {
                 label="Host Nationality"
 
               >
-                {getFieldDecorator('host_nationality', {
+                {getFieldDecorator('no_of_host_nationality_nationalities', {
                   rules: [{
                     required: true, message: 'Value is required',
                   }],
@@ -260,7 +247,7 @@ class SchoolRegisterPage_3 extends Component {
                 label="All Others"
 
               >
-                {getFieldDecorator('all_others', {
+                {getFieldDecorator('no_of_all_others_nationalities', {
                   rules: [{
                     required: true, message: 'Value is required',
                   }],
@@ -276,15 +263,4 @@ class SchoolRegisterPage_3 extends Component {
   	}
 }
 
-function mapStateToProps(state) {
-  //console.log(state);
-  return { };
-}
-
-// Anything returned from this function will end up as props
-// on the BookList container
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ registerApplicantDispatch:registerApplicantDispatch }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(SchoolRegisterPage_3));
+export default Form.create()(SchoolRegisterPage_3);

@@ -1,11 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Form, Input, Button, Modal } from 'antd';
-
-/*Import redux components*/
-/*Redux imports*/
-import { connect } from "react-redux";
-import { registerApplicantDispatch, resetStore } from "../../../actions/Register_Actions";
-import { bindActionCreators } from "redux";
+import { Row, Col, Form, Input } from 'antd';
 
 /*import components*/
 const FormItem = Form.Item;
@@ -149,15 +143,4 @@ class SchoolRegisterPage_2 extends Component {
   	}
 }
 
-function mapStateToProps(state) {
-  //console.log(state);
-  return { };
-}
-
-// Anything returned from this function will end up as props
-// on the BookList container
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ registerApplicantDispatch:registerApplicantDispatch }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Form.create()(SchoolRegisterPage_2));
+export default Form.create()(SchoolRegisterPage_2);
