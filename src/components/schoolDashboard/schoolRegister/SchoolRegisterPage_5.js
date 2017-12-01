@@ -10,6 +10,7 @@ import type_of_curriculum from "../../../assets/data/type_of_curriculum.json";
 import sports from "../../../assets/data/sports.json";
 import examinationAndTests from "../../../assets/data/examinationAndTests.json";
 import school_type from "../../../assets/data/school_type.json";
+import accredited_by from "../../../assets/data/accredited_by.json";
 
 /*import components*/
 const FormItem = Form.Item;
@@ -22,6 +23,7 @@ const typeOfCurriculumOptions = type_of_curriculum.map( type_of_curriculum => <O
 const sportsOptions = sports.map( sport => <Option key={sport.value} value={sport.value}>{sport.text}</Option>);
 const examinationAndTestsOptions = examinationAndTests.map( examinationAndTest => <Option key={examinationAndTest.value} value={examinationAndTest.value}>{examinationAndTest.text}</Option>);
 const schoolTypeOptions = school_type.map( schoolType => <Option key={schoolType.value} value={schoolType.value}>{schoolType.text}</Option>);
+const accreditedByOptions = accredited_by.map( accreditedBy => <Option key={accreditedBy.value} value={accreditedBy.value}>{accreditedBy.text}</Option>);
 
 
 class SchoolRegisterPage_5 extends Component {
@@ -117,6 +119,18 @@ class SchoolRegisterPage_5 extends Component {
 								<Select
 								style={{ width: '100%' }}>
 									{schoolTypeOptions}
+								</Select>
+							)}
+							</FormItem>
+
+							<FormItem
+								{...formItemLayout}
+								label="Accredited By"
+							>
+							{getFieldDecorator('accredited_by', { initialValue: 'CIS' })(
+								<Select
+								style={{ width: '100%' }}>
+									{accreditedByOptions}
 								</Select>
 							)}
 							</FormItem>

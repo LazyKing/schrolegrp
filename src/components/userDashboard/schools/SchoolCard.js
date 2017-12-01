@@ -19,24 +19,25 @@ class SchoolCard extends Component {
         <Col className="school-card-container">
           <Row type="flex" justify="space-between" className="school-card-name-container col-sm-12">
             <Col>
-              <h3>{this.props.title}</h3>
-              <h4>{this.props.location}</h4>
+              <h3 className="schoolName">{this.props.title}</h3>
+              <h4 className="country">{this.props.schoolDetails.country}</h4>
             </Col>
             <Col>
-              <p>School Profile</p>
-              <p>School Website</p>
+              <p>
+                <Link to={'/userprofile/schools/' + this.props.schoolDetails.id}>School Profile</Link>
+              </p>
+              <p>
+                <a href={this.props.schoolDetails.website} target="_blank">School Website</a>
+              </p>
             </Col>
-          </Row>
-          <Row className="school-card-actions-container">
-            <Button>Update Questions</Button>
-          </Row>
-          <Row className="school-card-actions-container">
-            <Link to={'/userprofile/schools/' + this.props.schoolDetails.id}>Details</Link>
           </Row>
         </Col>
       </Row>
     );
   }
 }
-
+/*
+<Row className="school-card-actions-container">
+  <Button>Update Questions</Button>
+</Row>*/
 export default SchoolCard;

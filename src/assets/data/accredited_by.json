@@ -1,11 +1,11 @@
 [
     {
-      "value": "common_ground_collaborative",
-      "text":"Common Ground Collaborative"
+      "value": "CIS",
+      "text":"CIS"
     },
     {
-      "value": "montessori",
-      "text":"Montessori"
+      "value": "MSACS",
+      "text":"MSACS"
     },
     {
       "value": "international",
@@ -16,8 +16,8 @@
       "text":"IB PYP"
     },
     {
-      "value": "USA",
-      "text":"USA"
+      "value": "IB_DP",
+      "text":"IB DP"
     },
     {
       "value": "IB_MYP",
