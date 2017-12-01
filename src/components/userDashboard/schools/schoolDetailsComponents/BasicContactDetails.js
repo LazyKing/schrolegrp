@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Card, Icon } from 'antd';
+import { Row, Col, Icon } from 'antd';
 import { Well } from 'react-bootstrap';
 
 class BasicContactDetails extends Component {
@@ -8,7 +8,6 @@ class BasicContactDetails extends Component {
     super(props);
     //console.log(this.props);
     this.state = {
-      showDescription: false,
       contact_details:{
         phone:'9999',
         fax:'9999',
@@ -27,6 +26,7 @@ class BasicContactDetails extends Component {
   render() {
     return (
         <Well>
+          <h3>Basic Contacts</h3>
           <div>
              <Row type="flex" justify="space-between">
               <Col><span><strong>Phone Number</strong></span></Col>

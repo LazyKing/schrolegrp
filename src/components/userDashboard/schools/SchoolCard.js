@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Row, Col } from 'antd';
+import { Button, Row, Col, Icon } from 'antd';
 import {Link} from 'react-router';
 import '../../../stylesheets/userdashboard.css';
 import '../../../App.css';
@@ -24,10 +24,10 @@ class SchoolCard extends Component {
             </Col>
             <Col>
               <p>
-                <Link to={'/userprofile/schools/' + this.props.schoolDetails.id}>School Profile</Link>
+                <Icon type="file" /><Link to={'/userprofile/schools/' + this.props.schoolDetails.id}>School Profile</Link>
               </p>
               <p>
-                <a href={this.props.schoolDetails.website} target="_blank">School Website</a>
+                <Icon type="global" /><a href={this.props.schoolDetails.website} target="_blank">School Website</a>
               </p>
             </Col>
           </Row>

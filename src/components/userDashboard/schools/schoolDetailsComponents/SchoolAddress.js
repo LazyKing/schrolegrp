@@ -24,9 +24,10 @@ class SchoolAddress extends Component {
     const { street_1='', street_2='', postal_code='', city='',country='' } = this.state.school_address;
     return (
         <Well>
+          <h3>Address</h3>
           <div>
              <Row type="flex" justify="space-between">
-              <Col><span><strong>Address</strong></span></Col>
+              <Col><span><strong>Postal Address</strong></span></Col>
               <Col>
                 <p>{street_1}</p>
                 <p>{street_2}</p>

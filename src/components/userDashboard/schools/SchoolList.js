@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col, Pagination } from 'antd';
 
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
@@ -32,6 +32,10 @@ class SchoolList extends Component {
     }
   }
 
+  onPageChange = (page, pageSize) => {
+    console.log("Page:", page,pageSize);
+  }
+
   render() {
     const listItems = this.state.schoolList.map((school) =>
             <SchoolCard key={school.id} schoolDetails={school} title={school.school_name} location={school.location} /> );
@@ -42,12 +46,17 @@ class SchoolList extends Component {
         </h1>
         <div className="" style={{ background: '#ECECEC', padding: '30px' }} >
           <Row gutter={16}>
-            <Col span={24}>
+            <Col offset={2} span={20}>
               <Row className="school-list-header" type="flex" justify="space-between">
                 <Col><span><strong>Schools</strong></span></Col>
                 <Col><span><strong>Results:{this.state.schoolList.length}</strong></span></Col>
               </Row>
               {listItems}
+              <Row type="flex" justify="space-around" style={{ marginTop:'10px' }}>
+                <Col>
+                  <Pagination onChange={this.onPageChange} defaultCurrent={1} total={100} />
+                </Col>
+              </Row>
             </Col>
           </Row>
         </div>

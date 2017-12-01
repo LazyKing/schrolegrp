@@ -20,13 +20,20 @@
 }*/
 .school-list-header {
   padding: 10px;
-  background-color: cornflowerblue;
+  background: #667db6;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to top, #667db6, #0082c8, #0082c8, #667db6);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to top, #667db6, #0082c8, #0082c8, #667db6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .school-card-listItem{
   margin-top: 10px;
   padding: 10px 0px;
   border: 1px rgba(117, 112, 112, 0.2) solid;
+  background-color: lightgray;
 }
+.school-card-listItem .schoolName {
+  color: cornflowerblue;
+}
+
 .school-card-actions-container{
 
 }
