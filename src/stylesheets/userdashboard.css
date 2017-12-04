@@ -30,13 +30,24 @@
   border: 1px rgba(117, 112, 112, 0.2) solid;
   background-color: lightgray;
 }
-.school-card-listItem .schoolName {
+.school-card-listItem .schoolName, .vacancy-list .vacancy-card .vacancyTitle{
   color: cornflowerblue;
 }
 
 .school-card-actions-container{
 
 }
+
+.vacancy-list .vacancy-card:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+}
+.vacancy-list .vacancy-description{
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .basic-profile-mainContainer, .experience-mainContainer,
 .extraInformation-mainContainer, .qualification-mainContainer,
 .references-mainContainer {

@@ -23,6 +23,8 @@ import Profile from './components/userDashboard/Profile';
 import Schools from './components/userDashboard/Schools';
 import SchoolList from './components/userDashboard/schools/SchoolList';
 import SchoolDetails from './components/userDashboard/schools/SchoolDetails';
+/*userprofile-vacancyComponents*/
+import VacancyDetails from './components/userDashboard/schools/schoolDetailsComponents/vacancyComponents/VacancyDetails';
 
 /*school profile components*/
 import SchoolRegisterBasicPage from './components/schoolDashboard/schoolRegister/SchoolRegisterBasicPage';
@@ -62,6 +64,8 @@ export default (
         <IndexRoute name="SchoolList" breadcrumbName="SchoolList" component={SchoolList} />
         <Route name="SchoolDetails" path="/schoolprofile/schools/:id" component={SchoolDetails} />
       </Route>
+      <Route name="Vacany_Details" breadcrumbName="Vacancy Details" path="/schoolprofile/vacany/:id" component={VacancyDetails} />
+
       <Route name="School_Vacancies" breadcrumbName="Vacancies" path="/schoolprofile/vacancies" component={About} />
       <Route name="School_Application" breadcrumbName="Application" path="/schoolprofile/application" component={SchoolApplication} />
       <Route name="School_Profile" breadcrumbName="Profile" path="/schoolprofile/profile" component={SchoolProfile} />

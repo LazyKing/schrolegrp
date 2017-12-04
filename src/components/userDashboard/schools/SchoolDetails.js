@@ -15,7 +15,7 @@ import SchoolAccreditationList from './schoolDetailsComponents/SchoolAccreditati
 import SchoolAccommodationDetails from './schoolDetailsComponents/SchoolAccommodationDetails';
 import SchoolInsuranceDetails from './schoolDetailsComponents/SchoolInsuranceDetails';
 import SchoolGeneralDetails from './schoolDetailsComponents/SchoolGeneralDetails';
-
+import SchoolVacanciesList from './schoolDetailsComponents/vacancyComponents/SchoolVacanciesList';
 
 class SchoolDetails extends Component {
 
@@ -116,7 +116,7 @@ class SchoolDetails extends Component {
       </Row>
       <h2>Vacancy Information</h2>
       <hr style={{ border: '1px rgba(37, 132, 193, 0.9) solid', 'margin': '10px 0px' }}/>
-      
+      <SchoolVacanciesList school_id={this.props.params.id}/>
     </div>
     );
   }
