@@ -217,6 +217,13 @@ export default function(state = INITIAL_STATE, action) {
         });
       return state;
 
+		case "HANDLE_APPLICANT_ERROR":
+			localStorage.removeItem("userprofile");
+				browserHistory.push({
+					pathname: '/Login'
+				});
+			return { ...state, INITIAL_STATE };
+
     default:
       return state;
   }

@@ -12,7 +12,7 @@ export default function(state = INITIAL_STATE, action) {
 
     case "GET_SCHOOL_PROFILE":
     //console.log(action.payload);
-      if( action.payload.status === 401 ) {
+      if( action.payload || action.payload.status === 401 ) {
         localStorage.removeItem("userprofile");
         browserHistory.push({
           pathname: '/Login'

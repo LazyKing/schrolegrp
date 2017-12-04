@@ -21,10 +21,17 @@ export function getCurrentSchoolDetailsDispatch(user, id) {
 }
 
 export function getSchoolList(schools) {
-  return {
-    type: "GET_ALL_SCHOOLS",
-    payload: schools
-  };
+  if( !schools || schools.status === 401 ) {
+    return {
+      type: "HANDLE_APPLICANT_ERROR",
+      payload: schools
+    };
+  } else {
+    return {
+      type: "GET_ALL_SCHOOLS",
+      payload: schools
+    };
+  }
 }
 
 export function getCurrentSchoolDetails(schoolDetails) {
