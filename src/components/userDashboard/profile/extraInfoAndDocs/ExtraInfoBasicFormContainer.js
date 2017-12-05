@@ -57,7 +57,7 @@ class ExtraInfoBasicFormContainer extends Component {
 		//console.log(this.state);
   	return (
   		<div className="extra_info_basic_container">
-				<Modal className="card-header-background" 
+				<Modal className="card-header-background"
 					title="Edit Qualification"
 					visible={this.state.visibleExtraInfoForm}
 					onOk={this.handleExtraInfoFormOk}
@@ -65,7 +65,7 @@ class ExtraInfoBasicFormContainer extends Component {
 					onCancel={this.handleExtraInfoFormCancel}
 					okText={'Save'}
 					cancelText={'cancel'}
-					width={'70%'}
+					width={'80%'}
 				>
 					<ExtraInfoBasicForm extraInfoDetails={this.state.extraInfoDetails}
 						wrappedComponentRef={(ref) => this._extraInfoFormProps = ref} />
