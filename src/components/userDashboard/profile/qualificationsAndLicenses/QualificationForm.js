@@ -190,10 +190,10 @@ export default Form.create({
     var updatedState = {};
     _.forEach( props.currentQualification, function(value, key) {
       if(key === 'date_of_completion' ){
-        updatedState[key] = { 'value': new moment(value, 'YYYY-MM-DD') }
+        updatedState[key] = Form.createFormField({ 'value': new moment(value, 'YYYY-MM-DD') });
       }
       else{
-        updatedState[key] = { 'value': value }
+        updatedState[key] = Form.createFormField({ 'value': value });
       }
     });
     return updatedState;

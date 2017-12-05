@@ -68,7 +68,7 @@ export default Form.create({
     //console.log(props);
     var updatedState = {};
     _.forEach( props.currentLicence, function(value, key) {
-        updatedState[key] = { 'value': value }
+        updatedState[key] = Form.createFormField({ 'value': value });
     });
     return updatedState;
   }
