@@ -134,7 +134,9 @@ class ImageUpload extends Component {
             </Button>
           </Upload>
         </Modal>
-        <Button type="primary" id="upload_profile_pic" onClick={this.showUploadModal}> Upload Image </Button>
+        <Button type="primary" id="upload_profile_pic" onClick={this.showUploadModal}>
+          <Icon type="edit" />Upload Image 
+        </Button>
       </div>
     );
   }

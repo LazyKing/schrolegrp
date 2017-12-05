@@ -119,10 +119,9 @@
   justify-content: center;
 }
 
-.login-formControl-align {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.login-form-header {
+  text-align: center;
+  margin-top: 10px;
 }
 
 .login-formControl-styles {

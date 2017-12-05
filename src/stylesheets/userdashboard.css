@@ -6,7 +6,9 @@
 .dashboard-card{
   margin: 5px 0px;
 }
-
+.dashboard-applicationsList-container, .dashboard-schoolList-container {
+  margin-top: 35px;
+}
 .school-card-container {
   display: flex;
   flex-direction: row;
@@ -25,7 +27,7 @@
   background: linear-gradient(to top, #667db6, #0082c8, #0082c8, #667db6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .school-card-listItem{
-  margin-top: 10px;
+  margin-top: 5px;
   padding: 10px 0px;
   border: 1px rgba(117, 112, 112, 0.2) solid;
   background-color: lightgray;
@@ -59,12 +61,13 @@
 }
 
 .profile-percentage-card{
+  height: 350px;
+}
+.profile-percentage-card * {
   display:flex;
   flex-direction:column;
   align-items:center;
-  height: 350px;
 }
-
 .profile-details-container{
   margin-top: 20px;
 }

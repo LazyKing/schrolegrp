@@ -48,7 +48,7 @@ class Profile extends Component {
               <NavItem eventKey={'profileDetails'} title="Item">Personal Details</NavItem>
               <NavItem eventKey={'qualifications'} title="Item">Qualifications/Licences</NavItem>
               <NavItem eventKey={'experience'} title="Item">Experience</NavItem>
-              <NavItem eventKey={'extraInfo'} title="Item">Extra Information & Documents</NavItem>
+              <NavItem eventKey={'extraInfo'} title="Item">Extra Info & Documents</NavItem>
               <NavItem eventKey={'referees'} title="Item">Referees</NavItem>
             </Nav>
           </Row>

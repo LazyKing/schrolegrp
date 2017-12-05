@@ -94,9 +94,7 @@ class LoginComponent extends Component {
     <div className="AppHeader">
       <div className="float-none col-sm-4 login-formControl-styles login-form-styles container-fluid">
           <Form onSubmit={this.handleSubmit} className="login-form">
-            <FormItem>
-                <h3 className="col-sm-12 login-formControl-align">Welcome to Schol</h3>
-            </FormItem>
+            <h3 className="col-sm-12 login-form-header">Welcome to Schol</h3>
             <FormItem>
               {getFieldDecorator('email', {
                 rules: [{

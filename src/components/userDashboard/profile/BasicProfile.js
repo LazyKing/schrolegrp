@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Row, Col, Card, Progress,
-          LocaleProvider, Form, Modal } from 'antd';
+          LocaleProvider, Form, Modal, Icon } from 'antd';
 
 import enUS from 'antd/lib/locale-provider/en_US';
 /*import components/modules*/
@@ -147,9 +147,11 @@ class BasicProfile extends Component {
           <div className="profile-basic-info-container">
             <Row gutter={16}>
               <Col xs={0} sm={10} md={8} lg={6}>
-                <Card className="profile-pic-card" title={this.state.first_name + ' ' + this.state.last_name} style={{ height: 350 }}>
-                  <img style={{ width: '100%', height:'100%' }} src= {profilePicUrl} />
-                  <ImageUpload />
+                <Card className="profile-pic-card" title={this.state.first_name + ' ' + this.state.last_name}
+                  style={{ height: 350 }}
+                  cover={<img style={{ width: '100%', height:'100%' }} alt="example" src= {profilePicUrl} />}
+                  actions={[<ImageUpload />]} >
+                  <p></p>
                 </Card>
               </Col>
               <Col xs={0} sm={14} md={8} lg={10} >

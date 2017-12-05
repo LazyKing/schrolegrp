@@ -25,7 +25,7 @@ class DashboardSchoolList extends Component {
     const listItems = this.state.schools.map((school) =>
             <DashboardSchoolCard key={school.id} title={school.title} location={school.location} /> );
     return (
-      <div className="">
+      <div className="dashboard-schoolList-container">
         <div className="" style={{ background: '#ECECEC', padding: '15px' }} >
           <Row gutter={16}>
             <Col span={24}>
