@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getSchoolListDispatch } from "../../Schools_Actions";
 
-import VacancyCard from './VacancyCard';
+//import VacancyCard from './VacancyCard';
 
 const IconText = ({ type, text, processDate }) => (
   <span>
