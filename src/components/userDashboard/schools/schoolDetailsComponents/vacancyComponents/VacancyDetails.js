@@ -49,12 +49,14 @@ class VacancyDetails extends Component {
   }
 
   componentDidMount() {
+    //console.log(this.props);
     const { email, auth_token} = JSON.parse(localStorage.getItem("userprofile"));
     const logoutPayloadHeader = { 'auth_token': auth_token, 'user_email': email }
-    if( this.props.params && this.props.params.id) {
-        this.props.getCurrentSchoolDetailsDispatch(logoutPayloadHeader, this.props.params.id).then(() =>
+    if( this.props.params && this.props.params.schoolid) {
+        this.props.getCurrentSchoolDetailsDispatch(logoutPayloadHeader, this.props.params.schoolid).then(() =>
         {
           //make getVacancyDetailsCall
+          //this.props.params.vacanyid
         });
     }
   }

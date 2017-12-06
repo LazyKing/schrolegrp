@@ -64,7 +64,7 @@ export default (
         <IndexRoute name="SchoolList" breadcrumbName="SchoolList" component={SchoolList} />
         <Route name="SchoolDetails" path="/schoolprofile/schools/:id" component={SchoolDetails} />
       </Route>
-      <Route name="Vacany_Details" breadcrumbName="Vacancy Details" path="/schoolprofile/vacany/:id" component={VacancyDetails} />
+      <Route name="Vacany_Details" breadcrumbName="Vacancy Details" path="/schoolprofile/vacany/:schoolid/:vacanyid" component={VacancyDetails} />
 
       <Route name="School_Vacancies" breadcrumbName="Vacancies" path="/schoolprofile/vacancies" component={About} />
       <Route name="School_Application" breadcrumbName="Application" path="/schoolprofile/application" component={SchoolApplication} />

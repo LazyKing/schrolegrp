@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Row, Col, Pagination } from 'antd';
+import { Row, Col, Pagination, List, Avatar, Icon } from 'antd';
+import { Link } from 'react-router'
 
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
@@ -7,6 +8,13 @@ import { bindActionCreators } from "redux";
 import { getSchoolListDispatch } from "../../Schools_Actions";
 
 import VacancyCard from './VacancyCard';
+
+const IconText = ({ type, text, processDate }) => (
+  <span>
+    <Icon type={type} style={{ marginRight: 8 }} />
+    {processDate ? new Date(processDate).toDateString() : text}
+  </span>
+);
 
 class SchoolVacanciesList extends Component {
 
@@ -82,25 +90,47 @@ class SchoolVacanciesList extends Component {
     console.log("Page:", page,pageSize);
   }
 
+  getCurrentUrl = () => {
+    const url = `/schoolprofile/vacany/${this.state.current_school_id}/3016`;
+    return url;
+  }
+
   render() {
-    const listItems = this.state.vancanyList.map((vacancy) =>
+    //Old list layout structure
+    /*const listItems = this.state.vancanyList.map((vacancy) =>
             <VacancyCard key={vacancy.vacancy_id} vacancyDetails={vacancy}
-                current_school_id={this.state.current_school_id} title={vacancy.headline} /> );
+                current_school_id={this.state.current_school_id} title={vacancy.headline} /> );*/
     return (
       <div className="">
         <h1 style={{'textAlign': 'left','color': '#1968a5' , padding: '10px' }}>
-          Registered Schools
+          School Vacancies
         </h1>
-        <div className="vacancy-list-container" style={{ background: '#ECECEC', padding: '30px' }} >
+        <div className="vacancy-list-container" style={{ padding: '30px' }} >
           <Row gutter={16}>
             <Col offset={2} span={20}>
               <Row className="school-list-header" type="flex" justify="space-between">
-                <Col><span><strong>Schools</strong></span></Col>
+                <Col><span><strong>Vacancies</strong></span></Col>
                 <Col><span><strong>Results:{this.state.vancanyList.length}</strong></span></Col>
               </Row>
               <Row className="vacancy-list">
                 <Col>
-                  {listItems}
+                  <List
+                    itemLayout="vertical"
+                    size="middle"
+                    dataSource={this.state.vancanyList}
+                    renderItem={item => (
+                      <List.Item
+                        key={item.vacancy_id}
+                        actions={[<IconText type="contacts" text={item.school_level} />, <IconText type="calendar" text={item.start_date} processDate={true}/>, <IconText type="folder" text={item.closing_date} processDate={true}/>]}
+                      >
+                        <List.Item.Meta
+                          title={<Link to={this.getCurrentUrl}>{item.headline}</Link>}
+                          description={item.position}
+                        />
+                        {item.description}
+                      </List.Item>
+                    )}
+                  />
                 </Col>
               </Row>
               <Row type="flex" justify="space-around" style={{ marginTop:'10px' }}>
