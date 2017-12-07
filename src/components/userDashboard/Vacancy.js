@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-//import SchoolCard from './schools/SchoolCard';
 
-class Schools extends Component {
+import AllVacanciesList from './vacancies/AllVacanciesList';
+
+class Vacancy extends Component {
 
   constructor(props) {
     super(props);
@@ -11,10 +12,10 @@ class Schools extends Component {
   render() {
     return (
       <div>
-        {this.props.children}
+        <AllVacanciesList />
       </div>
     );
   }
 }
 
-export default Schools;
+export default Vacancy;

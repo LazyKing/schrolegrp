@@ -4,6 +4,7 @@ import enUS from 'antd/lib/locale-provider/en_US';
 
 /*import css*/
 import '../../App.css';
+import '../../stylesheets/userdashboard.css';
 
 /*router functionalities*/
 import { Link, browserHistory } from 'react-router';

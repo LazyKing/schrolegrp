@@ -48,8 +48,21 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-.vacancy-list .ant-list-item{
+/*ant list item styles override*/
+.vacancy-list .ant-list-item:hover {
+  background-color: aliceblue;
+  cursor: pointer;
+}
 
+.all-vacancy-list-container .vacancy-list .ant-list-item{
+  background-color: white;
+  margin-top: 4px;
+  padding-left: 5px;
+}
+.vacancy-list .ant-list-item-content{
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .basic-profile-mainContainer, .experience-mainContainer,
 .extraInformation-mainContainer, .qualification-mainContainer,
