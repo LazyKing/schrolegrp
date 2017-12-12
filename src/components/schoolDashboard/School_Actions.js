@@ -22,10 +22,20 @@ export function updateSchoolDetailsDispatch(user, schoolDetails, schoolId) {
   };
 }
 
-export function updateOtherInfoDispatch(user, personalDetails) {
+export function createNewVacancyDispatch(schoolAdmin, vacancyDetails, schoolId) {
   return function(dispatch) {
-    return SchoolApi.updateOtherInfo(user, personalDetails).then(profile => {
-      dispatch(updateOtherInfo(profile));
+    return SchoolApi.createNewVacancy(schoolAdmin, vacancyDetails, schoolId).then(vacancyDetails => {
+      dispatch(createNewVacancy(vacancyDetails));
+    }).catch(error => {
+      throw(error);
+    });
+  };
+}
+
+export function getVacancyDetailsDispatch(schoolAdmin, vacancyId) {
+  return function(dispatch) {
+    return SchoolApi.getVacancyDetails(schoolAdmin, vacancyId).then(vacancyDetails => {
+      dispatch(getVacancyDetails(vacancyDetails));
     }).catch(error => {
       throw(error);
     });
@@ -106,10 +116,17 @@ export function updateSchoolDetails(schoolDetails) {
   };
 }
 
-export function updateOtherInfo(profile) {
+export function createNewVacancy(schoolDetails) {
   return {
-    type: "UPDATE_OTHER_INFO",
-    payload: profile
+    type: "CREATE_NEW_VACANCY",
+    payload: schoolDetails
+  };
+}
+
+export function getVacancyDetails(vacanyDetails) {
+  return {
+    type: "GET_VACANCY_DETAILS",
+    payload: vacanyDetails
   };
 }
 

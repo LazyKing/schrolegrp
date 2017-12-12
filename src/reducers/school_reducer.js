@@ -4,7 +4,9 @@ import {  browserHistory  } from 'react-router'
 import _ from 'lodash';
 
 const INITIAL_STATE = {
-	schoolProfile: {}
+	schoolProfile: {},
+	vacancyList: [],
+	currentVacancyDetails: {}
 }
 
 export default function(state = INITIAL_STATE, action) {
@@ -12,7 +14,7 @@ export default function(state = INITIAL_STATE, action) {
 
     case "GET_SCHOOL_PROFILE":
     //console.log(action.payload);
-      if( action.payload || action.payload.status === 401 ) {
+      if( !action.payload || action.payload.status === 401 ) {
         localStorage.removeItem("userprofile");
         browserHistory.push({
           pathname: '/Login'
@@ -22,13 +24,19 @@ export default function(state = INITIAL_STATE, action) {
       else
         return { ...state, schoolProfile: action.payload }
 
-
-
     case "UPDATE_SCHOOL_DETAILS":
       //console.log(action.payload);
       return { ...state, schoolProfile: action.payload }
 
+		case "CREATE_NEW_VACANCY":
+			//console.log(action.payload);
+			var vacancyList = action.payload.vacancies;
+			return Object.assign({}, state , {'vacancyList': vacancyList });
 
+		case "GET_VACANCY_DETAILS":
+			//console.log(action.payload);
+			var vacancyDetails = action.payload;
+			return Object.assign({}, state , {'currentVacancyDetails': vacancyDetails });
 
     case "DELETE_DEPENDANT":
       //creating a new copy of objects

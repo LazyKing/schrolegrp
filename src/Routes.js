@@ -21,24 +21,28 @@ import Dashboard from './components/userDashboard/Dashboard';
 import Profile from './components/userDashboard/Profile';
 import Vacancy from './components/userDashboard/Vacancy';
 
+/****/
 /*userProfile:: School components*/
 import Schools from './components/userDashboard/Schools';
 import SchoolList from './components/userDashboard/schools/SchoolList';
 import SchoolDetails from './components/userDashboard/schools/SchoolDetails';
 /*userprofile-vacancyComponents*/
 import VacancyDetails from './components/userDashboard/schools/schoolDetailsComponents/vacancyComponents/VacancyDetails';
+/****/
 
+/****/
 /*school profile components*/
 import SchoolRegisterBasicPage from './components/schoolDashboard/schoolRegister/SchoolRegisterBasicPage';
 import SchoolProfileDashboard from './components/schoolDashboard/SchoolProfileDashboard';
 import SchoolApplication from './components/schoolDashboard/Application';
 import SchoolDashboard from './components/schoolDashboard/Dashboard';
 import SchoolProfile from './components/schoolDashboard/Profile';
+/*schoolProfile:: Vacany components*/
+import SchoolVacancy from './components/schoolDashboard/Vacancy';
+import NewVacancy from './components/schoolDashboard/vacancies/NewVacancyForm';
 /*schoolProfile:: School components*/
-// import Schools from './components/schoolDashboard/Schools';
-// import SchoolList from './components/schoolDashboard/schools/SchoolList';
 // import SchoolDetails from './components/schoolDashboard/schools/SchoolDetails';
-
+/****/
 
 /**
  * All routes go here.
@@ -62,13 +66,11 @@ export default (
     <Route name="schoolprofile" breadcrumbName="School Profile" path="/schoolprofile" component={SchoolProfileDashboard}>
       <IndexRoute name="School_Dashboard" breadcrumbName="Dashboard" component={SchoolDashboard} />
       <Route path="/SchoolRegisterBasicPage" component={SchoolRegisterBasicPage} />
-      <Route name="Schools" breadcrumbName="Schools" path="/schoolprofile/schools" component={Schools}>
-        <IndexRoute name="SchoolList" breadcrumbName="SchoolList" component={SchoolList} />
-        <Route name="SchoolDetails" path="/schoolprofile/schools/:id" component={SchoolDetails} />
-      </Route>
-      <Route name="Vacany_Details" breadcrumbName="Vacancy Details" path="/schoolprofile/vacany/:schoolid/:vacanyid" component={VacancyDetails} />
 
-      <Route name="School_Vacancies" breadcrumbName="Vacancies" path="/schoolprofile/vacancies" component={About} />
+      <Route name="Vacany_Details" breadcrumbName="Vacancy Details" path="/schoolprofile/vacany/:schoolid/:vacanyid" component={VacancyDetails} />
+      <Route name="Vacany_Details" breadcrumbName="New Vacancy" path="/schoolprofile/vacancy/new" component={NewVacancy} />
+
+      <Route name="School_Vacancies" breadcrumbName="Vacancies" path="/schoolprofile/vacancies" component={SchoolVacancy} />
       <Route name="School_Application" breadcrumbName="Application" path="/schoolprofile/application" component={SchoolApplication} />
       <Route name="School_Profile" breadcrumbName="Profile" path="/schoolprofile/profile" component={SchoolProfile} />
       <Route name="School_Search" breadcrumbName="Search" path="/schoolprofile/search" component={About} />
