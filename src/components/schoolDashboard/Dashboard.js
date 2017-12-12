@@ -4,9 +4,7 @@ import {  browserHistory  } from 'react-router'
 import '../../App.css';
 
 /*import components*/
-import DashboardSchoolList from './dashboardComponents/DashboardSchoolList';
 import DashboardVanaciesList from './dashboardComponents/DashboardVanaciesList';
-import DashboardApplicationsList from './dashboardComponents/DashboardApplicationsList';
 
 /*Import Redux functionalities*/
 import { connect } from "react-redux";
@@ -83,17 +81,9 @@ class Dashboard extends Component {
         <hr style={{ border: '1px rgba(37, 132, 193, 0.9) solid', 'margin': '10px 0px' }}/>
         <div className="" style={{ background: '#ECECEC', padding: '30px' }} >
           <Row gutter={16}>
-            <Col span={8}>
-              <p style={{padding: '10px'}}>The 3 most recent schools you've registered with.</p>
-              <DashboardSchoolList />
-            </Col>
-            <Col span={8}>
-              <p style={{padding: '10px'}}>The 3 latest vacancies from schools you're registered with.</p>
+            <Col span={12}>
+              <p style={{padding: '10px'}}>The 3 latest vacancies from schools youre registered with.</p>
               <DashboardVanaciesList />
-            </Col>
-            <Col span={8}>
-              <p style={{padding: '10px'}}>The 3 most recent vacancies you have applied for.</p>
-              <DashboardApplicationsList />
             </Col>
           </Row>
         </div>

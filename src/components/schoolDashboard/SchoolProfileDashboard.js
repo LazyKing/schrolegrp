@@ -21,7 +21,6 @@ const { Header, Content, Footer, Sider } = Layout;
 const applicantsStore=createStore(schools, applyMiddleware(thunk)) ;
 
 const masterTabs = {
-  'schools' : '2',
   'vacancies' : '3',
   'application' : '4',
   'profile' : '5',
@@ -95,12 +94,11 @@ class SchoolProfileDashboard extends Component {
                 defaultSelectedKeys={['1']}
                 style={{ lineHeight: '64px' }}
               >
-                <Menu.Item key="1" title="Dashboard"><Icon type="desktop" /><Link role="button" to="/userprofile" style={{'display':'inline-flex'}}>Dashboard</Link></Menu.Item>
-                <Menu.Item key="2" title="School"><Icon type="mail" /><Link role="button" to={{ pathname: '/userprofile/schools'/*, state: { stateData: "Anirudh" }*/ }} style={{'display':'inline-flex'}}>School</Link></Menu.Item>
-                <Menu.Item key="3" title="Vacancies"><Icon type="user-add" /><Link role="button" to={{ pathname: '/userprofile/vacancies'/*, state: { stateData: "Anirudh" }*/ }} style={{'display':'inline-flex'}}>Vacancies</Link></Menu.Item>
-                <Menu.Item key="4" title="Applications"><Icon type="global" /><Link role="button" to={{ pathname: '/userprofile/application'/*, state: { stateData: "Anirudh" }*/ }} style={{'display':'inline-flex'}}>Applications</Link></Menu.Item>
-                <Menu.Item key="5" title="Profile" disabled><Icon type="smile-o" /><Link role="button" to={{ pathname: '/userprofile/profile'/*, state: { stateData: "Anirudh" }*/ }} style={{'display':'inline-flex'}}>Profile</Link></Menu.Item>
-                <Menu.Item key="6" title="Search"><Icon type="search" /><Link role="button" to={{ pathname: '/userprofile/search'/*, state: { stateData: "Anirudh" }*/ }} style={{'display':'inline-flex'}}>Search</Link></Menu.Item>
+                <Menu.Item key="1" title="Dashboard"><Icon type="desktop" /><Link role="button" to="/schoolprofile" style={{'display':'inline-flex'}}>Dashboard</Link></Menu.Item>
+                <Menu.Item key="3" title="Vacancies"><Icon type="user-add" /><Link role="button" to={{ pathname: '/schoolprofile/vacancies'/*, state: { stateData: "Anirudh" }*/ }} style={{'display':'inline-flex'}}>Vacancies</Link></Menu.Item>
+                <Menu.Item key="4" title="Applications"><Icon type="global" /><Link role="button" to={{ pathname: '/schoolprofile/application'/*, state: { stateData: "Anirudh" }*/ }} style={{'display':'inline-flex'}}>Applications</Link></Menu.Item>
+                <Menu.Item key="5" title="Profile" disabled><Icon type="smile-o" /><Link role="button" to={{ pathname: '/schoolprofile/profile'/*, state: { stateData: "Anirudh" }*/ }} style={{'display':'inline-flex'}}>Profile</Link></Menu.Item>
+                <Menu.Item key="6" title="Search"><Icon type="search" /><Link role="button" to={{ pathname: '/schoolprofile/search'/*, state: { stateData: "Anirudh" }*/ }} style={{'display':'inline-flex'}}>Search</Link></Menu.Item>
                 <Menu.SubMenu  title={<span><Icon type="setting" />Options</span>}>
                   <Menu.Item key="7" title={this.state.user}><Icon type="user" />{this.state.user}</Menu.Item>
                   <Menu.Item key="8"><Logout type="menuItem" auth_token={this.state.authToken} user_email={this.state.user}/></Menu.Item>
