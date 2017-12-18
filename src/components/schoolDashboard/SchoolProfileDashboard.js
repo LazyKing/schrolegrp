@@ -40,6 +40,11 @@ class SchoolProfileDashboard extends Component {
     this.state = { currentTab: '1', user: '' , authToken: '' };
   }
 
+  itemRender = (route, params, routes, paths) => {
+    const last = this.props.routes.indexOf(route) === this.props.routes.length - 1;
+    return last ? <span>{route.breadcrumbName}</span> : <Link to={'/' + paths.join('/')}>{route.breadcrumbName}</Link>;
+  }
+
   componentDidMount() {
     //console.log("UserProfileDashboard",this.props.location);
     var pathnam = this.props.location.pathname;
@@ -107,7 +112,8 @@ class SchoolProfileDashboard extends Component {
             </Header>
             <Layout>
               <Content style={{ padding: '0 20px' }}>
-                <Breadcrumb separator=">" routes={this.props.routes} params={this.props.params} className="breadCrumb-container" />
+                <Breadcrumb separator=">" itemRender={this.itemRender}
+                routes={this.props.routes} params={this.props.params} className="breadCrumb-container" />
                 <div style={{ background: '#fff', padding: 15, minHeight: 280 }}>
                   <div>
                     <LocaleProvider  locale={enUS}>
